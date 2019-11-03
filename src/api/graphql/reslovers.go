@@ -2,14 +2,11 @@ package graphQL
 
 import (
 	"github.com/graphql-go/graphql"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain"
 )
-type Song struct {
-	ID       string `json:"id,omitempty"`
-	Album    string `json:"album"`
-	Title    string `json:"title"`
-	Duration string `json:"duration"`
-	Type     string `json:"type"`
-}
+
+type Song domain.Song
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	// Strip the name from arguments and assert that it's a string
 
@@ -37,7 +34,6 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 			Type:     "song",
 		},
 	}
-	return  users,nil
+	return users, nil
 	//return nil, nil
 }
-
