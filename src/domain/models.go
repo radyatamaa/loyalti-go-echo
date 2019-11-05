@@ -3,7 +3,6 @@ package domain
 import (
 	"github.com/jinzhu/gorm"
 )
-
 type Song struct {
 	ID       string `json:"id,omitempty"`
 	Album    string `json:"album"`
@@ -14,8 +13,8 @@ type Song struct {
 
 type Merchant struct {
 	gorm.Model
-	MerchantName string
-	PhoneNumber string
-	Email       string
+	MerchantName string `json:"merchant_name"`
+	PhoneNumber string  `json:"phone_number"`
+	Email       string  `json:"email"`
 }
 

@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"encoding/json"
 	"../graphql"
+	"encoding/json"
 	"github.com/graphql-go/graphql"
 	"github.com/labstack/echo"
-	"net/http"
 	"log"
+	"net/http"
 )
 type Server struct {
 	GqlSchema *graphql.Schema

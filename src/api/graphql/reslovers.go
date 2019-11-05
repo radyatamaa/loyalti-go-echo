@@ -1,23 +1,23 @@
 package graphQL
 
 import (
+	"fmt"
 	"github.com/graphql-go/graphql"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain"
+	"github.com/radyatamaa/loyalti-go-echo/src/infrastructure/presistance"
+	_ "github.com/jinzhu/gorm/dialects/mssql"
 )
 
 type Song domain.Song
 
+
+func MerchantResolver(p graphql.ResolveParams)(interface{},error)  {
+	merchant := presistance.GetAll()
+	fmt.Println(merchant)
+	return merchant,nil
+
+}
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
-	// Strip the name from arguments and assert that it's a string
-
-	///if used parameter
-	//name, ok := p.Args["name"].(string)
-	//if ok {
-	//	users := r.db.GetAll()
-	//	return users, nil
-	//}
-	//
-
 	users := []Song{
 		Song{
 			ID:       "1",
@@ -37,3 +37,7 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	return users, nil
 	//return nil, nil
 }
+func MerchantResolve()  {
+	
+}
+
