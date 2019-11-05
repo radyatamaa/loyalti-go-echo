@@ -1,7 +1,7 @@
 package domain
 
 import (
-
+	"github.com/jinzhu/gorm"
 )
 
 type Song struct {
@@ -10,5 +10,12 @@ type Song struct {
 	Title    string `json:"title"`
 	Duration string `json:"duration"`
 	Type     string `json:"type"`
+}
+
+type Merchant struct {
+	gorm.Model
+	MerchantName string
+	PhoneNumber string
+	Email       string
 }
 
