@@ -3,6 +3,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
+	"github.com/radyatamaa/loyalti-go-echo/src/database"
 
 )
 type Product struct {
@@ -17,12 +18,7 @@ type Merchant struct {
 	Email       string
 }
 func main() {
-	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
-	if err != nil {
-		panic("failed to connect database")
-	}
-	defer db.Close()
-
+	db := database.ConnectionDB()
 	// Migrate the schema
 	db.AutoMigrate(&Merchant{})
 	//if err == nil{
