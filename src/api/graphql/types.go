@@ -21,3 +21,30 @@ var songType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var merchantType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Merchant",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"created_at": &graphql.Field{
+			Type: graphql.String,
+		},
+		"update_at": &graphql.Field{
+			Type: graphql.String,
+		},
+		"delete_at": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"merchant_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"phone_number": &graphql.Field{
+			Type: graphql.String,
+		},
+		"email": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
