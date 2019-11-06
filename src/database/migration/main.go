@@ -17,7 +17,7 @@ type Merchant struct {
 	Email       string
 }
 func main() {
-	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
+	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb")
 	if err != nil {
 		panic("failed to connect database")
 	}
