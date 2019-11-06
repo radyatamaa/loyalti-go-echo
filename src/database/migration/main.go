@@ -1,5 +1,6 @@
 package main
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 
@@ -7,6 +8,13 @@ import (
 type Product struct {
 	Code string
 	Price uint
+}
+
+type Merchant struct {
+	gorm.Model
+	MerchantName string
+	PhoneNumber string
+	Email       string
 }
 func main() {
 	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
@@ -16,10 +24,14 @@ func main() {
 	defer db.Close()
 
 	// Migrate the schema
-	db.AutoMigrate(&Product{})
-	if err == nil{
-		panic("success migration")
-	}
+	db.AutoMigrate(&Merchant{})
+	//if err == nil{
+	//	panic("success migration")
+	//}
+
+	var merchant []Merchant
+	db.Find(&merchant)
+	fmt.Println(merchant)
 	//// Create
 	//db.Create(&Product{Code: "L1212", Price: 1000})
 	//
