@@ -3,6 +3,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
+	"github.com/radyatamaa/loyalti-go-echo/src/database"
 
 )
 type Product struct {

@@ -1,7 +1,7 @@
 package presistance
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain"
 )
 
@@ -18,9 +18,9 @@ func GetAll() []domain.Merchant {
 	//if err != nil {
 	//	return nil, err
 	//}
-	defer db.Close()
 	var merchant []domain.Merchant
 	db.Find(&merchant)
 
 	return merchant
 }
+
