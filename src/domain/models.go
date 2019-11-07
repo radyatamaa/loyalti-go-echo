@@ -16,5 +16,9 @@ type Merchant struct {
 	MerchantName string `json:"merchant_name"`
 	PhoneNumber string  `json:"phone_number"`
 	Email       string  `json:"email"`
+	GeneralModels
+}
+
+type Program struct {
 }
 
