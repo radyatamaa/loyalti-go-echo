@@ -1,7 +1,7 @@
 package presistance
 
 import (
-	"github.com/radyatamaa/loyalti-go-echo/src/database"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain"
 )
 
