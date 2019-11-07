@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 	"github.com/davidnobels/loyalti-go-echo/src/domain"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 
@@ -14,8 +15,21 @@ func main() {
 	}
 	defer db.Close()
 
+	//connect postgre
+
+
 	// Migrate the schema
 	db.AutoMigrate(&domain.Merchant{})
+
+	//mengurangi kolom
+	//db.Model(&domain.Merchant{}).DropColumn("row_status")
+	//db.Model(&domain.Merchant{}).DropColumn("created_at")
+	//db.Model(&domain.Merchant{}).DropColumn("created_by")
+	//db.Model(&domain.Merchant{}).DropColumn("updated_by")
+	//db.Model(&domain.Merchant{}).DropColumn("updated_at")
+	//db.Model(&domain.Merchant{}).DropColumn("deleted_by")
+	//db.Model(&domain.Merchant{}).DropColumn("deleted_at")
+
 	//if err == nil{
 	//	panic("success migration")
 	//}

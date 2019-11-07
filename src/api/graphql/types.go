@@ -40,10 +40,10 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_name": &graphql.Field{
 			Type: graphql.String,
 		},
-		"phone_number": &graphql.Field{
+		"merchant_phone_number": &graphql.Field{
 			Type: graphql.String,
 		},
-		"email": &graphql.Field{
+		"merchant_email": &graphql.Field{
 			Type: graphql.String,
 		},
 	},
