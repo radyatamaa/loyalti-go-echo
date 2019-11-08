@@ -1,11 +1,11 @@
-package presistance
+package repository
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
-func GetAll() []domain.Merchant {
+func GetAll() []model.Merchant{
 	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
 	if err != nil {
 		panic("failed to connect database")
@@ -18,7 +18,7 @@ func GetAll() []domain.Merchant {
 	//if err != nil {
 	//	return nil, err
 	//}
-	var merchant []domain.Merchant
+	var merchant []model.Merchant
 	db.Find(&merchant)
 
 	return merchant

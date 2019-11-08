@@ -1,4 +1,4 @@
-package domain
+package model
 
 type Song struct {
 	ID       string `json:"id,omitempty"`
