@@ -7,7 +7,7 @@ func ConnectionDB() *gorm.DB{
 	if err != nil {
 		panic("failed to connect database")
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	return db
 }

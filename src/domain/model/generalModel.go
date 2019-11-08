@@ -14,4 +14,3 @@ type GeneralModels struct {
 	IsDeleted bool
 	Deleted *time.Time
 	Deleted_by string
-}

@@ -21,4 +21,3 @@ func GetCard() []model.CardType{
 	db.Find(&card)
 
 	return card
-}

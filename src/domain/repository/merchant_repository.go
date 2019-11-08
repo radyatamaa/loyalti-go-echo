@@ -23,4 +23,3 @@ func GetAll() []model.Merchant{
 
 	return merchant
 }
-
