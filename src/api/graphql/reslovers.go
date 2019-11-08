@@ -18,7 +18,7 @@ func MerchantResolver(p graphql.ResolveParams)(interface{},error)  {
 }
 
 func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
-		card := repository.GetAll()
+		card := repository.GetCard()
 		fmt.Println(card)
 		return card, nil
 }

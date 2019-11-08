@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
 
 func GetAll() []model.Merchant{
