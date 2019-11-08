@@ -1,33 +1,37 @@
 package main
+
 import (
-	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
-	"github.com/radyatamaa/loyalti-go-echo/src/database"
-
+	"github.com/davidnobels/loyalti-go-echo/src/domain"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
-type Product struct {
-	Code string
-	Price uint
-}
 
-type Merchant struct {
-	gorm.Model
-	MerchantName string
-	PhoneNumber string
-	Email       string
-}
+
 func main() {
-	db := database.ConnectionDB()
+	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+
+	//connect postgre
+
+
 	// Migrate the schema
-	db.AutoMigrate(&Merchant{})
+	db.AutoMigrate(&domain.Merchant{}, &domain.MerchantCategory{}, &domain.MerchantSocialMedia{}, &domain.CardType{})
+
+	//Create Insert to database
+	var card = domain.CardType{ CardTypeName:"Chop"}
+	db.Create(&card)
+
 	//if err == nil{
 	//	panic("success migration")
 	//}
 
-	var merchant []Merchant
-	db.Find(&merchant)
-	fmt.Println(merchant)
+	//var merchant []Merchant
+	//db.Find(&merchant)
+	//fmt.Println(merchant)
 	//// Create
 	//db.Create(&Product{Code: "L1212", Price: 1000})
 	//

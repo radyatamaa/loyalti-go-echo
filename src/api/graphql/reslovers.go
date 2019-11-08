@@ -3,20 +3,26 @@ package graphQL
 import (
 	"fmt"
 	"github.com/graphql-go/graphql"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain"
-	"github.com/radyatamaa/loyalti-go-echo/src/infrastructure/presistance"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/repository"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 )
 
-type Song domain.Song
+type Song model.Song
 
 
 func MerchantResolver(p graphql.ResolveParams)(interface{},error)  {
-	merchant := presistance.GetAll()
+	merchant := repository.GetAll()
 	fmt.Println(merchant)
 	return merchant,nil
-
 }
+
+func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
+		card := repository.GetCard()
+		fmt.Println(card)
+		return card, nil
+}
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	users := []Song{
 		Song{
