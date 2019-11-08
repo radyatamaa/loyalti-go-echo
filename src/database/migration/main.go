@@ -19,16 +19,11 @@ func main() {
 
 
 	// Migrate the schema
-	db.AutoMigrate(&domain.Merchant{})
+	db.AutoMigrate(&domain.Merchant{}, &domain.MerchantCategory{}, &domain.MerchantSocialMedia{}, &domain.CardType{})
 
-	//mengurangi kolom
-	//db.Model(&domain.Merchant{}).DropColumn("row_status")
-	//db.Model(&domain.Merchant{}).DropColumn("created_at")
-	//db.Model(&domain.Merchant{}).DropColumn("created_by")
-	//db.Model(&domain.Merchant{}).DropColumn("updated_by")
-	//db.Model(&domain.Merchant{}).DropColumn("updated_at")
-	//db.Model(&domain.Merchant{}).DropColumn("deleted_by")
-	//db.Model(&domain.Merchant{}).DropColumn("deleted_at")
+	//Create Insert to database
+	var card = domain.CardType{ CardTypeName:"Chop"}
+	db.Create(&card)
 
 	//if err == nil{
 	//	panic("success migration")

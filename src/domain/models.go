@@ -25,6 +25,19 @@ type Merchant struct {
 	MerchantGallery string `json:"merchant_gallery"`
 }
 
-type Program struct {
+type MerchantCategory struct {
+	GeneralModels
+	CategoryName string `json:"category_name"`
+	ImageUrl string `json:"image_url"`
 }
 
+type MerchantSocialMedia struct{
+	GeneralModels
+	SocialMediaName string `json:"social_media_name"`
+	SocialMediaImageUrl string `json:"social_media_image_url"`
+}
+
+type CardType struct {
+	GeneralModels
+	CardTypeName string `json:"card_type_name"`
+}

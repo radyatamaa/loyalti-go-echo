@@ -15,8 +15,14 @@ func MerchantResolver(p graphql.ResolveParams)(interface{},error)  {
 	merchant := presistance.GetAll()
 	fmt.Println(merchant)
 	return merchant,nil
-
 }
+
+func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
+		card := presistance.GetAll()
+		fmt.Println(card)
+		return card, nil
+}
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	users := []Song{
 		Song{
