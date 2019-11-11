@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type Song struct {
 	ID       string `json:"id,omitempty"`
 	Album    string `json:"album"`
@@ -40,4 +42,28 @@ type MerchantSocialMedia struct{
 type CardType struct {
 	GeneralModels
 	CardTypeName string `json:"card_type_name"`
+}
+
+type Outlet struct {
+	GeneralModels
+	OutletName 			string		`json:"outlet_name"`
+	OutletAddress 		string		`json:"outlet_address"`
+	OutletPhone 		string		`json:"outlet_phone"`
+	OutletCity 			string		`json:"outlet_city"`
+	OutletProvince 		string		`json:"outlet_province"`
+	OutletPostalCode 	string		`json:"outlet_postal_code"`
+	OutletLongitude 	string		`json:"outlet_longitude"`
+	OutletLatitude 		string		`json:"outlet_latitude"`
+	OutletDay 			time.Time	`json:"outlet_day"`
+	OutletHour 			time.Time	`json:"outlet_hour"`
+}
+
+type Program struct {
+	GeneralModels
+	ProgramName 		string		`json:"program_name"`
+	ProgramImage 		string		`json:"program_image"`
+	ProgramStartDate 	time.Time	`json:"program_start_date"`
+	ProgramEndDate 		time.Time	`json:"program_end_date"`
+	ProgramDescription 	string		`json:"program_description"`
+	Card 				string		`json:"card"`
 }

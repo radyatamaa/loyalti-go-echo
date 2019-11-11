@@ -1,10 +1,11 @@
 package repository
 
-import (
+import(
 	"github.com/jinzhu/gorm"
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
-func GetCard() []model.CardType {
+
+func GetProgram() []model.Program {
 	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
 	if err != nil {
 		panic("failed to connect database")
@@ -17,8 +18,8 @@ func GetCard() []model.CardType {
 	//if err != nil {
 	//	return nil, err
 	//}
-	var card []model.CardType
-	db.Find(&card)
+	var program []model.Program
+	db.Find(&program)
 
-	return card
+	return program
 }
