@@ -3,12 +3,11 @@ package consumer
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Shopify/sarama"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain"
 	"os"
 	"os/signal"
-	"github.com/Shopify/sarama"
 	"time"
-	"github.com/radyatamaa/loyalti-go-echo/src/infrastructure/presistance"
 )
 
 
@@ -36,7 +35,7 @@ func NewMerchantConsumer() {
 
 	}()
 
-	topic := "new-customer-topic"
+	topic := "new-customer-topic-1"
 
 	consumer, err := master.ConsumePartition(topic, 0, sarama.OffsetOldest)
 
@@ -69,7 +68,7 @@ func NewMerchantConsumer() {
 				merchant := domain.Merchant{}
 				json.Unmarshal([]byte(msg.Value),&merchant)
 				fmt.Println(merchant)
-				presistance.CreateMerchant(merchant)
+				//presistance.CreateMerchant(merchant)
 				fmt.Println("Received messages", string(msg.Topic),string(msg.Key), string(msg.Value))
 
 			case <-signals:
