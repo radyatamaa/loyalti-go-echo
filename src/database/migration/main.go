@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/davidnobels/loyalti-go-echo/src/domain"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
-	"github.com/davidnobels/loyalti-go-echo/src/domain"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
@@ -19,11 +19,14 @@ func main() {
 
 
 	// Migrate the schema
-	db.AutoMigrate(&domain.Merchant{}, &domain.MerchantCategory{}, &domain.MerchantSocialMedia{}, &domain.CardType{})
+	db.AutoMigrate(&domain.Outlet{}, &domain.Program{})
 
+
+	var program = domain.Program{ ProgramName:"Belanja 11:11", ProgramDescription:"Program baru", Card:"Chop"}
+	db.Create(&program)
 	//Create Insert to database
-	var card = domain.CardType{ CardTypeName:"Chop"}
-	db.Create(&card)
+	//var card = domain.CardType{ CardTypeName:"Chop"}
+	//db.Create(&card)
 
 	//if err == nil{
 	//	panic("success migration")

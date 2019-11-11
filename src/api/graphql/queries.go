@@ -35,6 +35,10 @@ func NewRoot() *Root {
 						Type:graphql.NewList(cardType),
 						Resolve: resolverCard,
 					},
+					"programs" : &graphql.Field{
+						Type:graphql.NewList(programType),
+						Resolve: resolverProgram,
+				},
 				},
 			},
 		),
