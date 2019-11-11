@@ -23,6 +23,12 @@ func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
 		return card, nil
 }
 
+func ProgramResolver(p graphql.ResolveParams) (interface{}, error){
+	program := repository.GetProgram()
+	fmt.Println(program)
+	return program, nil
+}
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	users := []Song{
 		Song{
@@ -46,4 +52,6 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 func MerchantResolve()  {
 	
 }
+
+
 
