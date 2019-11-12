@@ -29,6 +29,12 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error){
 	return program, nil
 }
 
+func OutletResolver(p graphql.ResolveParams) (interface{}, error){
+	outlet := repository.GetOutlet()
+	fmt.Println(outlet)
+	return outlet, nil
+}
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	users := []Song{
 		Song{
