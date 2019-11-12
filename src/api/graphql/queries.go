@@ -16,6 +16,7 @@ func NewRoot() *Root {
 	resolverMerchant := MerchantResolver
 	resolverCard := MerchantCardResolver
 	resolverProgram := ProgramResolver
+	resolverOutlet := OutletResolver
 	// Create a new Root that describes our base query set up. In this
 	// example we have a user query that takes one argument called name
 	root := Root{
@@ -39,6 +40,10 @@ func NewRoot() *Root {
 					"program" : &graphql.Field{
 						Type:graphql.NewList(programType),
 						Resolve: resolverProgram,
+					},
+					"outlet" : &graphql.Field{
+						Type:graphql.NewList(outletType),
+						Resolve: resolverOutlet,
 					},
 				},
 			},
