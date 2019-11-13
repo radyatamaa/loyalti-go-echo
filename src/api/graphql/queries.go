@@ -39,6 +39,14 @@ func NewRoot() *Root {
 					},
 					"program" : &graphql.Field{
 						Type:graphql.NewList(programType),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type:graphql.NewNonNull(graphql.Int),
+							},
+							"size": &graphql.ArgumentConfig{
+								Type:graphql.NewNonNull(graphql.Int),
+							},
+						},
 						Resolve: resolverProgram,
 					},
 					"outlet" : &graphql.Field{
