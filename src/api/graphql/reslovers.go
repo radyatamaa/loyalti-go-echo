@@ -19,6 +19,14 @@ func MerchantResolver(p graphql.ResolveParams)(interface{},error)  {
 	return merchant,nil
 }
 
+func MerchantCategoryResolver(p graphql.ResolveParams)(interface{}, error){
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	category := repository.GetCategory(page, size)
+	fmt.Println(category)
+	return category, nil
+}
+
 func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
 	page := p.Args["page"].(int)
 	size := p.Args["size"].(int)
@@ -36,7 +44,9 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error){
 }
 
 func OutletResolver(p graphql.ResolveParams) (interface{}, error){
-	outlet := repository.GetOutlet()
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	outlet := repository.GetOutlet(page, size)
 	fmt.Println(outlet)
 	return outlet, nil
 }

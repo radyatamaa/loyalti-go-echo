@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/davidnobels/loyalti-go-echo/src/domain"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 
@@ -17,22 +16,39 @@ func main() {
 
 	//connect postgre
 
-
 	// Migrate the schema
-	db.AutoMigrate(&domain.Outlet{}, &domain.Program{})
+	db.AutoMigrate(&model.MerchantCategory{})
+	var category = model.MerchantCategory{
+		CategoryName: "Food & Beverages",
+	}
+	db.Create(category)
 
-
+	//var merchant = model.Merchant{
+	//	MerchantName: "Bateeq",
+	//	MerchantPhoneNumber: "+62 821 373 92222",
+	//	MerchantEmail:"contact@bateeq.com",
+	//	MerchantCategory:"Fashion",
+	//	MerchantWebsite:"www.bateeq.com",
+	//	MerchantMediaSocial:"@bateeqshop",
+	//	MerchantAddress:"Equity Tower, floor 15th, Suite C SCBD Lot 9. Jalan Jend. Sudirman kav 52-53",
+	//	MerchantCity:"Jakarta",
+	//	MerchantPostalCode:"12190",
+	//	MerchantProvince:  "DKI Jakarta",
+	//	MerchantDescription: " bateeq is an Indonesian fashion brand that offers a fresh, fashion-forward take on batik through our clothing line for men, women and children",
+	//}
+	//	db.Create(&merchant)
+	//	db.Create(&merchant1)
 	//INSERT TO DATABASE, TABLE OUTLET
-	var outlet = domain.Outlet{ OutletName:"Starbucks FX Sudirman",
-								OutletAddress:"FX Sudirman",
-								OutletPhone:"(021) 30030377",
-								OutletCity:"Kota Jakarta PUsat",
-								OutletProvince:"DKI Jakarta",
-								OutletPostalCode:"10270",
-								OutletLongitude:"6.2250° S",
-								OutletLatitude:"106.8038° E"}
-
-	db.Create(&outlet)
+	//var outlet = model.Outlet{ OutletName:"Starbucks FX Sudirman",
+	//							OutletAddress:"FX Sudirman",
+	//							OutletPhone:"(021) 30030377",
+	//							OutletCity:"Kota Jakarta PUsat",
+	//							OutletProvince:"DKI Jakarta",
+	//							OutletPostalCode:"10270",
+	//							OutletLongitude:"6.2250° S",
+	//							OutletLatitude:"106.8038° E"}
+	//
+	//db.Create(&outlet)
 	//var program = domain.Program{ ProgramName:"Belanja 11:11", ProgramDescription:"Program baru", Card:"Chop"}
 	//db.Create(&program)
 	//Create Insert to database

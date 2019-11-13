@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/jinzhu/gorm"
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
@@ -18,7 +19,13 @@ func GetCard(page int, size int) []model.CardType {
 	//	return nil, err
 	//}
 	var card []model.CardType
-	db.Limit(1).Find(&card)
+	pagination.Paging(&pagination.Param{
+		DB:	db,
+		Page: page,
+		Limit:	size,
+		OrderBy:	[]string{"card_type_name desc"},
+	}, &card)
 
+	db.Close()
 	return card
 }
