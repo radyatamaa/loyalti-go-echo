@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 	"os"
 	"os/signal"
 	"time"
@@ -65,7 +65,7 @@ func NewMerchantConsumer() {
 
 				//*messageCountStart++
 				//Deserialize
-				merchant := domain.Merchant{}
+				merchant := model.Merchant{}
 				json.Unmarshal([]byte(msg.Value),&merchant)
 				fmt.Println(merchant)
 				//presistance.CreateMerchant(merchant)
