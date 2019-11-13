@@ -28,7 +28,9 @@ func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
 }
 
 func ProgramResolver(p graphql.ResolveParams) (interface{}, error){
-	program := repository.GetProgram()
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	program := repository.GetProgram(page, size)
 	fmt.Println(program)
 	return program, nil
 }
