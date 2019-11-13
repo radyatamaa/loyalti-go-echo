@@ -41,14 +41,6 @@ func NewRoot() *Root {
 					},
 					"card" : &graphql.Field{
 						Type:graphql.NewList(cardType),
-						Args: graphql.FieldConfigArgument{
-							"page": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
-							},
-							"size": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
-							},
-						},
 						Resolve: resolverCard,
 					},
 				},
