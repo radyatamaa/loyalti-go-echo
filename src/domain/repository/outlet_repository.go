@@ -1,15 +1,15 @@
 package repository
 
-import (
+import(
 	"github.com/felixsiburian/loyalti-go-echo/src/database"
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
 
-func GetProgram() []model.Program {
+func GetOutlet() []model.Outlet {
 	db := database.ConnectionDB()
 
-	var program []model.Program
-	db.Find(&program)
+	var outlet []model.Outlet
+	db.Find(&outlet)
 	db.Close()
-	return program
+	return outlet
 }

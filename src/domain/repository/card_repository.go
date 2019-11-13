@@ -18,7 +18,7 @@ func GetCard(page int, size int) []model.CardType {
 	//	return nil, err
 	//}
 	var card []model.CardType
-	db.Find(&card)
+	db.Limit(1).Find(&card)
 
 	return card
 }

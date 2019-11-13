@@ -22,8 +22,19 @@ func main() {
 	db.AutoMigrate(&domain.Outlet{}, &domain.Program{})
 
 
-	var program = domain.Program{ ProgramName:"Belanja 11:11", ProgramDescription:"Program baru", Card:"Chop"}
-	db.Create(&program)
+	//INSERT TO DATABASE, TABLE OUTLET
+	var outlet = domain.Outlet{ OutletName:"Starbucks FX Sudirman",
+								OutletAddress:"FX Sudirman",
+								OutletPhone:"(021) 30030377",
+								OutletCity:"Kota Jakarta PUsat",
+								OutletProvince:"DKI Jakarta",
+								OutletPostalCode:"10270",
+								OutletLongitude:"6.2250° S",
+								OutletLatitude:"106.8038° E"}
+
+	db.Create(&outlet)
+	//var program = domain.Program{ ProgramName:"Belanja 11:11", ProgramDescription:"Program baru", Card:"Chop"}
+	//db.Create(&program)
 	//Create Insert to database
 	//var card = domain.CardType{ CardTypeName:"Chop"}
 	//db.Create(&card)

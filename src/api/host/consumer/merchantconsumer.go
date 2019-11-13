@@ -35,7 +35,7 @@ func NewMerchantConsumer() {
 
 	}()
 
-	topic := "new-customer-topic"
+	topic := "new-customer-topic-1"
 
 	consumer, err := master.ConsumePartition(topic, 0, sarama.OffsetOldest)
 
