@@ -46,7 +46,36 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_email": &graphql.Field{
 			Type: graphql.String,
 		},
-
+		"merchant_postal_code": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_address": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_city": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_province": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_website": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_category": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_media_social": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_description": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_image_profile": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_gallery": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
 

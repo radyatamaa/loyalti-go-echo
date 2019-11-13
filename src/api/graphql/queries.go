@@ -29,16 +29,28 @@ func NewRoot() *Root {
 					},
 					"merchant" : &graphql.Field{
 						Type:graphql.NewList(merchantType),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+						},
 						Resolve: resolverMerchant,
 					},
 					"card" : &graphql.Field{
 						Type:graphql.NewList(cardType),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.NewNonNull(graphql.Int),
+							},
+						},
 						Resolve: resolverCard,
 					},
-					"programs" : &graphql.Field{
-						Type:graphql.NewList(programType),
-						Resolve: resolverProgram,
-				},
 				},
 			},
 		),

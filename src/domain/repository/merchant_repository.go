@@ -5,7 +5,7 @@ import (
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
 
-func GetAll() []model.Merchant{
+func GetAll(page int, size int) []model.Merchant{
 	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
 	if err != nil {
 		panic("failed to connect database")
