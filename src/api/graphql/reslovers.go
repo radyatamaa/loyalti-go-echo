@@ -12,15 +12,19 @@ type Song model.Song
 
 
 func MerchantResolver(p graphql.ResolveParams)(interface{},error)  {
-	merchant := repository.GetAll()
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	merchant := repository.GetAll(page, size)
 	fmt.Println(merchant)
 	return merchant,nil
 }
 
 func MerchantCardResolver(p graphql.ResolveParams)(interface{}, error){
-		card := repository.GetCard()
-		fmt.Println(card)
-		return card, nil
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	card := repository.GetCard(page, size)
+	fmt.Println(card)
+	return card, nil
 }
 
 func ProgramResolver(p graphql.ResolveParams) (interface{}, error){
