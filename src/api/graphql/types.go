@@ -76,7 +76,7 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_website": &graphql.Field{
 			Type: graphql.String,
 		},
-		"merchant_category": &graphql.Field{
+		"merchant_category_id": &graphql.Field{
 			Type: graphql.String,
 		},
 		"merchant_media_social": &graphql.Field{
@@ -90,6 +90,45 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"merchant_gallery": &graphql.Field{
 			Type: graphql.String,
+		},
+	},
+})
+
+var socialmediaType = graphql.NewObject(graphql.ObjectConfig{
+	Name:        "Card",
+	Fields: graphql.Fields{
+		"id" : &graphql.Field{
+			Type:graphql.Int,
+		},
+		"created" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"created_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"modified" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"modified_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"active" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"is_deleted" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"deleted" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type:graphql.String,
+		},
+		"social_media_name": &graphql.Field{
+			Type:graphql.String,
+		},
+		"image_url": &graphql.Field{
+			Type:graphql.String,
 		},
 	},
 })

@@ -33,11 +33,14 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type: graphql.NewNonNull(graphql.Int),
 							},
+							"email" : &graphql.ArgumentConfig{
+								Type: graphql.NewNonNull(graphql.String),
+							},
 						},
 						Resolve: MerchantResolver,
 					},
 					"category" : &graphql.Field{
-						Type:graphql.NewList(merchantType),
+						Type:graphql.NewList(categoryType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
 								Type: graphql.NewNonNull(graphql.Int),
@@ -59,6 +62,10 @@ func NewRoot() *Root {
 							},
 						},
 						Resolve: MerchantCardResolver,
+					},
+					"socialmedia" : &graphql.Field{
+						Type:graphql.NewList(cardType),
+						Resolve: SocialMediaResolver,
 					},
 					"program" : &graphql.Field{
 						Type:graphql.NewList(programType),

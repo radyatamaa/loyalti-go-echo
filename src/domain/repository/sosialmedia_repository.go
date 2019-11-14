@@ -1,12 +1,12 @@
 package repository
 
 import (
-	"github.com/biezhi/gorm-paginator/pagination"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
-	"github.com/radyatamaa/loyalti-go-echo/src/database"
+"github.com/biezhi/gorm-paginator/pagination"
+"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+"github.com/radyatamaa/loyalti-go-echo/src/database"
 )
 
-func GetCategory(page int, size int) []model.MerchantCategory {
+func GetSocialMedia(page int, size int) []model.MerchantCategory {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var category []model.MerchantCategory
