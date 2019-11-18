@@ -79,7 +79,7 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_category_id": &graphql.Field{
 			Type: graphql.String,
 		},
-		"merchant_media_social": &graphql.Field{
+		"merchant_media_social_id": &graphql.Field{
 			Type: graphql.String,
 		},
 		"merchant_description": &graphql.Field{

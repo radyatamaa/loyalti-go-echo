@@ -6,19 +6,20 @@ import (
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
 
-func GetCard(page int, size int) []model.CardType {
+func GetCard(page *int, size *int) []model.CardType {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var card []model.CardType
 	db.Find(&card)
-	db.Close()
 
+	if size != nil && page != nil {
 	pagination.Paging(&pagination.Param{
 		DB:	db,
-		Page: page,
-		Limit:	size,
+		Page: *page,
+		Limit:	*size,
 		OrderBy:	[]string{"program_name desc"},
-	}, &card)
-
+		}, &card)
+	}
+	db.Close()
 	return card
 }
