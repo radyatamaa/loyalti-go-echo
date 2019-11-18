@@ -2,23 +2,23 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
-	"github.com/felixsiburian/loyalti-go-echo/src/database"
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/database"
 )
 
-func GetProgram(page int, size int) []model.Program {
+func GetCategory(page int, size int) []model.MerchantCategory {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
-	var program []model.Program
-	db.Find(&program)
-	db.Close()
+	var category []model.MerchantCategory
+	db.Find(&category)
 
 	pagination.Paging(&pagination.Param{
 		DB:	db,
 		Page: page,
 		Limit:	size,
-		OrderBy:	[]string{"program_name desc"},
-	}, &program)
+		OrderBy:	[]string{"category_name desc"},
+	}, &category)
 
-	return program
+	db.Close()
+	return category
 }
