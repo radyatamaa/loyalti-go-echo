@@ -3,7 +3,7 @@ package main
 import (
 	"../router"
 	"fmt"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
+	"github.com/davidnobels/loyalti-go-echo/src/api/host"
 )
 
 func main() {

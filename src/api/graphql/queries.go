@@ -16,6 +16,7 @@ type Page struct{
 // NewRoot returns base query type. This is where we add all the base queries
 func NewRoot() *Root {
 	// Create a resolver holding our database. Resolver can be found in resolvers.go
+
 	// Create a new Root that describes our base query set up. In this
 	// example we have a user query that takes one argument called name
 	root := Root{
@@ -88,6 +89,9 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
+							//"sort": &graphql.ArgumentConfig{
+							//	Type:graphql.NewNonNull(graphql.Int),
+							//},
 						},
 						Resolve: ProgramResolver,
 					},
