@@ -89,7 +89,22 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	return program, nil
 }
+func ProgramByMerchantId(p graphql.ResolveParams) (interface{}, error){
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	program := repository.GetProgramByMerchantId(page, size)
+	//fmt.Println(program)
+	return program, nil
+}
 
+//func ProgramResolverByDate(p graphql.ResolveParams) (interface{}, error) {
+//	page := p.Args["page"].(int)
+//	size := p.Args["size"].(int)
+//	sort := p.Args["sort"].(int)
+//	program1 := repository.(page, size, sort)
+//	fmt.Println(program1)
+//	return program1, nil
+//}
 func OutletResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)

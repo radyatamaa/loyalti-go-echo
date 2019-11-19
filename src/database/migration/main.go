@@ -5,8 +5,6 @@ import (
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 	"time"
-
-	//"time"
 )
 //type User struct {
 //	Id int `json:"id","AUTO_INCREMENT"`
@@ -18,41 +16,6 @@ func main() {
 	//db := database.ConnectPostgre()
 	//connect postgre
 
-	// Migrate the schema
-	//db.AutoMigrate(&model.MerchantCategory{}, &model.Merchant{}, &model.MerchantSocialMedia{})
-	//db.AutoMigrate(&User{})
-
-	//sosmed := model.MerchantSocialMedia{
-	//	GeneralModels:       model.GeneralModels{
-	//		Created:    time.Now(),
-	//		CreatedBy:  "Admin",
-	//		Modified:   time.Now(),
-	//		ModifiedBy: "Admin",
-	//		Active:     true,
-	//		IsDeleted:  false,
-	//		Deleted:    nil,
-	//		Deleted_by: "",
-	//	},
-	//	SocialMediaName:     "Google+",
-	//	SocialMediaImageUrl: "",
-	//}
-	//db.Create(&sosmed)
-
-	//category := model.MerchantCategory{
-	//	GeneralModels: model.GeneralModels{
-	//		Created:    time.Now(),
-	//		CreatedBy:  "Admin",
-	//		Modified:   time.Now(),
-	//		ModifiedBy: "Admin",
-	//		Active:     false,
-	//		IsDeleted:  false,
-	//		Deleted:    nil,
-	//		Deleted_by: "",
-	//	},
-	//	CategoryName:  "Music",
-	//	ImageUrl:      "",
-	//}
-	//db.Create(&category)
 
 	var merchant1 = model.Merchant{
 		GeneralModels: model.GeneralModels{
