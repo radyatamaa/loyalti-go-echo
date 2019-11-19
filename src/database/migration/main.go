@@ -1,15 +1,11 @@
 package main
 
 import (
-	"github.com/felixsiburian/loyalti-go-echo/src/database"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/database"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 	"time"
 )
-//type User struct {
-//	Id int `json:"id","AUTO_INCREMENT"`
-//	Name string `json:"name"`
-//}
 
 func main() {
 	db := database.ConnectionDB()
