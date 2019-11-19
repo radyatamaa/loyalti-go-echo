@@ -12,30 +12,30 @@ type Song struct {
 
 type Merchant struct {
 	GeneralModels
-	MerchantName 			string `json:"merchant_name"`
-	MerchantEmail 			string `json:"merchant_email"`
-	MerchantPhoneNumber 	string `json:"merchant_phone_number"`
-	MerchantProvince 		string `json:"merchant_province"`
-	MerchantCity 			string `json:"merchant_city"`
-	MerchantAddress 		string `json:"merchant_address"`
-	MerchantPostalCode 		string `json:"merchant_postal_code"`
-	MerchantCategory 		string `json:"merchant_category"`
-	MerchantWebsite 		string `json:"merchant_website"`
-	MerchantMediaSocial 	string `json:"merchant_media_social"`
-	MerchantDescription 	string `json:"merchant_description"`
-	MerchantImageProfile 	string `json:"merchant_image_profile"`
-	MerchantGallery 		string `json:"merchant_gallery"`
+	MerchantName          string `json:"merchant_name"`
+	MerchantEmail         string `json:"merchant_email"`
+	MerchantPhoneNumber   string `json:"merchant_phone_number"`
+	MerchantProvince      string `json:"merchant_province"`
+	MerchantCity          string `json:"merchant_city"`
+	MerchantAddress       string `json:"merchant_address"`
+	MerchantPostalCode    string `json:"merchant_postal_code"`
+	MerchantCategoryId    int    `json:"merchant_category_id"`
+	MerchantWebsite       string `json:"merchant_website"`
+	MerchantMediaSocialId int    `json:"merchant_media_social_id"`
+	MerchantDescription   string `json:"merchant_description"`
+	MerchantImageProfile  string `json:"merchant_image_profile"`
+	MerchantGallery       string `json:"merchant_gallery"`
 }
 
 type MerchantCategory struct {
 	GeneralModels
 	CategoryName string `json:"category_name"`
-	ImageUrl string `json:"image_url"`
+	ImageUrl     string `json:"image_url"`
 }
 
-type MerchantSocialMedia struct{
+type MerchantSocialMedia struct {
 	GeneralModels
-	SocialMediaName string `json:"social_media_name"`
+	SocialMediaName     string `json:"social_media_name"`
 	SocialMediaImageUrl string `json:"social_media_image_url"`
 }
 

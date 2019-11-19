@@ -9,6 +9,10 @@ type Root struct {
 	Query *graphql.Object
 }
 
+type Page struct{
+	page int `json:"null"`
+}
+
 // NewRoot returns base query type. This is where we add all the base queries
 func NewRoot() *Root {
 	// Create a resolver holding our database. Resolver can be found in resolvers.go
@@ -29,13 +33,13 @@ func NewRoot() *Root {
 						Type:graphql.NewList(merchantType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.Int,
 							},
 							"email" : &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.String),
+								Type: graphql.String,
 							},
 						},
 						Resolve: MerchantResolver,
@@ -44,10 +48,10 @@ func NewRoot() *Root {
 						Type:graphql.NewList(categoryType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.Int,
 							},
 						},
 						Resolve: MerchantCategoryResolver,
@@ -56,26 +60,34 @@ func NewRoot() *Root {
 						Type:graphql.NewList(cardType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type: graphql.NewNonNull(graphql.Int),
+								Type: graphql.Int,
 							},
 						},
 						Resolve: MerchantCardResolver,
 					},
 					"socialmedia" : &graphql.Field{
-						Type:graphql.NewList(cardType),
+						Type:graphql.NewList(socialmediaType),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
 						Resolve: SocialMediaResolver,
 					},
 					"program" : &graphql.Field{
 						Type:graphql.NewList(programType),
 						Args:graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.NewNonNull(graphql.Int),
+								Type:graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.NewNonNull(graphql.Int),
+								Type:graphql.Int,
 							},
 							//"sort": &graphql.ArgumentConfig{
 							//	Type:graphql.NewNonNull(graphql.Int),
@@ -87,10 +99,10 @@ func NewRoot() *Root {
 						Type:graphql.NewList(outletType),
 						Args:graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.NewNonNull(graphql.Int),
+								Type:graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.NewNonNull(graphql.Int),
+								Type:graphql.Int,
 							},
 						},
 						Resolve: OutletResolver,
