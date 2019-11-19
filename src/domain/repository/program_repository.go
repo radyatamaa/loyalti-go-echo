@@ -9,7 +9,7 @@ import (
 
 func GetProgram(page int, size int) []model.Program {
 	db := database.ConnectionDB()
-
+	//db := database.ConnectPostgre()
 	var program []model.Program
 	db.Find(&program)
 
