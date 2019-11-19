@@ -163,6 +163,15 @@ var programType = graphql.NewObject(graphql.ObjectConfig{
 		"card": &graphql.Field{
 			Type: graphql.String,
 		},
+		"outlet_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"merchant_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"merchant_name": &graphql.Field{
+			Type:graphql.String,
+		},
 	},
 })
 
@@ -219,6 +228,9 @@ var outletType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"outlet_latitude": &graphql.Field{
 			Type: graphql.String,
+		},
+		"merchant_id": &graphql.Field{
+			Type:graphql.String,
 		},
 	},
 })

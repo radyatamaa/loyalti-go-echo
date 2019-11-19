@@ -1,8 +1,8 @@
 package repository
 
 import(
-	"github.com/felixsiburian/loyalti-go-echo/src/database"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/davidnobels/loyalti-go-echo/src/database"
+	"github.com/davidnobels/loyalti-go-echo/src/domain/model"
 )
 
 func GetOutlet() []model.Outlet {

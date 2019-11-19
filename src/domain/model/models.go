@@ -56,6 +56,7 @@ type Outlet struct {
 	OutletLatitude 		string		`json:"outlet_latitude"`
 	OutletDay 			time.Time	`json:"outlet_day"`
 	OutletHour 			time.Time	`json:"outlet_hour"`
+	MerchantId			int			`json:"merchant_id"`
 }
 
 type Program struct {
@@ -66,4 +67,20 @@ type Program struct {
 	ProgramEndDate 		time.Time	`json:"program_end_date"`
 	ProgramDescription 	string		`json:"program_description"`
 	Card 				string		`json:"card"`
+	OutletID			int			`json:"outlet_id"`
+	MerchantId			int			`json:"merchant_id"`
+	MerchantName 		string      `json:"merchant_name"`
+}
+
+type SpecialProgram struct {
+	GeneralModels
+	ProgramName 		string		`json:"program_name"`
+	ProgramImage 		string		`json:"program_image"`
+	ProgramStartDate 	time.Time	`json:"program_start_date"`
+	ProgramEndDate 		time.Time	`json:"program_end_date"`
+	ProgramDescription 	string		`json:"program_description"`
+	Card 				string		`json:"card"`
+	OutletID			int			`json:"outlet_id"`
+	MerchantId			int			`json:"merchant_id"`
+	//MerchantName 		string      `json:"merchant_name"`
 }

@@ -2,9 +2,9 @@ package graphQL
 
 import (
 	"fmt"
+	"github.com/davidnobels/loyalti-go-echo/src/domain/model"
+	"github.com/davidnobels/loyalti-go-echo/src/domain/repository"
 	"github.com/graphql-go/graphql"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/repository"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 )
 
@@ -34,6 +34,23 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error){
 	fmt.Println(program)
 	return program, nil
 }
+
+func ProgramByMerchantId(p graphql.ResolveParams) (interface{}, error){
+	page := p.Args["page"].(int)
+	size := p.Args["size"].(int)
+	program := repository.GetProgramByMerchantId(page, size)
+	//fmt.Println(program)
+	return program, nil
+}
+
+//func ProgramResolverByDate(p graphql.ResolveParams) (interface{}, error) {
+//	page := p.Args["page"].(int)
+//	size := p.Args["size"].(int)
+//	sort := p.Args["sort"].(int)
+//	program1 := repository.(page, size, sort)
+//	fmt.Println(program1)
+//	return program1, nil
+//}
 
 func OutletResolver(p graphql.ResolveParams) (interface{}, error){
 	outlet := repository.GetOutlet()

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/davidnobels/loyalti-go-echo/src/domain/model"
 )
 
 func GetAll(page int, size int) []model.Merchant{
