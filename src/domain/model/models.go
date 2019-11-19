@@ -60,7 +60,16 @@ type Outlet struct {
 }
 
 type Program struct {
-	GeneralModels
+	//GeneralModels
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 	ProgramName 		string		`json:"program_name"`
 	ProgramImage 		string		`json:"program_image"`
 	ProgramStartDate 	time.Time	`json:"program_start_date"`
@@ -84,3 +93,4 @@ type SpecialProgram struct {
 	MerchantId			int			`json:"merchant_id"`
 	//MerchantName 		string      `json:"merchant_name"`
 }
+

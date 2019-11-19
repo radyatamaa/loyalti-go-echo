@@ -89,9 +89,9 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
-							//"sort": &graphql.ArgumentConfig{
-							//	Type:graphql.NewNonNull(graphql.Int),
-							//},
+							"sort": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
 						},
 						Resolve: ProgramResolver,
 					},

@@ -5,13 +5,13 @@ import (
 )
 
 type GeneralModels struct {
-	Id         int `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"`
-	Created    time.Time
-	CreatedBy  string
-	Modified   time.Time
-	ModifiedBy string
-	Active     bool
-	IsDeleted  bool
-	Deleted    *time.Time
-	Deleted_by string
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 }
