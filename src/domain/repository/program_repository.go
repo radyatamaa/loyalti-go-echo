@@ -6,19 +6,20 @@ import (
 	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
 
-func GetProgram(page int, size int) []model.Program {
+func GetProgram(page *int, size *int) []model.Program {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var program []model.Program
 	db.Find(&program)
-	db.Close()
 
+	if page != nil && size != nil {
 	pagination.Paging(&pagination.Param{
 		DB:	db,
-		Page: page,
-		Limit:	size,
+		Page: *page,
+		Limit:	*size,
 		OrderBy:	[]string{"program_name desc"},
 	}, &program)
-
+	}
+	db.Close()
 	return program
 }

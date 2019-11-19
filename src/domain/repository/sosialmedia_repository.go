@@ -1,24 +1,25 @@
 package repository
 
 import (
-"github.com/biezhi/gorm-paginator/pagination"
-"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
-"github.com/radyatamaa/loyalti-go-echo/src/database"
+	"github.com/biezhi/gorm-paginator/pagination"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/felixsiburian/loyalti-go-echo/src/database"
 )
 
-func GetSocialMedia(page int, size int) []model.MerchantCategory {
+func GetSocialMedia(page *int, size *int) []model.MerchantSocialMedia {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
-	var category []model.MerchantCategory
-	db.Find(&category)
+	var sosmed []model.MerchantSocialMedia
+	db.Find(&sosmed)
 
+	if size != nil && page != nil {
 	pagination.Paging(&pagination.Param{
 		DB:	db,
-		Page: page,
-		Limit:	size,
+		Page: *page,
+		Limit:	*size,
 		OrderBy:	[]string{"category_name desc"},
-	}, &category)
-
+	}, &sosmed)
+	}
 	db.Close()
-	return category
+	return sosmed
 }
