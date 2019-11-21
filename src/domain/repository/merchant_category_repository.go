@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 )
 

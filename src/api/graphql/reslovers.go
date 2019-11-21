@@ -2,8 +2,8 @@ package graphQL
 
 import (
 	"fmt"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/repository"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
 	"github.com/graphql-go/graphql"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 )
@@ -77,25 +77,27 @@ func SocialMediaResolver(p graphql.ResolveParams) (interface{}, error) {
 func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	if ok && sip {
+	sort,deh := p.Args["sort"].(int)
+	if ok && sip && deh{
 		var pages *int = &page
 		var sizes *int = &size
-		program := repository.GetProgram(pages, sizes)
+		var sorts *int = &sort
+		program := repository.GetProgram(pages, sizes, sorts)
 		fmt.Println(program)
 		return program,nil
 	}
 
-	program := repository.GetProgram(nil,nil)
+	program := repository.GetProgram(nil,nil, nil)
 
 	return program, nil
 }
-func ProgramByMerchantId(p graphql.ResolveParams) (interface{}, error){
-	page := p.Args["page"].(int)
-	size := p.Args["size"].(int)
-	program := repository.GetProgramByMerchantId(page, size)
-	//fmt.Println(program)
-	return program, nil
-}
+//func ProgramByMerchantId(p graphql.ResolveParams) (interface{}, error){
+//	page := p.Args["page"].(int)
+//	size := p.Args["size"].(int)
+//	program := repository.GetProgramByMerchantId(page, size)
+//	//fmt.Println(program)
+//	return program, nil
+//}
 
 //func ProgramResolverByDate(p graphql.ResolveParams) (interface{}, error) {
 //	page := p.Args["page"].(int)
