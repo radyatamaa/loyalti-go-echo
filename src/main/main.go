@@ -1,9 +1,9 @@
 package main
 
 import (
-	"../router"
 	"fmt"
-	"github.com/davidnobels/loyalti-go-echo/src/api/host"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
+	"github.com/radyatamaa/loyalti-go-echo/src/router"
 )
 
 func main() {

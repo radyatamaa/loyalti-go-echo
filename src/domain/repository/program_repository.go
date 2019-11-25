@@ -13,6 +13,7 @@ func GetProgram(page *int, size *int, sort *int) []model.Program {
 	var program []model.Program
 	db.Find(&program)
 
+
 	if page != nil && size != nil {
 		pagination.Paging(&pagination.Param{
 			DB:      db,

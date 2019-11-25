@@ -2,10 +2,10 @@ package graphQL
 
 import (
 	"fmt"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
 	"github.com/graphql-go/graphql"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
 )
 
 type Song model.Song

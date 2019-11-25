@@ -2,8 +2,8 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
-	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 	"github.com/felixsiburian/loyalti-go-echo/src/database"
+	"github.com/felixsiburian/loyalti-go-echo/src/domain/model"
 )
 
 func GetSocialMedia(page *int, size *int) []model.MerchantSocialMedia {

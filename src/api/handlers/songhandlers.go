@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"../graphql"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/graphql"
 	"encoding/json"
 	"github.com/graphql-go/graphql"
 	"github.com/labstack/echo"

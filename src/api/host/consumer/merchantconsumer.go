@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
-	"github.com/davidnobels/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"os"
 	"os/signal"
 	"time"

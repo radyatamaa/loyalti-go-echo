@@ -2,8 +2,8 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
 func GetCategory(page *int, size *int) []model.MerchantCategory {
