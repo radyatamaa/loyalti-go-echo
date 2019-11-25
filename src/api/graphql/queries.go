@@ -38,6 +38,9 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
 							"email" : &graphql.ArgumentConfig{
 								Type: graphql.String,
 							},
@@ -53,6 +56,9 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
+							"sort": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
 						},
 						Resolve: MerchantCategoryResolver,
 					},
@@ -65,6 +71,9 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
 						},
 						Resolve: MerchantCardResolver,
 					},
@@ -75,6 +84,9 @@ func NewRoot() *Root {
 								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
 						},
@@ -92,8 +104,26 @@ func NewRoot() *Root {
 							"sort": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
+							"category": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
 						},
 						Resolve: ProgramResolver,
+					},
+					"special" : &graphql.Field{
+						Type:graphql.NewList(specialprogramType),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+						},
+						Resolve: SpecialProgramResolver,
 					},
 					"outlet" : &graphql.Field{
 						Type:graphql.NewList(outletType),
@@ -102,6 +132,9 @@ func NewRoot() *Root {
 								Type:graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
 						},
