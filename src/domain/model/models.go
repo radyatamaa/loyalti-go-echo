@@ -1,9 +1,7 @@
 package model
 
 import (
-	_ "github.com/jinzhu/gorm"
-	"time"
-	//"github.com/satori/go.uuid"
+
 )
 
 
@@ -33,24 +31,56 @@ type Merchant struct {
 }
 
 type MerchantCategory struct {
-	GeneralModels
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 	CategoryName string `json:"category_name"`
 	ImageUrl     string `json:"image_url"`
 }
 
 type MerchantSocialMedia struct {
-	GeneralModels
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 	SocialMediaName     string `json:"social_media_name"`
 	SocialMediaImageUrl string `json:"social_media_image_url"`
 }
 
 type CardType struct {
-	GeneralModels
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 	CardTypeName string `json:"card_type_name"`
 }
 
 type Outlet struct {
-	GeneralModels
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 	OutletName 			string		`json:"outlet_name"`
 	OutletAddress 		string		`json:"outlet_address"`
 	OutletPhone 		string		`json:"outlet_phone"`
@@ -84,10 +114,19 @@ type Program struct {
 	OutletID			int			`json:"outlet_id"`
 	MerchantId			int			`json:"merchant_id"`
 	MerchantName 		string      `json:"merchant_name"`
+	CategoryId	int 	`json:"category_id"`
 }
 
 type SpecialProgram struct {
-	GeneralModels
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created    time.Time 	`json:"created"`
+	CreatedBy  string		`json:"created_by"`
+	Modified   time.Time	`json:"modified"`
+	ModifiedBy string		`json:"modified_by"`
+	Active     bool			`json:"active"`
+	IsDeleted  bool			`json:"is_deleted"`
+	Deleted    *time.Time	`json:"deleted"`
+	Deleted_by string		`json:"deleted_by"`
 	ProgramName 		string		`json:"program_name"`
 	ProgramImage 		string		`json:"program_image"`
 	ProgramStartDate 	time.Time	`json:"program_start_date"`
@@ -97,4 +136,3 @@ type SpecialProgram struct {
 	OutletID			int			`json:"outlet_id"`
 	MerchantId			int			`json:"merchant_id"`
 	//MerchantName 		string      `json:"merchant_name"`
-}
