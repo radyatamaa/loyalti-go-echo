@@ -265,6 +265,69 @@ var programType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_name": &graphql.Field{
 			Type:graphql.String,
 		},
+		"category_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+	},
+})
+
+var specialprogramType = graphql.NewObject(graphql.ObjectConfig{
+	Name : "SpecialProgram",
+	Fields: graphql.Fields{
+		"id" : &graphql.Field{
+			Type:graphql.Int,
+		},
+		"created" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"created_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"modified" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"modified_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"active" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"is_deleted" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"deleted" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type:graphql.String,
+		},
+		"program_name": &graphql.Field{
+			Type:graphql.String,
+		},
+		"program_image": &graphql.Field{
+			Type:graphql.String,
+		},
+		"program_start_date": &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"program_end_date": &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"program_description": &graphql.Field{
+			Type:graphql.String,
+		},
+		"card": &graphql.Field{
+			Type: graphql.String,
+		},
+		"outlet_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"merchant_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"merchant_name": &graphql.Field{
+			Type:graphql.String,
+		},
 	},
 })
 

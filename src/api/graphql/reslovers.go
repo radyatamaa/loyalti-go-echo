@@ -14,17 +14,18 @@ func MerchantResolver(p graphql.ResolveParams) (interface{}, error) {
 	page, ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
 	email, top := p.Args["email"].(string)
-
-	if ok && sip && top {
+	sort, tap := p.Args["sort"].(int)
+	if ok && sip && top && tap{
 		var pages *int = &page
 		var sizes *int = &size
 		var emails *string = &email
-		merchant := repository.GetMerchant(pages, sizes, emails)
+		var sorts *int = &sort
+		merchant := repository.GetMerchant(pages, sizes, sorts, emails)
 		fmt.Println(merchant)
 		return merchant, nil
 	}
 
-	merchant := repository.GetMerchant(nil, nil, nil)
+	merchant := repository.GetMerchant(nil, nil, nil, nil)
 	fmt.Println(merchant)
 	return merchant, nil
 }
@@ -32,15 +33,17 @@ func MerchantResolver(p graphql.ResolveParams) (interface{}, error) {
 func MerchantCategoryResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	if ok && sip {
+	sort,top := p.Args["sort"].(int)
+	if ok && sip && top{
 		var pages *int = &page
 		var sizes *int = &size
-		category := repository.GetCategory(pages, sizes)
+		var sorts *int = &sort
+		category := repository.GetCategory(pages, sizes, sorts)
 		fmt.Println(category)
 		return category,nil
 	}
 
-	category := repository.GetCategory(nil,nil)
+	category := repository.GetCategory(nil,nil, nil)
 
 	return category, nil
 }
@@ -48,33 +51,37 @@ func MerchantCategoryResolver(p graphql.ResolveParams) (interface{}, error) {
 func MerchantCardResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
+	sort, top := p.Args["sort"].(int)
 
-	if ok && sip {
+	if ok && sip && top{
 		var pages *int = &page
 		var sizes *int = &size
-	card := repository.GetCard(pages, sizes)
+		var sorts *int = &sort
+	card := repository.GetCard(pages, sizes, sorts)
 	fmt.Println(card)
 	return card, nil
 	}
-	card := repository.GetCard(nil,nil)
+	card := repository.GetCard(nil,nil, nil)
 	return card, nil
 }
 
 func SocialMediaResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	if ok && sip {
+	sort,top := p.Args["sort"].(int)
+	if ok && sip && top{
 		var pages *int = &page
 		var sizes *int = &size
-		sosmed := repository.GetSocialMedia(pages, sizes)
+		var sorts *int = &sort
+		sosmed := repository.GetSocialMedia(pages, sizes, sorts)
 		fmt.Println(sosmed)
 		return sosmed,nil
 	}
-	sosmed := repository.GetSocialMedia(nil, nil)
+	sosmed := repository.GetSocialMedia(nil, nil, nil)
 	return sosmed, nil
 }
 
-func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
+func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
 	sort,deh := p.Args["sort"].(int)
@@ -82,12 +89,32 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
-		program := repository.GetProgram(pages, sizes, sorts)
+		special := repository.GetSpecialProgram(pages, sizes, sorts)
+		fmt.Println(special)
+		return special,nil
+	}
+
+	program := repository.GetSpecialProgram(nil,nil, nil)
+
+	return program, nil
+}
+
+func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
+	page,ok := p.Args["page"].(int)
+	size,sip := p.Args["size"].(int)
+	sort,deh := p.Args["sort"].(int)
+	category, cat := p.Args["category"].(int)
+	if ok && sip && deh  && cat{
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		var cats *int = &category
+		program := repository.GetProgram(pages, sizes, sorts, cats)
 		fmt.Println(program)
 		return program,nil
 	}
 
-	program := repository.GetProgram(nil,nil, nil)
+	program := repository.GetProgram(nil,nil, nil,nil)
 
 	return program, nil
 }
@@ -110,15 +137,17 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 func OutletResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	if ok && sip {
+	sort, top := p.Args["sort"].(int)
+	if ok && sip && top{
 		var pages *int = &page
 		var sizes *int = &size
-		outlet := repository.GetOutlet(pages, sizes)
+		var sorts *int = &sort
+		outlet := repository.GetOutlet(pages, sizes, sorts)
 		fmt.Println(outlet)
 		return outlet,nil
 	}
 
-	outlet := repository.GetOutlet(nil,nil)
+	outlet := repository.GetOutlet(nil,nil, nil)
 
 	return outlet, nil
 }
