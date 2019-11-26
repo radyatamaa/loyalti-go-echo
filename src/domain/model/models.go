@@ -1,9 +1,7 @@
 package model
 
 import (
-	//"github.com/jinzhu/gorm"
-	"time"
-	//"github.com/google/uuid"
+
 )
 
 
@@ -98,7 +96,7 @@ type Outlet struct {
 
 type Program struct {
 	//GeneralModels
-	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Id         int 			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created    time.Time 	`json:"created"`
 	CreatedBy  string		`json:"created_by"`
 	Modified   time.Time	`json:"modified"`
@@ -138,23 +136,3 @@ type SpecialProgram struct {
 	OutletID			int			`json:"outlet_id"`
 	MerchantId			int			`json:"merchant_id"`
 	//MerchantName 		string      `json:"merchant_name"`
-}
-
-type Base struct {
-	ID 			uint64 		`json:"id"`
-	CreatedAt 	time.Time	`json:"created_at"`
-	UpdatedAt 	time.Time	`json:"updated_at"`
-	DeleteAt 	*time.Time	`json:"delete_at"`
-}
-
-//ID :=uuid.New().String()
-//func (base *Base) BeforeCreate(scope *gorm.Scope) error {
-//
-//	s
-//	return scope.SetColumn("ID", corrID)
-//}
-
-//type Userr struct {
-//	Base
-//	SomeFlag bool `gorm:"column:some_flag;not null;default:true"`
-//}
