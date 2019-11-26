@@ -1,8 +1,8 @@
 package webserver
 
 import (
-    "../router"
     "github.com/labstack/echo"
+    "github.com/radyatamaa/loyalti-go-echo/src/router"
     "log"
     "sync"
 )

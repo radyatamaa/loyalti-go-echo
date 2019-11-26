@@ -1,9 +1,9 @@
 package router
 
 import (
-    "../api/middlewares"
+    "github.com/radyatamaa/loyalti-go-echo/src/api"
+    "github.com/radyatamaa/loyalti-go-echo/src/api/middlewares"
     "github.com/labstack/echo"
-    "../api"
 )
 
 func New() *echo.Echo {

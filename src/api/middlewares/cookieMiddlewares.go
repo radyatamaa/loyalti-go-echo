@@ -1,9 +1,9 @@
 package middlewares
 
 import (
-    "strings"
-    "net/http"
     "log"
+    "net/http"
+    "strings"
 
     "github.com/labstack/echo"
 )
