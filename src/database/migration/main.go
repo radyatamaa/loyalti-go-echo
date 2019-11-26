@@ -12,7 +12,6 @@ func main() {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	//connect postgre
-	db.AutoMigrate(&model.Userr{})
 	db.AutoMigrate(&model.Program{})
 
 	//	MerchantName: "GoJek",
