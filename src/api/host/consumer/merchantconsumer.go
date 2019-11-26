@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/Shopify/sarama"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
 	"os"
 	"os/signal"
 	"time"
@@ -54,33 +55,23 @@ func NewMerchantConsumer() {
 	go func() {
 
 		for {
-
 			select {
-
 			case err := <-consumer.Errors():
-
 				fmt.Println(err)
-
 			case msg := <-consumer.Messages():
-
 				//*messageCountStart++
 				//Deserialize
 				merchant := model.Merchant{}
 				json.Unmarshal([]byte(msg.Value),&merchant)
 				fmt.Println(merchant)
 				//presistance.CreateMerchant(merchant)
-				fmt.Println("Received messages", string(msg.Topic),string(msg.Key), string(msg.Value))
+				//fmt.Println("Received messages", string(msg.Topic),string(msg.Key), string(msg.Value))
 
-			case <-signals:
-
+				case <-signals:
 				fmt.Println("Interrupt is detected")
-
 				doneCh <- struct{}{}
-
 			}
-
 		}
-
 	}()
 
 	<-doneCh
