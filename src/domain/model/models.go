@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	"time"
+)
+
 
 type Song struct {
 	ID       string `json:"id,omitempty"`
@@ -94,3 +97,20 @@ type SpecialProgram struct {
 	//MerchantName 		string      `json:"merchant_name"`
 }
 
+type Base struct {
+	ID 			uint64 		`json:"id"`
+	CreatedAt 	time.Time	`json:"created_at"`
+	UpdatedAt 	time.Time	`json:"updated_at"`
+	DeleteAt 	*time.Time	`json:"delete_at"`
+}
+
+//func (base *Base) BeforeCreate(scope *gorm.Scope) error {
+//
+//	s
+//	return scope.SetColumn("ID", corrID)
+//}
+
+type Userr struct {
+	Base
+	SomeFlag bool `gorm:"column:some_flag;not null;default:true"`
+}

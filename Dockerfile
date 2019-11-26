@@ -14,12 +14,12 @@ RUN make engine
 FROM alpine:latest
 
 RUN apk update && apk upgrade && \
-    apk --update --no-cache add tzdata && \
-    mkdir /app 
+    apk --no-cache --update add ca-certificates tzdata && \
+    mkdir /app
 
 WORKDIR /app 
 
-EXPOSE 9090
+EXPOSE 2525
 
 COPY --from=builder /app/engine /app
 
