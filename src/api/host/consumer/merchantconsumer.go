@@ -36,7 +36,7 @@ func NewMerchantConsumer() {
 
 	}()
 
-	topic := "new-customer-topic-1"
+	topic := "new-merchant-topic"
 
 	consumer, err := master.ConsumePartition(topic, 0, sarama.OffsetOldest)
 
@@ -63,10 +63,11 @@ func NewMerchantConsumer() {
 				//Deserialize
 				merchant := model.Merchant{}
 				json.Unmarshal([]byte(msg.Value),&merchant)
-				fmt.Println(merchant)
+				repository.CreateMerchant(&merchant)
+				//fmt.Println(merchant)
 				//presistance.CreateMerchant(merchant)
 				//fmt.Println("Received messages", string(msg.Topic),string(msg.Key), string(msg.Value))
-
+				//repository.CreateMerchant()
 				case <-signals:
 				fmt.Println("Interrupt is detected")
 				doneCh <- struct{}{}

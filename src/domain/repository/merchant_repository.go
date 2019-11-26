@@ -6,6 +6,17 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
+func CreateMerchant(merchant *model.Merchant) string{
+	db := database.ConnectionDB()
+
+	merchantObj := *merchant
+
+	db.Create(&merchantObj)
+
+	return merchantObj.MerchantEmail
+
+}
+
 func GetMerchant(page *int, size *int, sort *int, email *string) []model.Merchant {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()

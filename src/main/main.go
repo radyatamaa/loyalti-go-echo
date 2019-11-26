@@ -1,8 +1,8 @@
 package main
 
 import (
-	"../router"
 	"fmt"
+	"github.com/radyatamaa/loyalti-go-echo/src/router"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
 )
 
@@ -13,4 +13,6 @@ func main() {
 	e.Start(":8000")
 
 	host.StartKafka()
+
+
 }
