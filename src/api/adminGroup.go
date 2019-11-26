@@ -1,7 +1,7 @@
 package api
 
 import (
-    "../api/handlers"
+    "github.com/radyatamaa/loyalti-go-echo/src/api/handlers"
     "github.com/labstack/echo"
 )
 
