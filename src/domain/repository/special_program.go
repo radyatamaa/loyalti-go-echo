@@ -34,40 +34,11 @@ func GetSpecialProgram(page *int, size *int, sort *int) []model.SpecialProgram {
 			case 4:
 				db.Order("program_name desc").Find(&special)
 			}
-
-
-			//switch *sort {
-			//case enum.OrderByDate_Asc:
-			//	db.Order("created asc").Find(&program)
-			//	fmt.Println("test asc")
-			//case enum.OrderByDate_Desc:
-			//	db.Order("created desc").Find(&program)
-			//	}
 		}
 	}
 	db.Close()
 	return special
 }
-
-
-//func GetProgramByDate(page int, size int, sort int) []model.Program {
-//	db := database.ConnectionDB()
-//	sortBy := domain.Enum.OrderByDate_Asc
-//
-//	var program_date []model.Program
-//	db.Find(&program_date)
-//
-//	pagination.Paging(&pagination.Param{
-//		DB:      db,
-//		Page:    page,
-//		Limit:   size,
-//		 //StartDate: start_date,
-//		OrderBy: []string{" asc"} ,
-//	}, &program_date)
-//
-//	db.Close()
-//	return program_date
-//}
 
 //func GetProgramByMerchantId(page int, size int) []model.Program {
 //	db := database.ConnectionDB()

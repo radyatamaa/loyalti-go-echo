@@ -103,18 +103,24 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
 	sort,deh := p.Args["sort"].(int)
-	category, cat := p.Args["category"].(int)
-	if ok && sip && deh  && cat{
+	//category, cat := p.Args["category"].(int)
+	if ok && sip && deh{
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
-		var cats *int = &category
-		program := repository.GetProgram(pages, sizes, sorts, cats)
+		//var cats *int = &category
+		program := repository.GetProgram(pages, sizes, sorts)
+		fmt.Println(program)
+		return program,nil
+	} else if ok && sip {
+		var paging *int = &page
+		var sizing *int = &size
+		program := repository.GetProgram(paging, sizing, nil)
 		fmt.Println(program)
 		return program,nil
 	}
 
-	program := repository.GetProgram(nil,nil, nil,nil)
+	program := repository.GetProgram(nil,nil, nil)
 
 	return program, nil
 }
