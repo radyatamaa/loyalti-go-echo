@@ -99,6 +99,7 @@ func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	return program, nil
 }
 
+//program function
 func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
