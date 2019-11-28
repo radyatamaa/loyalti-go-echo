@@ -135,7 +135,8 @@ type SpecialProgram struct {
 	Card               string     `json:"card"`
 	OutletID           int        `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
-	//MerchantName 		string      `json:"merchant_name"`
+	MerchantName 		string      `json:"merchant_name"`
+	//CategoryId		int				`json:"category_id"`
 }
 
 type Product struct {
