@@ -328,6 +328,9 @@ var specialprogramType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_name": &graphql.Field{
 			Type:graphql.String,
 		},
+		"category_id": &graphql.Field{
+			Type:graphql.Int,
+		},
 	},
 })
 

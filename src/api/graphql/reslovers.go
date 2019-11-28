@@ -85,18 +85,37 @@ func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
 	sort,deh := p.Args["sort"].(int)
-	if ok && sip && deh{
+	category,cat := p.Args["category"].(int)
+	if ok && sip && deh && cat {
+		fmt.Println("12345")
+		var pagination *int = &page
+		var sizing *int = &size
+		var category *int = &category
+		var sorting *int = &sort
+		special := repository.GetSpecialProgram(pagination,sizing,sorting,category)
+		//fmt.Println(program)
+		return special,nil
+	}else if ok && sip && deh {
+		fmt.Println("5678")
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
-		special := repository.GetSpecialProgram(pages, sizes, sorts)
-		fmt.Println(special)
+		//var cats *int = &category
+		special := repository.GetSpecialProgram(pages, sizes, sorts,nil)
+		//fmt.Println(program)
+		return special,nil
+	} else if ok && sip {
+		fmt.Println("7890")
+		var paging *int = &page
+		var sizing *int = &size
+		special := repository.GetSpecialProgram(paging, sizing, nil, nil)
+		//fmt.Println(program)
 		return special,nil
 	}
 
-	program := repository.GetSpecialProgram(nil,nil, nil)
+	special := repository.GetSpecialProgram(nil,nil, nil, nil)
 
-	return program, nil
+	return special, nil
 }
 
 //program function
@@ -104,24 +123,35 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
 	sort,deh := p.Args["sort"].(int)
-	//category, cat := p.Args["category"].(int)
-	if ok && sip && deh{
+	category, cat := p.Args["category"].(int)
+	if ok && sip && deh && cat {
+		fmt.Println("12345")
+		var pagination *int = &page
+		var sizing *int = &size
+		var category *int = &category
+		var sorting *int = &sort
+		program := repository.GetProgram(pagination,sizing,sorting,category)
+		//fmt.Println(program)
+		return program,nil
+	}else if ok && sip && deh {
+		fmt.Println("5678")
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
 		//var cats *int = &category
-		program := repository.GetProgram(pages, sizes, sorts)
-		fmt.Println(program)
+		program := repository.GetProgram(pages, sizes, sorts,nil)
+		//fmt.Println(program)
 		return program,nil
 	} else if ok && sip {
+		fmt.Println("7890")
 		var paging *int = &page
 		var sizing *int = &size
-		program := repository.GetProgram(paging, sizing, nil)
-		fmt.Println(program)
+		program := repository.GetProgram(paging, sizing, nil, nil)
+		//fmt.Println(program)
 		return program,nil
 	}
 
-	program := repository.GetProgram(nil,nil, nil)
+	program := repository.GetProgram(nil,nil, nil, nil)
 
 	return program, nil
 }

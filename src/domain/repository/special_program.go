@@ -1,69 +1,130 @@
 package repository
 
 import (
+	"database/sql"
 	"fmt"
-	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"github.com/sirupsen/logrus"
 )
 
-func GetSpecialProgram(page *int, size *int, sort *int) []model.SpecialProgram {
+func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.SpecialProgram {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
-	var special []model.SpecialProgram
-	db.Find(&special)
+	var program []model.Program
+	var rows *sql.Rows
+	var err error
+	var total int
 
-	if page != nil && size != nil {
-		pagination.Paging(&pagination.Param{
-			DB:      db,
-			Page:    *page,
-			Limit:   *size,
-			OrderBy: []string{"program_name desc"},
-		}, &special)
-
-		//var enum domain.List
-		if sort != nil {
-			fmt.Println("masuk gak kesini")
-			switch *sort {
-			case 1 :
-				db.Order("created asc").Find(&special)
-			case 2:
-				db.Order("created desc").Find(&special)
-			case 3:
-				db.Order("program_name asc").Find(&special)
-			case 4:
-				db.Order("program_name desc").Find(&special)
+	if sort != nil {
+		switch *sort {
+		case 1:
+			if page != nil && size != nil && category == nil{
+				rows, err = db.Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+				fmt.Println("test")
+				if err != nil {
+					panic(err)
+				}
+			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+				fmt.Println("apakah masuk")
+				if err != nil {
+					panic(err)
+				}
+			}
+		case 2:
+			if page != nil && size != nil && category == nil{
+				rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+		case 3:
+			if page != nil && size != nil && category == nil{
+				rows, err = db.Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+		case 4:
+			if page != nil && size != nil && category == nil{
+				rows, err = db.Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+		}
+	}else {
+		if page != nil && size != nil {
+			rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+			if err != nil {
+				panic(err)
+			}
+		} else{
+			fmt.Println("masuk ga")
+			rows, err = db.Find(&program).Rows()
+			if err != nil {
+				panic(err)
 			}
 		}
 	}
-	db.Close()
-	return special
-}
 
-//func GetProgramByMerchantId(page int, size int) []model.Program {
-//	db := database.ConnectionDB()
-//
-//	var program_by_merchant []model.Program
-//
-//	db.Find(&program_by_merchant)
-//
-//	 pagination.Paging(&pagination.Param{
-//		DB:      db,
-//		Page:    page,
-//		Limit:   size,
-//		OrderBy: []string{"merchant_id desc"} ,
-//	} ,&program_by_merchant)
-//	offset := ((page - 1) * (size))
-//	db.Table("merchants").Select("merchants.merchant_name, programs.program_name,programs.program_description").
-//		Joins("left join programs on programs.merchant_id = merchants.id").
-//		Order("merchant_id desc").Offset(offset).
-//		Scan(&program_by_merchant)
-//
-//	test := append(program_by_merchant)
-//
-//	fmt.Print(test)
-//
-//
-//	db.Close()
-//	return test
-//}
+	result := make([]model.SpecialProgram, 0)
+
+	for rows.Next() {
+		t := new(model.SpecialProgram)
+		err = rows.Scan(
+			&t.Id,
+			&t.Created,
+			&t.CreatedBy,
+			&t.Modified,
+			&t.ModifiedBy,
+			&t.Active,
+			&t.IsDeleted,
+			&t.Deleted,
+			&t.Deleted_by,
+			&t.ProgramName,
+			&t.ProgramImage,
+			&t.ProgramStartDate,
+			&t.ProgramEndDate,
+			&t.ProgramDescription,
+			&t.Card,
+			&t.OutletID,
+			&t.MerchantId,
+			&t.CategoryId,
+		)
+		merchant := new(model.Merchant)
+
+		db.Table("merchants").
+			Select("merchants.merchant_name").
+			Where("id = ?", t.MerchantId).
+			First(&merchant)
+		t.MerchantName = merchant.MerchantName
+		if err != nil {
+			logrus.Error(err)
+			return nil
+		}
+		result = append(result,*t)
+	}
+	db.Close()
+	return result
+}
