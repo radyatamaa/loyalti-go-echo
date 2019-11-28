@@ -8,10 +8,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func GetSpecialProgram(page *int, size *int, sort *int) []model.SpecialProgram {
+func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.SpecialProgram {
 	db := database.ConnectionDB()
-
-	var program []model.SpecialProgram
+	//db := database.ConnectPostgre()
+	var program []model.Program
 	var rows *sql.Rows
 	var err error
 	var total int
@@ -19,29 +19,55 @@ func GetSpecialProgram(page *int, size *int, sort *int) []model.SpecialProgram {
 	if sort != nil {
 		switch *sort {
 		case 1:
-			if page != nil && size != nil {
+			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+				fmt.Println("test")
+				if err != nil {
+					panic(err)
+				}
+			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+				fmt.Println("apakah masuk")
 				if err != nil {
 					panic(err)
 				}
 			}
 		case 2:
-			if page != nil && size != nil {
+			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
 		case 3:
-			if page != nil && size != nil {
+			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
 		case 4:
-			if page != nil && size != nil {
+			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
+				if err != nil {
+					panic(err)
+				}
+			}
+			if category != nil && page != nil && size != nil{
+				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
@@ -84,6 +110,7 @@ func GetSpecialProgram(page *int, size *int, sort *int) []model.SpecialProgram {
 			&t.Card,
 			&t.OutletID,
 			&t.MerchantId,
+			&t.CategoryId,
 		)
 		merchant := new(model.Merchant)
 
@@ -97,7 +124,7 @@ func GetSpecialProgram(page *int, size *int, sort *int) []model.SpecialProgram {
 			return nil
 		}
 		result = append(result,*t)
-		}
-		db.Close()
-	return result
 	}
+	db.Close()
+	return result
+}
