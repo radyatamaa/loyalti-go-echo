@@ -47,35 +47,37 @@ func main() {
 	}
 
 	defer func() {
-
 		if err := producer.Close(); err != nil {
-
 			panic(err)
-
 		}
-
 	}()
 
-	var newTopic = "new-customer-topic"
-	
-	msg := &sarama.ProducerMessage{
+	var newTopic = "new-merchant-topic"
+	 message := `
+    {
+        "merchant_name":"Starbucks",
+		"merchant_email":"contact@starbucks.com",
+		"merchant_address":"Plaza Festival",
+		"merchant_city":"Jakarta",
+		"merchant_postal_code":"129002",
+		"merchant_province":"DKI Jakarta",
+		"merchant_website":"www.starbucksindonesia.com",
+		"merchant_category":"1",
+		"merchant_phone_number":"190882",
+		"merchant_address":"Palza Festival",
+		"merchant_description":"menjual kopi yang dimasak"
+    }`
 
+	 msg := &sarama.ProducerMessage{
 		Topic: newTopic,
-
-		Value: sarama.StringEncoder("Something Cool 2"),
-
+		Value: sarama.StringEncoder(message),
 	}
 
 	partition, offset, err := producer.SendMessage(msg)
-
 	if err != nil {
-
 		panic(err)
-
 	}
-
 	fmt.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", newTopic, partition, offset)
-
 }
 
 func getKafkaConfig(username, password string) *sarama.Config {
