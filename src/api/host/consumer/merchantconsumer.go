@@ -11,7 +11,6 @@ import (
 	"time"
 )
 
-
 func NewMerchantConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
@@ -38,7 +37,7 @@ func NewMerchantConsumer() {
 
 	topic := "new-merchant-topic"
 
-	consumer, err := master.ConsumePartition(topic, 0, sarama.OffsetOldest)
+	consumer, err := master.ConsumePartition(topic, 0, sarama.OffsetNewest)
 
 	if err != nil {
 
@@ -53,8 +52,8 @@ func NewMerchantConsumer() {
 	doneCh := make(chan struct{})
 
 	go func() {
-
-		for {
+		fmt.Println("ini jalan")
+		for  {
 			select {
 			case err := <-consumer.Errors():
 				fmt.Println(err)
@@ -62,25 +61,27 @@ func NewMerchantConsumer() {
 				//*messageCountStart++
 				//Deserialize
 				merchant := model.Merchant{}
-				json.Unmarshal([]byte(msg.Value),&merchant)
+				json.Unmarshal([]byte(msg.Value), &merchant)
 				repository.CreateMerchant(&merchant)
-				//fmt.Println(merchant)
-				//presistance.CreateMerchant(merchant)
-				//fmt.Println("Received messages", string(msg.Topic),string(msg.Key), string(msg.Value))
-				//repository.CreateMerchant()
-				case <-signals:
+				//fmt.Println("sukses")
+				fmt.Println(&merchant)
+				
+			//presistance.CreateMerchant(merchant)
+			//fmt.Println("Received messages", string(msg.Topic),string(msg.Key), string(msg.Value))
+			//repository.CreateMerchant()
+			case <-signals:
 				fmt.Println("Interrupt is detected")
 				doneCh <- struct{}{}
 			}
+
 		}
 	}()
 
 	<-doneCh
 	master.Close()
-	fmt.Println("Processed",  "messages")
+	fmt.Println("Processed", "messages")
 
 }
-
 
 func getKafkaConfig(username, password string) *sarama.Config {
 
@@ -91,8 +92,6 @@ func getKafkaConfig(username, password string) *sarama.Config {
 	kafkaConfig.Net.WriteTimeout = 5 * time.Second
 
 	kafkaConfig.Producer.Retry.Max = 0
-
-
 
 	if username != "" {
 

@@ -55,9 +55,17 @@ func main() {
 	var newTopic = "new-merchant-topic"
 	 message := `
     {
-        "merchant_name":"Holy Wings",
-		"merchant_email":"contact@holywings.com",
-		"merchant_address":"Plaza Festival"
+        "merchant_name":"Starbucks",
+		"merchant_email":"contact@starbucks.com",
+		"merchant_address":"Plaza Festival",
+		"merchant_city":"Jakarta",
+		"merchant_postal_code":"129002",
+		"merchant_province":"DKI Jakarta",
+		"merchant_website":"www.starbucksindonesia.com",
+		"merchant_category":"1",
+		"merchant_phone_number":"190882",
+		"merchant_address":"Palza Festival",
+		"merchant_description":"menjual kopi yang dimasak"
     }`
 
 	 msg := &sarama.ProducerMessage{
