@@ -107,6 +107,9 @@ func NewRoot() *Root {
 							"category": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
+							"id": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
 						},
 						Resolve: ProgramResolver,
 					},
