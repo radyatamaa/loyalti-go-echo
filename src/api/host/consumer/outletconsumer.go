@@ -4,15 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host/consumer"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
 	"os"
 	"os/signal"
 	"strings"
-	"time"
+	//"time"
 )
 
-func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
 	fmt.Println(topics)
@@ -38,17 +39,17 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					merchant := model.Merchant{}
+					outlet := model.Outlet{}
 					switch msg.Topic {
-					case "new-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.CreateMerchant(&merchant)
-					case "update-merchant-topic" :
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.UpdateMerchant(&merchant)
-					case "delete-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.DeleteMerchant(&merchant)
+					case "new-outlet-topic":
+						json.Unmarshal([]byte(msg.Value), &outlet)
+						repository.CreateOutlet(&outlet)
+					case "update-outlet-topic" :
+						json.Unmarshal([]byte(msg.Value), &outlet)
+						repository.UpdateOutlet(&outlet)
+					case "delete-outlet-topic":
+						json.Unmarshal([]byte(msg.Value),&outlet)
+						repository.DeleteOutlet(&outlet)
 					}
 				}
 			}
@@ -58,11 +59,11 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 	return consumers, errors
 }
 
-func NewMerchantConsumer() {
+func NewOutletConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
-	kafkaConfig := getKafkaConfig("", "")
+	kafkaConfig := consumer.getKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -89,7 +90,7 @@ func NewMerchantConsumer() {
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consume(topics, master)
+	consumer, errors := consumeOutlet(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {
@@ -125,29 +126,5 @@ func NewMerchantConsumer() {
 	<-doneCh
 	master.Close()
 	fmt.Println("Processed", msgCount, "messages")
-
-}
-
-func getKafkaConfig(username, password string) *sarama.Config {
-
-	kafkaConfig := sarama.NewConfig()
-
-	kafkaConfig.Producer.Return.Successes = true
-
-	kafkaConfig.Net.WriteTimeout = 5 * time.Second
-
-	kafkaConfig.Producer.Retry.Max = 0
-
-	if username != "" {
-
-		kafkaConfig.Net.SASL.Enable = true
-
-		kafkaConfig.Net.SASL.User = username
-
-		kafkaConfig.Net.SASL.Password = password
-
-	}
-
-	return kafkaConfig
 
 }

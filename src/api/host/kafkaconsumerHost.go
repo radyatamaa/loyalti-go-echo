@@ -5,4 +5,5 @@ import (
 )
 func StartKafka() {
 	consumer.NewMerchantConsumer()
+	consumer.NewOutletConsumer()
 }

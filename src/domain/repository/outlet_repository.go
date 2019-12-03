@@ -6,6 +6,29 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
+func CreateOutlet(outlet *model.Outlet) string{
+	db := database.ConnectionDB()
+
+	outletObj := *outlet
+
+	db.Create(&outletObj)
+
+	return outletObj.OutletName
+}
+
+func UpdateOutlet  (outlet *model.Outlet) string {
+	db := database.ConnectionDB()
+	db.Model(&outlet).Where("merchant_id = ?", outlet.MerchantId).Update(&outlet)
+	return outlet.OutletName
+}
+
+func DeleteOutlet(outlet *model.Outlet) string {
+	db:= database.ConnectionDB()
+	db.Model(&outlet).Where("merchant_email= ?",outlet.OutletName).Delete(&outlet)
+	return "berhasil dihapus"
+}
+
+
 func GetOutlet(page *int, size *int, sort *int) []model.Outlet {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
