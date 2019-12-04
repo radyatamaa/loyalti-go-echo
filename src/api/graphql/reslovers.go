@@ -13,17 +13,30 @@ type Song model.Song
 func MerchantResolver(p graphql.ResolveParams) (interface{}, error) {
 	page, ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
-	email, top := p.Args["email"].(string)
+	email, mail := p.Args["email"].(string)
 	sort, tap := p.Args["sort"].(int)
-	if ok && sip && top && tap{
+	if ok && sip && tap{
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		merchant := repository.GetMerchant(pages, sizes, sorts, nil)
+		fmt.Println(merchant)
+		return merchant, nil
+
+	} else if ok && sip && mail {
 		var pages *int = &page
 		var sizes *int = &size
 		var emails *string = &email
-		var sorts *int = &sort
-		merchant := repository.GetMerchant(pages, sizes, sorts, emails)
-		fmt.Println(merchant)
-		return merchant, nil
+		merchant := repository.GetMerchant(pages,sizes,nil,emails)
+		return merchant,nil
+
+	} else if ok && sip {
+		var pages *int = &page
+		var sizes *int = &size
+		merchant := repository.GetMerchant(pages,sizes,nil,nil)
+		return merchant,nil
 	}
+
 
 	merchant := repository.GetMerchant(nil, nil, nil, nil)
 	fmt.Println(merchant)
