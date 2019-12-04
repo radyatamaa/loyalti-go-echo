@@ -9,5 +9,5 @@ import (
 func main() {
 	db := database.ConnectionDB()
 
-	db.Model(&model.Program{}).ModifyColumn("outlet_id", "string")
+	//db.Model(&model.Program{}).AddIndex("category", "program_gallery")
 }

@@ -140,7 +140,7 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
-							"sort": &graphql.ArgumentConfig{
+							"id": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
 						},

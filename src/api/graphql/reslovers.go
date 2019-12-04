@@ -161,13 +161,18 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 func OutletResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	sort, top := p.Args["sort"].(int)
+	id, top := p.Args["id"].(int)
 	if ok && sip && top{
 		var pages *int = &page
 		var sizes *int = &size
-		var sorts *int = &sort
-		outlet := repository.GetOutlet(pages, sizes, sorts)
+		var merchant_id *int = &id
+		outlet := repository.GetOutlet(pages, sizes, merchant_id)
 		fmt.Println(outlet)
+		return outlet,nil
+	} else if ok && sip{
+		var paging *int = &page
+		var sizing *int = &size
+		outlet := repository.GetOutlet(paging, sizing, nil)
 		return outlet,nil
 	}
 
