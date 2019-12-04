@@ -110,7 +110,7 @@ type Program struct {
 	ProgramEndDate     time.Time  `json:"program_end_date"`
 	ProgramDescription string     `json:"program_description"`
 	Card               string     `json:"card"`
-	OutletID           int        `json:"outlet_id"`
+	OutletID           string        `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
 	//MerchantName       string     `json:"merchant_name"`
 	CategoryId   int `json:"category_id"`

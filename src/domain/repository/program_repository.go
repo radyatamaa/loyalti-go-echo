@@ -2,13 +2,12 @@ package repository
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/sirupsen/logrus"
 )
 
-func GetProgram(page *int, size *int, sort *int, category *int) []model.Program {
+func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var program []model.Program
@@ -21,14 +20,12 @@ func GetProgram(page *int, size *int, sort *int, category *int) []model.Program 
 		case 1:
 			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
-				fmt.Println("test")
 				if err != nil {
 					panic(err)
 				}
 			}
 			if category != nil && page != nil && size != nil{
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
-				fmt.Println("apakah masuk")
 				if err != nil {
 					panic(err)
 				}
@@ -80,11 +77,16 @@ func GetProgram(page *int, size *int, sort *int, category *int) []model.Program 
 				panic(err)
 			}
 		} else{
-			fmt.Println("masuk ga")
 			rows, err = db.Find(&program).Rows()
 			if err != nil {
 				panic(err)
 			}
+		}
+	}
+	if id != nil {
+		rows, err = db.Where("id = ?", id).First(&program).Rows()
+		if err != nil{
+			panic(err)
 		}
 	}
 
