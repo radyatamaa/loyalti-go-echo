@@ -15,11 +15,12 @@ func MerchantResolver(p graphql.ResolveParams) (interface{}, error) {
 	size, sip := p.Args["size"].(int)
 	email, mail := p.Args["email"].(string)
 	sort, tap := p.Args["sort"].(int)
+	merchantid, id := p.Args["id"].(int)
 	if ok && sip && tap{
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
-		merchant := repository.GetMerchant(pages, sizes, sorts, nil)
+		merchant := repository.GetMerchant(pages, sizes, sorts, nil, nil)
 		fmt.Println(merchant)
 		return merchant, nil
 
@@ -27,18 +28,25 @@ func MerchantResolver(p graphql.ResolveParams) (interface{}, error) {
 		var pages *int = &page
 		var sizes *int = &size
 		var emails *string = &email
-		merchant := repository.GetMerchant(pages,sizes,nil,emails)
+		merchant := repository.GetMerchant(pages,sizes,nil,emails,nil)
 		return merchant,nil
+
+	} else if ok && sip && id{
+		var pages *int = &page
+		var sizes *int = &size
+		var merchantid *int = &merchantid
+		merchant := repository.GetMerchant(pages,sizes,nil,nil,merchantid)
+		return merchant, nil
 
 	} else if ok && sip {
 		var pages *int = &page
 		var sizes *int = &size
-		merchant := repository.GetMerchant(pages,sizes,nil,nil)
+		merchant := repository.GetMerchant(pages,sizes,nil,nil,nil)
 		return merchant,nil
 	}
 
 
-	merchant := repository.GetMerchant(nil, nil, nil, nil)
+	merchant := repository.GetMerchant(nil, nil, nil, nil, nil)
 	fmt.Println(merchant)
 	return merchant, nil
 }
