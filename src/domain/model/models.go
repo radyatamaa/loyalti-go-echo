@@ -154,19 +154,19 @@ type SpecialProgram struct {
 }
 
 type Product struct {
-	Id                 int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created            time.Time  `json:"created"`
-	CreatedBy          string     `json:"created_by"`
-	Modified           time.Time  `json:"modified"`
-	ModifiedBy         string     `json:"modified_by"`
-	Active             bool       `json:"active"`
-	IsDeleted          bool       `json:"is_deleted"`
-	Deleted            *time.Time `json:"deleted"`
-	Deleted_by         string     `json:"deleted_by"`
-	ProductName		string 		`json:"product_name"`
-	ProductDesc 	string		`json:"product_desc"`
-	MerchantId		string		`gorm:"FOREIGNKEY"; json:"merchant_id"`
-	ProductCategoryId int		`gorm:"FOREIGNKEY"; json:"product_category_id"`
+	Id                 	int        	`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created            	time.Time  	`json:"created"`
+	CreatedBy          	string     	`json:"created_by"`
+	Modified           	time.Time  	`json:"modified"`
+	ModifiedBy         	string     	`json:"modified_by"`
+	Active             	bool       	`json:"active"`
+	IsDeleted          	bool       	`json:"is_deleted"`
+	Deleted            	*time.Time	`json:"deleted"`
+	Deleted_by         	string     	`json:"deleted_by"`
+	ProductName			string 		`json:"product_name"`
+	ProductDesc 		string		`json:"product_desc"`
+	MerchantId			int			`gorm:"FOREIGNKEY"; json:"merchant_id"`
+	ProductCategoryId 	int			`gorm:"FOREIGNKEY"; json:"product_category_id"`
 }
 
 type ProductCategory struct {
