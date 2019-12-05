@@ -6,7 +6,7 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
-func GetMerchant(page *int, size *int, sort *int, email *string) []model.Merchant {
+func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []model.Merchant {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var merchant []model.Merchant
@@ -44,18 +44,27 @@ func GetMerchant(page *int, size *int, sort *int, email *string) []model.Merchan
 				OrderBy: []string{"merchant_name asc"},
 
 			}, &merchant)
-
 			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
-			//fmt.Println("2")
-			//rows, err = db.Where("merchant_id = ?", id).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
-			//if err != nil {
-			//	panic(err)
-			//}
+
 		} else{
 			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
 		}
 	}
 
+	if id != nil {
+		if page != nil && size != nil {
+			pagination.Paging(&pagination.Param{
+				DB:		db,
+				Page:	*page,
+				Limit:	*size,
+				OrderBy: []string{"merchant_name asc"},
+			}, &merchant)
+			db.Order("id").Where("id = ?", id).Find(&merchant)
+
+		} else {
+			db.Order("id").Where("id = ?", id).Find(&merchant)
+		}
+	}
 
 
 	db.Close()

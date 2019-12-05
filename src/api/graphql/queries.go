@@ -44,6 +44,9 @@ func NewRoot() *Root {
 							"email" : &graphql.ArgumentConfig{
 								Type: graphql.String,
 							},
+							"id" : &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
 						},
 						Resolve: MerchantResolver,
 					},
