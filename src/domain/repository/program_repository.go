@@ -7,7 +7,31 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
+
+func CreateProgram(program *model.Program) string{
+	db := database.ConnectionDB()
+
+	programObj := *program
+
+	db.Create(&programObj)
+
+	return programObj.ProgramName
+}
+
+func UpdateProgram  (program *model.Program) string {
+	db := database.ConnectionDB()
+	db.Model(&program).Where("id = ?", program.Id).Update(&program)
+	return "Berhasil diUpdate"
+}
+
+func DeleteProgram(program *model.Program) string {
+	db:= database.ConnectionDB()
+	db.Model(&program).Where("id= ?",program.Id).Delete(&program)
+	return "berhasil dihapus"
+}
+
+func GetProgram(page *int, size *int, sort *int, category *int) []model.Program {
+
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var program []model.Program
