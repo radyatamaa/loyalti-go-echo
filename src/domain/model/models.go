@@ -152,12 +152,12 @@ type SpecialProgram struct {
 	MerchantId         int        `json:"merchant_id"`
 	MerchantName 		string      `json:"merchant_name"`
 	CategoryId		int				`json:"category_id"`
-	Benefit				*string 		`json:"benefit"`
-	TermsAndCondition	*string		`json:"terms_and_condition"`
-	Tier 				*string		`json:"tier"`
-	RedeemRules			*string		`json:"redeem_rules"`
-	RewardTarget		*float64		`json:"reward_target"`
-	QRCodeId			*string		`json:"qr_code_id"`
+	Benefit				string 		`json:"benefit"`
+	TermsAndCondition	string		`json:"terms_and_condition"`
+	Tier 				string		`json:"tier"`
+	RedeemRules			string		`json:"redeem_rules"`
+	RewardTarget		float64		`json:"reward_target"`
+	QRCodeId			string		`json:"qr_code_id"`
 }
 
 type Product struct {
