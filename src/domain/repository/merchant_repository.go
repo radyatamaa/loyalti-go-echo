@@ -8,28 +8,24 @@ import (
 	//"net/http"
 )
 
- func CreateMerchant(merchant *model.Merchant) string{
+func CreateMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
-
 	merchantObj := *merchant
-
 	db.Create(&merchantObj)
-
 	return merchantObj.MerchantEmail
 }
 
-func UpdateMerchant  (merchant *model.Merchant) string {
+func UpdateMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
 	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update(&merchant)
 	return merchant.MerchantEmail
 }
 
 func DeleteMerchant(merchant *model.Merchant) string {
-db:= database.ConnectionDB()
-db.Model(&merchant).Select("merchant_email = ?", merchant.MerchantEmail).Updates(map[string]interface{}{"active":false})
-return "berhasil dihapus"
+	db := database.ConnectionDB()
+	db.Model(&merchant).Select("merchant_email = ?", merchant.MerchantEmail).Updates(map[string]interface{}{"active": false})
+	return "berhasil dihapus"
 }
-
 
 func GetMerchant(page *int, size *int, sort *int, email *string) []model.Merchant {
 	db := database.ConnectionDB()
