@@ -3,9 +3,6 @@ package repository
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
 
-	"github.com/jinzhu/gorm"
-	"github.com/labstack/echo"
-
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	//"net/http"
@@ -34,7 +31,7 @@ func DeleteMerchant(merchant *model.Merchant) string {
 }
 
 
-func GetMerchant(page *int, size *int, sort *int, email *string) []model.Merchant {
+func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []model.Merchant {
 
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
