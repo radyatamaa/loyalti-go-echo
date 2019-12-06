@@ -36,6 +36,7 @@ type Merchant struct {
 	MerchantDescription   string `json:"merchant_description"`
 	MerchantImageProfile  string `json:"merchant_image_profile"`
 	MerchantGallery       string `json:"merchant_gallery"`
+
 }
 
 type MerchantCategory struct {

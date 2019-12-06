@@ -7,12 +7,13 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
+	"log"
 	"os"
 	"os/signal"
 	"strings"
 )
 
-func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
 	//fmt.Println(topics)
@@ -38,22 +39,22 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					merchant := model.Merchant{}
+					program := model.Program{}
 					switch msg.Topic {
-					case "create-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.CreateMerchant(&merchant)
+					case "create-program-topic":
+						json.Unmarshal([]byte(msg.Value), &program)
+						repository.CreateProgram(&program)
 						fmt.Println(string(msg.Value))
 
-					case "update-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.UpdateMerchant(&merchant)
-					case "delete-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.DeleteMerchant(&merchant)
+					case "update-program-topic":
+						json.Unmarshal([]byte(msg.Value), &program)
+						repository.UpdateProgram(&program)
+					case "delete-program-topic":
+						json.Unmarshal([]byte(msg.Value), &program)
+						repository.DeleteProgram(&program)
 					}
 				}
-				fmt.Println("merchant berhasil dibuat")
+				fmt.Println("Program berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -61,7 +62,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 	return consumers, errors
 }
 
-func NewMerchantConsumer() {
+func NewProgramConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
@@ -91,13 +92,11 @@ func NewMerchantConsumer() {
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consume(topics, master)
+	consumer, errors := consumeProgram(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {
-		fmt.Println(err)
-		//panic(err)
-
+		log.Println(errors)
 	}
 
 	signals := make(chan os.Signal, 1)
@@ -129,4 +128,7 @@ func NewMerchantConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
+
+
+
 

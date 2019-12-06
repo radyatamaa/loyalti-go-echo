@@ -1,6 +1,7 @@
 package consumer
 
 import (
+
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
@@ -10,12 +11,13 @@ import (
 	"os"
 	"os/signal"
 	"strings"
+	//"time"
 )
 
-func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	//fmt.Println(topics)
+	fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -38,22 +40,21 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					merchant := model.Merchant{}
+					outlet := model.Outlet{}
 					switch msg.Topic {
-					case "create-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.CreateMerchant(&merchant)
+					case "create-outlet-topic":
+						json.Unmarshal([]byte(msg.Value), &outlet)
+						 repository.CreateOutlet(&outlet)
 						fmt.Println(string(msg.Value))
-
-					case "update-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.UpdateMerchant(&merchant)
-					case "delete-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.DeleteMerchant(&merchant)
+					case "update-outlet-topic" :
+						json.Unmarshal([]byte(msg.Value), &outlet)
+						 repository.UpdateOutlet(&outlet)
+					case "delete-outlet-topic":
+						json.Unmarshal([]byte(msg.Value),&outlet)
+						 repository.DeleteOutlet(&outlet)
 					}
 				}
-				fmt.Println("merchant berhasil dibuat")
+				fmt.Println("outlet berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -61,11 +62,12 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 	return consumers, errors
 }
 
-func NewMerchantConsumer() {
+func NewOutletConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
-	kafkaConfig := Config.GetKafkaConfig("", "")
+	//kafkaConfig := consumer.getKafkaConfig("", "")
+	kafkaConfig := Config.GetKafkaConfig("","")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -85,13 +87,14 @@ func NewMerchantConsumer() {
 
 	}()
 
+
 	//topic, err := master.Topics()
 	if err != nil {
 		panic(err)
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consume(topics, master)
+	consumer, errors := consumeOutlet(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {
@@ -129,4 +132,3 @@ func NewMerchantConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
-
