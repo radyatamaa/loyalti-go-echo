@@ -137,6 +137,12 @@ func GetProgram(page *int, size *int, sort *int, category *int) []model.Program 
 			&t.OutletID,
 			&t.MerchantId,
 			&t.CategoryId,
+			&t.Benefit,
+			&t.TermsAndCondition,
+			&t.Tier,
+			&t.RedeemRules,
+			&t.RewardTarget,
+			&t.QRCodeId,
 		)
 		merchant := new(model.Merchant)
 

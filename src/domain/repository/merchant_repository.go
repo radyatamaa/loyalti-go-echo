@@ -3,6 +3,9 @@ package repository
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
 
+	"github.com/jinzhu/gorm"
+	"github.com/labstack/echo"
+
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	//"net/http"
@@ -16,11 +19,13 @@ func CreateMerchant(merchant *model.Merchant) string{
 	return merchantObj.MerchantEmail
 }
 
+
 func UpdateMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
 	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update(&merchant)
 	return merchant.MerchantEmail
 }
+
 
 func DeleteMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
