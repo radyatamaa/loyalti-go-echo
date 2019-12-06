@@ -30,7 +30,7 @@ func DeleteProgram(program *model.Program) string {
 	return "berhasil dihapus"
 }
 
-func GetProgram(page *int, size *int, sort *int, category *int) []model.Program {
+func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
 
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
