@@ -92,6 +92,7 @@ func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.S
 
 	for rows.Next() {
 		t := new(model.SpecialProgram)
+		fmt.Println(t)
 		err = rows.Scan(
 			&t.Id,
 			&t.Created,
