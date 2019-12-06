@@ -1,23 +1,22 @@
 package consumer
 
 import (
-
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
+	"log"
 	"os"
 	"os/signal"
 	"strings"
-	//"time"
 )
 
-func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	fmt.Println(topics)
+	//fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -40,21 +39,22 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					outlet := model.Outlet{}
+					program := model.Program{}
 					switch msg.Topic {
-					case "create-outlet-topic":
-						json.Unmarshal([]byte(msg.Value), &outlet)
-						 repository.CreateOutlet(&outlet)
+					case "create-program-topic":
+						json.Unmarshal([]byte(msg.Value), &program)
+						repository.CreateProgram(&program)
 						fmt.Println(string(msg.Value))
-					case "update-outlet-topic" :
-						json.Unmarshal([]byte(msg.Value), &outlet)
-						 repository.UpdateOutlet(&outlet)
-					case "delete-outlet-topic":
-						json.Unmarshal([]byte(msg.Value),&outlet)
-						 repository.DeleteOutlet(&outlet)
+
+					case "update-program-topic":
+						json.Unmarshal([]byte(msg.Value), &program)
+						repository.UpdateProgram(&program)
+					case "delete-program-topic":
+						json.Unmarshal([]byte(msg.Value), &program)
+						repository.DeleteProgram(&program)
 					}
 				}
-				fmt.Println("outlet berhasil dibuat")
+				fmt.Println("Program berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -62,12 +62,11 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 	return consumers, errors
 }
 
-func NewOutletConsumer() {
+func NewProgramConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
-	//kafkaConfig := consumer.getKafkaConfig("", "")
-	kafkaConfig := Config.GetKafkaConfig("","")
+	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -87,20 +86,17 @@ func NewOutletConsumer() {
 
 	}()
 
-
 	//topic, err := master.Topics()
 	if err != nil {
 		panic(err)
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consumeOutlet(topics, master)
+	consumer, errors := consumeProgram(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {
-		fmt.Println(err)
-		//panic(err)
-
+		log.Println(errors)
 	}
 
 	signals := make(chan os.Signal, 1)
@@ -132,3 +128,7 @@ func NewOutletConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
+
+
+
+

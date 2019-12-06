@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
 	"os"
 	"os/signal"
 	"strings"
-	"time"
 )
 
 func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	fmt.Println(topics)
+	//fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -40,10 +40,12 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 					//Deserialize
 					merchant := model.Merchant{}
 					switch msg.Topic {
-					case "new-merchant-topic":
+					case "create-merchant-topic":
 						json.Unmarshal([]byte(msg.Value), &merchant)
 						repository.CreateMerchant(&merchant)
-					case "update-merchant-topic" :
+						fmt.Println(string(msg.Value))
+
+					case "update-merchant-topic":
 						json.Unmarshal([]byte(msg.Value), &merchant)
 						repository.UpdateMerchant(&merchant)
 					case "delete-merchant-topic":
@@ -51,6 +53,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 						repository.DeleteMerchant(&merchant)
 					}
 				}
+				fmt.Println("merchant berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -62,7 +65,7 @@ func NewMerchantConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
-	kafkaConfig := getKafkaConfig("", "")
+	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -81,7 +84,6 @@ func NewMerchantConsumer() {
 		}
 
 	}()
-
 
 	//topic, err := master.Topics()
 	if err != nil {
@@ -128,26 +130,3 @@ func NewMerchantConsumer() {
 
 }
 
-func getKafkaConfig(username, password string) *sarama.Config {
-
-	kafkaConfig := sarama.NewConfig()
-
-	kafkaConfig.Producer.Return.Successes = true
-
-	kafkaConfig.Net.WriteTimeout = 5 * time.Second
-
-	kafkaConfig.Producer.Retry.Max = 0
-
-	if username != "" {
-
-		kafkaConfig.Net.SASL.Enable = true
-
-		kafkaConfig.Net.SASL.User = username
-
-		kafkaConfig.Net.SASL.Password = password
-
-	}
-
-	return kafkaConfig
-
-}

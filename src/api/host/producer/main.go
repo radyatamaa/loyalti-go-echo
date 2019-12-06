@@ -1,16 +1,12 @@
 package main
 
-
-
 import (
-
 	"fmt"
-	"time"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
+	"log"
+	//"time"
 	"github.com/Shopify/sarama"
-
 )
-
-
 
 //var (
 //
@@ -21,8 +17,6 @@ import (
 //	maxRetry   = kingpin.Flag("maxRetry", "Retry limit").Default("5").Int()
 //
 //)
-
-
 
 func main() {
 
@@ -36,7 +30,7 @@ func main() {
 	//
 	//config.Producer.Return.Successes = true
 
-	kafkaConfig := getKafkaConfig("", "")
+	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	producer, err := sarama.NewSyncProducer([]string{"11.11.5.146:9092"}, kafkaConfig)
 
@@ -52,58 +46,58 @@ func main() {
 		}
 	}()
 
-	//var newTopic = "new-merchant-topic"
-	// message := `
-    //{
-    //    "merchant_name":"Starbucks",
-	//	"merchant_email":"contact@starbucks.com",
-	//	"merchant_address":"Plaza Festival",
-	//	"merchant_city":"Jakarta",
-	//	"merchant_postal_code":"129002",
-	//	"merchant_province":"DKI Jakarta",
-	//	"merchant_website":"www.starbucksindonesia.com",
-	//	"merchant_category":"1",
-	//	"merchant_phone_number":"190882",
-	//	"merchant_address":"PP",
-	//	"merchant_description":"menjual kopi yang dimasak"
-    //}`
-	 //var updateTopic = "update-merchant-topic"
-	var deleteTopic = "delete-merchant-topic"
+	var newTopic = "create-outlet-topic"
+
+	//message := `
+	//	"program_name":"Gojek 70%",
+	//	"program_description":"Diskon GoRide sampai dengan 70% maksimal 7000",
+	//	"outlet_id":"1",
+	//	"merchant_id":"3",
+	//`
+	message := `
+	"outlet_name":"Gojek Medan",
+	"outlet_address":"Jl, Sudirman",
+	"outlet_longitude":"108.9802",
+	"oulet_latitude":"6.902"
+	`
+	//pesan := fmt.Sprint("%s",message)
+	// var updateTopic = "update-merchant-topic"
+	//var createTopic = "new-outlet-topic"
 
 	msg := &sarama.ProducerMessage{
-		Topic: deleteTopic,
-		//Value: sarama.StringEncoder(message),
+		Topic: newTopic,
+		Value: sarama.StringEncoder(message),
 	}
 
 	partition, offset, err := producer.SendMessage(msg)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
-	fmt.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", deleteTopic, partition, offset)
+	fmt.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", newTopic, partition, offset)
 }
 
-func getKafkaConfig(username, password string) *sarama.Config {
+//func getKafkaConfig(username, password string) *sarama.Config {
+//
+//	kafkaConfig := sarama.NewConfig()
+//
+//	kafkaConfig.Producer.Return.Successes = true
+//
+//	kafkaConfig.Net.WriteTimeout = 5 * time.Second
+//
+//	kafkaConfig.Producer.Retry.Max = 0
+//
+//
+//
+//	if username != "" {
+//
+//		kafkaConfig.Net.SASL.Enable = true
+//
+//		kafkaConfig.Net.SASL.User = username
+//
+//		kafkaConfig.Net.SASL.Password = password
+//
+//	}
+//
+//	return kafkaConfig
 
-	kafkaConfig := sarama.NewConfig()
-
-	kafkaConfig.Producer.Return.Successes = true
-
-	kafkaConfig.Net.WriteTimeout = 5 * time.Second
-
-	kafkaConfig.Producer.Retry.Max = 0
-
-
-
-	if username != "" {
-
-		kafkaConfig.Net.SASL.Enable = true
-
-		kafkaConfig.Net.SASL.User = username
-
-		kafkaConfig.Net.SASL.Password = password
-
-	}
-
-	return kafkaConfig
-
-}
+//}
