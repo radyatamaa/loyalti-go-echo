@@ -6,7 +6,7 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
-
+// fungsi get outlet
 func GetOutlet(page *int, size *int, id *int) []model.Outlet {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
