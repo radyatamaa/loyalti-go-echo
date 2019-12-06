@@ -427,8 +427,5 @@ var outletType = graphql.NewObject(graphql.ObjectConfig{
 		"outlet_hour": &graphql.Field{
 			Type:graphql.DateTime,
 		},
-		"is_head_quarter": &graphql.Field{
-			Type:graphql.Boolean,
-		},
 	},
 })

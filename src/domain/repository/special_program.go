@@ -11,7 +11,7 @@ import (
 func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.SpecialProgram {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
-	var program []model.Program
+	var program []model.SpecialProgram
 	var rows *sql.Rows
 	var err error
 	var total int
@@ -111,6 +111,12 @@ func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.S
 			&t.OutletID,
 			&t.MerchantId,
 			&t.CategoryId,
+			&t.Benefit,
+			&t.TermsAndCondition,
+			&t.Tier,
+			&t.RedeemRules,
+			&t.RewardTarget,
+			&t.QRCodeId,
 		)
 		merchant := new(model.Merchant)
 

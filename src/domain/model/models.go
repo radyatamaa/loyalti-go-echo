@@ -81,27 +81,26 @@ type CardType struct {
 }
 
 type Outlet struct {
-	Id               int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	Created          string `json:"created"`
-	CreatedBy        string `json:"created_by"`
-	Modified         string `json:"modified"`
-	ModifiedBy       string `json:"modified_by"`
-	Active           bool   `json:"active"`
-	IsDeleted        bool   `json:"is_deleted"`
-	Deleted          string `json:"deleted"`
-	Deleted_by       string `json:"deleted_by"`
-	OutletName       string `json:"outlet_name"`
-	OutletAddress    string `json:"outlet_address"`
-	OutletPhone      string `json:"outlet_phone"`
-	OutletCity       string `json:"outlet_city"`
-	OutletProvince   string `json:"outlet_province"`
-	OutletPostalCode string `json:"outlet_postal_code"`
-	OutletLongitude  string `json:"outlet_longitude"`
-	OutletLatitude   string `json:"outlet_latitude"`
-	OutletDay        string `json:"outlet_day"`
-	OutletHour       string `json:"outlet_hour"`
-	MerchantId       int    `json:"merchant_id"`
-
+	Id               int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created          time.Time  `json:"created"`
+	CreatedBy        string     `json:"created_by"`
+	Modified         time.Time  `json:"modified"`
+	ModifiedBy       string     `json:"modified_by"`
+	Active           bool       `json:"active"`
+	IsDeleted        bool       `json:"is_deleted"`
+	Deleted          *time.Time `json:"deleted"`
+	Deleted_by       string     `json:"deleted_by"`
+	OutletName       string     `json:"outlet_name"`
+	OutletAddress    string     `json:"outlet_address"`
+	OutletPhone      string     `json:"outlet_phone"`
+	OutletCity       string     `json:"outlet_city"`
+	OutletProvince   string     `json:"outlet_province"`
+	OutletPostalCode string     `json:"outlet_postal_code"`
+	OutletLongitude  string     `json:"outlet_longitude"`
+	OutletLatitude   string     `json:"outlet_latitude"`
+	OutletDay        time.Time  `json:"outlet_day"`
+	OutletHour       time.Time  `json:"outlet_hour"`
+	MerchantId       int        `json:"merchant_id"`
 }
 
 type Program struct {
@@ -125,13 +124,12 @@ type Program struct {
 	MerchantId         	int        	`json:"merchant_id"`
 	CategoryId   	   	int 		`json:"category_id"`
 	MerchantName 		string		`json:"merchant_name"`
-	ProgramTitle		string		`json:"program_title"`
-	Benefit				string 		`json:"benefit"`
-	TermsAndCondition	string		`json:"terms_and_condition"`
-	Tier 				string		`json:"tier"`
-	RedeemRules			string		`json:"redeem_rules"`
-	RewardTarget		float64		`json:"reward_target"`
-	QRCodeId			string		`json:"qr_code_id"`
+	Benefit				*string 		`json:"benefit"`
+	TermsAndCondition	*string		`json:"terms_and_condition"`
+	Tier 				*string		`json:"tier"`
+	RedeemRules			*string		`json:"redeem_rules"`
+	RewardTarget		*float64		`json:"reward_target"`
+	QRCodeId			*string		`json:"qr_code_id"`
 }
 
 type SpecialProgram struct {
@@ -154,13 +152,12 @@ type SpecialProgram struct {
 	MerchantId         int        `json:"merchant_id"`
 	MerchantName 		string      `json:"merchant_name"`
 	CategoryId		int				`json:"category_id"`
-	ProgramTitle		string		`json:"program_title"`
-	Benefit				string 		`json:"benefit"`
-	TermsAndCondition	string		`json:"terms_and_condition"`
-	Tier 				string		`json:"tier"`
-	RedeemRules			string		`json:"redeem_rules"`
-	RewardTarget		float64		`json:"reward_target"`
-	QRCodeId			string		`json:"qr_code_id"`
+	Benefit				*string 		`json:"benefit"`
+	TermsAndCondition	*string		`json:"terms_and_condition"`
+	Tier 				*string		`json:"tier"`
+	RedeemRules			*string		`json:"redeem_rules"`
+	RewardTarget		*float64		`json:"reward_target"`
+	QRCodeId			*string		`json:"qr_code_id"`
 }
 
 type Product struct {
@@ -203,4 +200,20 @@ type MerchantStatus struct {
 	Deleted            *time.Time `json:"deleted"`
 	Deleted_by         	string    `json:"deleted_by"`
 	MerchantStatusDesc	string		`json:"merchant_status_desc"`
+}
+
+type Employee struct {
+	Id					int			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created            	time.Time  	`json:"created"`
+	CreatedBy          	string     	`json:"created_by"`
+	Modified           	time.Time  	`json:"modified"`
+	ModifiedBy         	string     	`json:"modified_by"`
+	Active             	bool       	`json:"active"`
+	IsDeleted          	bool       	`json:"is_deleted"`
+	Deleted            	*time.Time 	`json:"deleted"`
+	Deleted_by         	string     	`json:"deleted_by"`
+	EmployeeName		string		`json:"employee_name"`
+	EmployeeEmail		string		`json:"employee_email"`
+	EmployeePin			string		`json:"employee_pin"`
+	OutletId			int			`json:"outlet_id"`
 }
