@@ -268,6 +268,21 @@ var programType = graphql.NewObject(graphql.ObjectConfig{
 		"category_id": &graphql.Field{
 			Type:graphql.Int,
 		},
+		"program_title": &graphql.Field{
+			Type:graphql.String,
+		},
+		"benefit": &graphql.Field{
+			Type:graphql.String,
+		},
+		"terms_and_condition": &graphql.Field{
+			Type:graphql.String,
+		},
+		"tier": &graphql.Field{
+			Type:graphql.String,
+		},
+		"redeem_rules": &graphql.Field{
+			Type:graphql.String,
+		},
 	},
 })
 
@@ -326,6 +341,24 @@ var specialprogramType = graphql.NewObject(graphql.ObjectConfig{
 			Type:graphql.Int,
 		},
 		"merchant_name": &graphql.Field{
+			Type:graphql.String,
+		},
+		"category_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"program_title": &graphql.Field{
+			Type:graphql.String,
+		},
+		"benefit": &graphql.Field{
+			Type:graphql.String,
+		},
+		"terms_and_condition": &graphql.Field{
+			Type:graphql.String,
+		},
+		"tier": &graphql.Field{
+			Type:graphql.String,
+		},
+		"redeem_rules": &graphql.Field{
 			Type:graphql.String,
 		},
 	},
@@ -387,6 +420,15 @@ var outletType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"merchant_id": &graphql.Field{
 			Type:graphql.String,
+		},
+		"outlet_day": &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"outlet_hour": &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"is_head_quarter": &graphql.Field{
+			Type:graphql.Boolean,
 		},
 	},
 })

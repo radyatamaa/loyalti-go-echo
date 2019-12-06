@@ -44,6 +44,9 @@ func NewRoot() *Root {
 							"email" : &graphql.ArgumentConfig{
 								Type: graphql.String,
 							},
+							"id" : &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
 						},
 						Resolve: MerchantResolver,
 					},
@@ -107,6 +110,9 @@ func NewRoot() *Root {
 							"category": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
+							"id": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
 						},
 						Resolve: ProgramResolver,
 					},
@@ -122,6 +128,9 @@ func NewRoot() *Root {
 							"sort": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
+							"category": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
 						},
 						Resolve: SpecialProgramResolver,
 					},
@@ -134,7 +143,7 @@ func NewRoot() *Root {
 							"size": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
-							"sort": &graphql.ArgumentConfig{
+							"id": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
 						},
