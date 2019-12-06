@@ -8,6 +8,7 @@ import (
 )
 
 
+
  func CreateOutlet(outlet *model.Outlet) string{
 	db := database.ConnectionDB()
 
@@ -32,6 +33,7 @@ func DeleteOutlet(outlet *model.Outlet) string {
 
 
 func GetOutlet(page *int, size *int, sort *int) []model.Outlet {
+
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var outlet []model.Outlet
