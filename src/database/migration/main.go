@@ -10,7 +10,6 @@ import (
 func main() {
 
 	db := database.ConnectionDB()
-
 	program := model.Program{
 		Created:            time.Now(),
 		CreatedBy:          "Admin",
@@ -37,4 +36,5 @@ func main() {
 		QRCodeId:           "1",
 	}
 	db.Create(&program)
+	
 }
