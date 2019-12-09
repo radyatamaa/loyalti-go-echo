@@ -65,6 +65,7 @@ func GetSpecialProgram(page *int, size *int, sort *int, category *int, id *int) 
 				if err != nil {
 					panic(err)
 				}
+				rows.Close()
 			}
 			if category != nil && page != nil && size != nil{
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()

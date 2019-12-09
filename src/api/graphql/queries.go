@@ -152,6 +152,21 @@ func NewRoot() *Root {
 						},
 						Resolve: OutletResolver,
 					},
+					"employee" : &graphql.Field{
+						Type:graphql.NewList(employeeType),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+						},
+						Resolve: EmployeeResolver,
+					},
 				},
 			},
 		),

@@ -426,3 +426,48 @@ var outletType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var employeeType = graphql.NewObject(graphql.ObjectConfig{
+	Name:        "Employee",
+	Fields: graphql.Fields{
+		"id" : &graphql.Field{
+			Type:graphql.Int,
+		},
+		"created" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"created_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"modified" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"modified_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"active" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"is_deleted" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"deleted" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type:graphql.String,
+		},
+		"employee_name": &graphql.Field{
+			Type:graphql.String,
+		},
+		"employee_email": &graphql.Field{
+			Type:graphql.String,
+		},
+		"employee_pin": &graphql.Field{
+			Type:graphql.String,
+		},
+		"outlet_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+	},
+})

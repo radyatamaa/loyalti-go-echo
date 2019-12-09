@@ -14,29 +14,28 @@ type Song struct {
 
 type Merchant struct {
 	//GeneralModels
-	Id               int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	Created          time.Time  `json:"created"`
-	CreatedBy        string     `json:"created_by"`
-	Modified         time.Time  `json:"modified"`
-	ModifiedBy       string     `json:"modified_by"`
-	Active           bool       `json:"active"`
-	IsDeleted        bool       `json:"is_deleted"`
-	Deleted          *time.Time `json:"deleted"`
-	Deleted_by       string     `json:"deleted_by"`
-	MerchantName          string `json:"merchant_name"`
-	MerchantEmail         string `json:"merchant_email"`
-	MerchantPhoneNumber   string `json:"merchant_phone_number"`
-	MerchantProvince      string `json:"merchant_province"`
-	MerchantCity          string `json:"merchant_city"`
-	MerchantAddress       string `json:"merchant_address"`
-	MerchantPostalCode    string `json:"merchant_postal_code"`
-	MerchantCategoryId    int    `json:"merchant_category_id"`
-	MerchantWebsite       string `json:"merchant_website"`
-	MerchantMediaSocialId int    `json:"merchant_media_social_id"`
-	MerchantDescription   string `json:"merchant_description"`
-	MerchantImageProfile  string `json:"merchant_image_profile"`
-	MerchantGallery       string `json:"merchant_gallery"`
-
+	Id                    int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created               time.Time  `json:"created"`
+	CreatedBy             string     `json:"created_by"`
+	Modified              time.Time  `json:"modified"`
+	ModifiedBy            string     `json:"modified_by"`
+	Active                bool       `json:"active"`
+	IsDeleted             bool       `json:"is_deleted"`
+	Deleted               *time.Time `json:"deleted"`
+	Deleted_by            string     `json:"deleted_by"`
+	MerchantName          string     `json:"merchant_name"`
+	MerchantEmail         string     `json:"merchant_email"`
+	MerchantPhoneNumber   string     `json:"merchant_phone_number"`
+	MerchantProvince      string     `json:"merchant_province"`
+	MerchantCity          string     `json:"merchant_city"`
+	MerchantAddress       string     `json:"merchant_address"`
+	MerchantPostalCode    string     `json:"merchant_postal_code"`
+	MerchantCategoryId    int        `json:"merchant_category_id"`
+	MerchantWebsite       string     `json:"merchant_website"`
+	MerchantMediaSocialId int        `json:"merchant_media_social_id"`
+	MerchantDescription   string     `json:"merchant_description"`
+	MerchantImageProfile  string     `json:"merchant_image_profile"`
+	MerchantGallery       string     `json:"merchant_gallery"`
 }
 
 type MerchantCategory struct {
@@ -104,32 +103,30 @@ type Outlet struct {
 }
 
 type Program struct {
-	//GeneralModels
-	Id					int			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created            	time.Time  	`json:"created"`
-	CreatedBy          	string     	`json:"created_by"`
-	Modified           	time.Time  	`json:"modified"`
-	ModifiedBy         	string     	`json:"modified_by"`
-	Active             	bool       	`json:"active"`
-	IsDeleted          	bool       	`json:"is_deleted"`
-	Deleted            	*time.Time 	`json:"deleted"`
-	Deleted_by         	string     	`json:"deleted_by"`
-	ProgramName        	string     	`json:"program_name"`
-	ProgramImage       	string     	`json:"program_image"`
-	ProgramStartDate   	time.Time  	`json:"program_start_date"`
-	ProgramEndDate     	time.Time  	`json:"program_end_date"`
-	ProgramDescription 	string     	`json:"program_description"`
-	Card               	string     	`json:"card"`
-	OutletID           	string	  	`json:"outlet_id"`
-	MerchantId         	int        	`json:"merchant_id"`
-	CategoryId   	   	int 		`json:"category_id"`
-	MerchantName 		string		`json:"merchant_name"`
-	Benefit				*string 		`json:"benefit"`
-	TermsAndCondition	*string		`json:"terms_and_condition"`
-	Tier 				*string		`json:"tier"`
-	RedeemRules			*string		`json:"redeem_rules"`
-	RewardTarget		*float64		`json:"reward_target"`
-	QRCodeId			*string		`json:"qr_code_id"`
+	Id                 int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created            time.Time  `json:"created"`
+	CreatedBy          string     `json:"created_by"`
+	Modified           time.Time  `json:"modified"`
+	ModifiedBy         string     `json:"modified_by"`
+	Active             bool       `json:"active"`
+	IsDeleted          bool       `json:"is_deleted"`
+	Deleted            *time.Time `json:"deleted"`
+	Deleted_by         string     `json:"deleted_by"`
+	ProgramName        string     `json:"program_name"`
+	ProgramImage       string     `json:"program_image"`
+	ProgramStartDate   time.Time  `json:"program_start_date"`
+	ProgramEndDate     time.Time  `json:"program_end_date"`
+	ProgramDescription string     `json:"program_description"`
+	Card               string     `json:"card"`
+	OutletID           string     `json:"outlet_id"`
+	MerchantId         int        `json:"merchant_id"`
+	CategoryId         int        `json:"category_id"`
+	Benefit            *string    `json:"benefit"`
+	TermsAndCondition  *string    `json:"terms_and_condition"`
+	Tier               *string    `json:"tier"`
+	RedeemRules        *string    `json:"redeem_rules"`
+	RewardTarget       *float64   `json:"reward_target"`
+	QRCodeId           *string    `json:"qr_code_id"`
 }
 
 type SpecialProgram struct {
@@ -161,32 +158,32 @@ type SpecialProgram struct {
 }
 
 type Product struct {
-	Id                 	int        	`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created            	time.Time  	`json:"created"`
-	CreatedBy          	string     	`json:"created_by"`
-	Modified           	time.Time  	`json:"modified"`
-	ModifiedBy         	string     	`json:"modified_by"`
-	Active             	bool       	`json:"active"`
-	IsDeleted          	bool       	`json:"is_deleted"`
-	Deleted            	*time.Time	`json:"deleted"`
-	Deleted_by         	string     	`json:"deleted_by"`
-	ProductName			string 		`json:"product_name"`
-	ProductDesc 		string		`json:"product_desc"`
-	MerchantId			int			`gorm:"FOREIGNKEY"; json:"merchant_id"`
-	ProductCategoryId 	int			`gorm:"FOREIGNKEY"; json:"product_category_id"`
+	Id                int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created           time.Time  `json:"created"`
+	CreatedBy         string     `json:"created_by"`
+	Modified          time.Time  `json:"modified"`
+	ModifiedBy        string     `json:"modified_by"`
+	Active            bool       `json:"active"`
+	IsDeleted         bool       `json:"is_deleted"`
+	Deleted           *time.Time `json:"deleted"`
+	Deleted_by        string     `json:"deleted_by"`
+	ProductName       string     `json:"product_name"`
+	ProductDesc       string     `json:"product_desc"`
+	MerchantId        int        `gorm:"FOREIGNKEY"; json:"merchant_id"`
+	ProductCategoryId int        `gorm:"FOREIGNKEY"; json:"product_category_id"`
 }
 
 type ProductCategory struct {
-	Id                 int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created            time.Time  `json:"created"`
-	CreatedBy          string     `json:"created_by"`
-	Modified           time.Time  `json:"modified"`
-	ModifiedBy         string     `json:"modified_by"`
-	Active             bool       `json:"active"`
-	IsDeleted          bool       `json:"is_deleted"`
-	Deleted            *time.Time `json:"deleted"`
-	Deleted_by         string     `json:"deleted_by"`
-	ProductCategoryDesc	string		`json:"product_category_desc"`
+	Id                  int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created             time.Time  `json:"created"`
+	CreatedBy           string     `json:"created_by"`
+	Modified            time.Time  `json:"modified"`
+	ModifiedBy          string     `json:"modified_by"`
+	Active              bool       `json:"active"`
+	IsDeleted           bool       `json:"is_deleted"`
+	Deleted             *time.Time `json:"deleted"`
+	Deleted_by          string     `json:"deleted_by"`
+	ProductCategoryDesc string     `json:"product_category_desc"`
 }
 
 type MerchantStatus struct {
@@ -198,22 +195,22 @@ type MerchantStatus struct {
 	Active             bool       `json:"active"`
 	IsDeleted          bool       `json:"is_deleted"`
 	Deleted            *time.Time `json:"deleted"`
-	Deleted_by         	string    `json:"deleted_by"`
-	MerchantStatusDesc	string		`json:"merchant_status_desc"`
+	Deleted_by         string     `json:"deleted_by"`
+	MerchantStatusDesc string     `json:"merchant_status_desc"`
 }
 
 type Employee struct {
-	Id					int			`gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created            	time.Time  	`json:"created"`
-	CreatedBy          	string     	`json:"created_by"`
-	Modified           	time.Time  	`json:"modified"`
-	ModifiedBy         	string     	`json:"modified_by"`
-	Active             	bool       	`json:"active"`
-	IsDeleted          	bool       	`json:"is_deleted"`
-	Deleted            	*time.Time 	`json:"deleted"`
-	Deleted_by         	string     	`json:"deleted_by"`
-	EmployeeName		string		`json:"employee_name"`
-	EmployeeEmail		string		`json:"employee_email"`
-	EmployeePin			string		`json:"employee_pin"`
-	OutletId			int			`json:"outlet_id"`
+	Id            int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created       time.Time  `json:"created"`
+	CreatedBy     string     `json:"created_by"`
+	Modified      time.Time  `json:"modified"`
+	ModifiedBy    string     `json:"modified_by"`
+	Active        bool       `json:"active"`
+	IsDeleted     bool       `json:"is_deleted"`
+	Deleted       *time.Time `json:"deleted"`
+	Deleted_by    string     `json:"deleted_by"`
+	EmployeeName  string     `json:"employee_name"`
+	EmployeeEmail string     `json:"employee_email"`
+	EmployeePin   string     `json:"employee_pin"`
+	OutletId      int        `json:"outlet_id"`
 }
