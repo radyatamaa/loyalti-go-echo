@@ -11,7 +11,6 @@ func main() {
 
 	db := database.ConnectionDB()
 
-
 	//db.Model(&model.Program{}).AddIndex("category", "program_gallery")
 	db.AutoMigrate(&model.Program{})
 

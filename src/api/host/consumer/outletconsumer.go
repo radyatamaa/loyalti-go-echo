@@ -1,7 +1,6 @@
 package consumer
 
 import (
-
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
@@ -44,14 +43,14 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 					switch msg.Topic {
 					case "create-outlet-topic":
 						json.Unmarshal([]byte(msg.Value), &outlet)
-						 repository.CreateOutlet(&outlet)
+						repository.CreateOutlet(&outlet)
 						fmt.Println(string(msg.Value))
-					case "update-outlet-topic" :
+					case "update-outlet-topic":
 						json.Unmarshal([]byte(msg.Value), &outlet)
-						 repository.UpdateOutlet(&outlet)
+						repository.UpdateOutlet(&outlet)
 					case "delete-outlet-topic":
-						json.Unmarshal([]byte(msg.Value),&outlet)
-						 repository.DeleteOutlet(&outlet)
+						json.Unmarshal([]byte(msg.Value), &outlet)
+						repository.DeleteOutlet(&outlet)
 					}
 				}
 				fmt.Println("outlet berhasil dibuat")
@@ -67,7 +66,7 @@ func NewOutletConsumer() {
 	brokers := []string{"11.11.5.146:9092"}
 
 	//kafkaConfig := consumer.getKafkaConfig("", "")
-	kafkaConfig := Config.GetKafkaConfig("","")
+	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -86,7 +85,6 @@ func NewOutletConsumer() {
 		}
 
 	}()
-
 
 	//topic, err := master.Topics()
 	if err != nil {

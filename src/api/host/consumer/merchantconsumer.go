@@ -129,4 +129,3 @@ func NewMerchantConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
-

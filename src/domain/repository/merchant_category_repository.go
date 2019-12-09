@@ -14,7 +14,7 @@ func GetCategory(page *int, size *int, sort *int) []model.MerchantCategory {
 
 	if sort != nil {
 		switch *sort {
-		case 1 :
+		case 1:
 			if size != nil && page != nil {
 				pagination.Paging(&pagination.Param{
 					DB:      db,

@@ -6,7 +6,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-func ConnectionDB() *gorm.DB{
+func ConnectionDB() *gorm.DB {
 	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=loyalti.MerchantDb.Dev")
 	if err != nil {
 		panic("failed to connect database")

@@ -28,5 +28,3 @@ func GetKafkaConfig(username, password string) *sarama.Config {
 	return kafkaConfig
 
 }
-
-
