@@ -6,6 +6,25 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
+func CreateCard(card *model.CardType) string{
+	db := database.ConnectionDB()
+	cardObj := *card
+	db.Create(&card)
+	return cardObj.CardTypeName
+}
+
+func UpdateCard(card *model.CardType) string {
+	db := database.ConnectionDB()
+	db.Model(&card).Where("id = ?", card.Id).Update(&card)
+	return card.CardTypeName
+}
+
+func DeleteCard(card *model.CardType) string {
+	db := database.ConnectionDB()
+	db.Model(&card).Select("id = ?", card.Id).Updates(map[string]interface{}{"active": false})
+	return "berhasil dihapus"
+}
+
 func GetCard(page *int, size *int, sort *int) []model.CardType {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
