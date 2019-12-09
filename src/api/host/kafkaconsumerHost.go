@@ -9,4 +9,5 @@ func StartKafka() {
 	go consumer.NewOutletConsumer()
 	go consumer.NewProgramConsumer()
 	go consumer.NewEmployeeConsumer()
+	go consumer.NewCardConsumer()
 }
