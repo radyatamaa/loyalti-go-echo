@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.SpecialProgram {
+func GetSpecialProgram(page *int, size *int, sort *int, category *int, id *int) []model.SpecialProgram {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var program []model.SpecialProgram
@@ -86,6 +86,12 @@ func GetSpecialProgram(page *int, size *int, sort *int, category *int) []model.S
 			if err != nil {
 				panic(err)
 			}
+		}
+	}
+	if id != nil {
+		rows, err = db.Where("id = ?", id).First(&program).Rows()
+		if err != nil {
+			panic(err)
 		}
 	}
 
