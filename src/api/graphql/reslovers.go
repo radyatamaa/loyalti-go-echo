@@ -196,10 +196,30 @@ func OutletResolver(p graphql.ResolveParams) (interface{}, error) {
 		outlet := repository.GetOutlet(paging, sizing, nil)
 		return outlet,nil
 	}
-
 	outlet := repository.GetOutlet(nil,nil, nil)
-
 	return outlet, nil
+}
+
+func EmployeeResolver(p graphql.ResolveParams) (interface{}, error) {
+	page,ok := p.Args["page"].(int)
+	size,sip := p.Args["size"].(int)
+	sort, top := p.Args["id"].(int)
+	if ok && sip && top{
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		employee := repository.GetEmployee(pages, sizes, sorts)
+		fmt.Println(employee)
+		return employee,nil
+	} else if ok && sip{
+		var paging *int = &page
+		var sizing *int = &size
+		var sorting *int = &sort
+		employee := repository.GetEmployee(paging, sizing, sorting)
+		return employee,nil
+	}
+	employee := repository.GetEmployee(nil,nil, nil)
+	return employee, nil
 }
 
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {

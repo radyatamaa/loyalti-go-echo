@@ -46,19 +46,19 @@ func main() {
 		}
 	}()
 
-	var newTopic = "create-outlet-topic"
+	var newTopic = "create-employee-topic"
 
-	//message := `
-	//	"program_name":"Gojek 70%",
-	//	"program_description":"Diskon GoRide sampai dengan 70% maksimal 7000",
-	//	"outlet_id":"1",
-	//	"merchant_id":"3",
-	//`
 	message := `
-	"outlet_name":"Gojek Medan",
-	"outlet_address":"Jl, Sudirman",
-	"outlet_longitude":"108.9802",
-	"oulet_latitude":"6.902"
+		"created":"22016-11-02T08:18:20Z",
+		"created_by":"Admin",
+		"modified":"2016-11-02T08:18:20Z",
+		"modified_by":"Admin",
+		"active":"True",
+		"is_deleted":"False",
+		"employee_name":"Sunarto",
+		"employee_email":"Sunartosunarto@jamil.com",
+		"employee_pin":"12345",
+		"outlet_id":"2",
 	`
 	//pesan := fmt.Sprint("%s",message)
 	// var updateTopic = "update-merchant-topic"

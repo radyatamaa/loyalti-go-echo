@@ -150,7 +150,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		t.MerchantName = merchant.MerchantName
+		//t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil
