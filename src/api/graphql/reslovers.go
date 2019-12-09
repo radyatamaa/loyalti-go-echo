@@ -107,13 +107,14 @@ func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	size,sip := p.Args["size"].(int)
 	sort,deh := p.Args["sort"].(int)
 	category,cat := p.Args["category"].(int)
+	detail,id := p.Args["id"].(int)
 	if ok && sip && deh && cat {
 		fmt.Println("12345")
 		var pagination *int = &page
 		var sizing *int = &size
 		var category *int = &category
 		var sorting *int = &sort
-		special := repository.GetSpecialProgram(pagination,sizing,sorting,category)
+		special := repository.GetSpecialProgram(pagination,sizing,sorting,category, nil)
 		//fmt.Println(program)
 		return special,nil
 	}else if ok && sip && deh {
@@ -122,19 +123,23 @@ func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 		var sizes *int = &size
 		var sorts *int = &sort
 		//var cats *int = &category
-		special := repository.GetSpecialProgram(pages, sizes, sorts,nil)
+		special := repository.GetSpecialProgram(pages, sizes, sorts,nil, nil)
 		//fmt.Println(program)
 		return special,nil
 	} else if ok && sip {
 		fmt.Println("7890")
 		var paging *int = &page
 		var sizing *int = &size
-		special := repository.GetSpecialProgram(paging, sizing, nil, nil)
+		special := repository.GetSpecialProgram(paging, sizing, nil, nil, nil)
 		//fmt.Println(program)
 		return special,nil
+	} else if id {
+		var detail *int = &detail
+		special := repository.GetSpecialProgram(nil, nil,nil,nil, detail)
+		return special, nil
 	}
 
-	special := repository.GetSpecialProgram(nil,nil, nil, nil)
+	special := repository.GetSpecialProgram(nil,nil, nil, nil, nil)
 
 	return special, nil
 }
