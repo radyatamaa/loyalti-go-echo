@@ -12,7 +12,7 @@ import (
 	"strings"
 )
 
-func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
 	//fmt.Println(topics)
@@ -30,7 +30,6 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 		fmt.Println(" Start consuming topic ", topic)
 		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
-				fmt.Println("membuat merchant baru")
 				select {
 				case consumerError := <-consumer.Errors():
 					errors <- consumerError
@@ -39,22 +38,23 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					merchant := model.Merchant{}
+					card := model.CardType{}
 					switch msg.Topic {
-					case "create-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.CreateMerchant(&merchant)
+					case "create-card-topic":
+						json.Unmarshal([]byte(msg.Value), &card)
+						repository.CreateCard(&card)
 						fmt.Println(string(msg.Value))
-
-					case "update-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.UpdateMerchant(&merchant)
-					case "delete-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.DeleteMerchant(&merchant)
+						fmt.Println("Card berhasil dibuat")
+					case "update-card-topic":
+						json.Unmarshal([]byte(msg.Value), &card)
+						repository.UpdateCard(&card)
+						fmt.Println("card berhasil diupdate")
+					case "delete-card-topic":
+						json.Unmarshal([]byte(msg.Value), &card)
+						repository.DeleteCard(&card)
+						fmt.Println("card berhasil dihapus")
 					}
 				}
-				fmt.Println("merchant berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -62,7 +62,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 	return consumers, errors
 }
 
-func NewMerchantConsumer() {
+func NewCardConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
@@ -92,7 +92,7 @@ func NewMerchantConsumer() {
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consume(topics, master)
+	consumer, errors := consumeCard(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {
