@@ -46,11 +46,10 @@ func main() {
 		}
 	}()
 
-	var newTopic = "create-special-topic"
+	var newTopic = "delete-merchant-topic"
 
 	message :=`{
-	"program_name":"goride diskon 70% hari sabtu",
-	"program_description":"Diskon GoRide sebesar 70% maksimal 10rb khusus di hari sabtu. Sabtu kami tidak melayani"
+	"merchant_email":"contact@jco.com"
 }`
 
 	msg := &sarama.ProducerMessage{

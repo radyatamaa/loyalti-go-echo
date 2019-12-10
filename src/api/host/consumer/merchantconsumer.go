@@ -28,7 +28,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		 func(topic string, consumer sarama.PartitionConsumer) {
+		 go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				//fmt.Println("membuat merchant baru")
 				select {
@@ -51,12 +51,15 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 						repository.UpdateMerchant(&merchant)
 						break
 					case "delete-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
+						err := json.Unmarshal([]byte(msg.Value), &merchant)
+						if err != nil {
+							fmt.Println(err.Error())
+						}
 						repository.DeleteMerchant(&merchant)
+						fmt.Println("merchant berhasil dihapus")
 						break
 					}
 				}
-				fmt.Println("merchant berhasil dibuat")
 			}
 		}(topic, consumer)
 	}

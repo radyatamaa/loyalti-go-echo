@@ -28,7 +28,7 @@ func consumeSpecial(topics []string, master sarama.Consumer) (chan *sarama.Consu
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		func(topic string, consumer sarama.PartitionConsumer) {
+		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -43,17 +43,16 @@ func consumeSpecial(topics []string, master sarama.Consumer) (chan *sarama.Consu
 					case "create-special-topic":
 						json.Unmarshal([]byte(msg.Value), &special)
 						repository.CreateSpecial(&special)
-						fmt.Println("Special Program berhasil dibuat")
+						fmt.Println("berhasil dibuat")
+						fmt.Println(string(msg.Value))
 						break
 					case "update-special-topic":
 						json.Unmarshal([]byte(msg.Value), &special)
 						repository.UpdateSpecial(&special)
-						fmt.Println("Special program berhasil diupdate")
 						break
 					case "delete-special-topic":
 						json.Unmarshal([]byte(msg.Value), &special)
 						repository.DeleteSpecial(&special)
-						fmt.Println("Special Program berhasil dihapus")
 						break
 					}
 				}

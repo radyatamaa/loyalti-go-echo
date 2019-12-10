@@ -29,7 +29,7 @@ func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.Consu
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		 func(topic string, consumer sarama.PartitionConsumer) {
+		 go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -47,16 +47,23 @@ func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.Consu
 						fmt.Println(string(msg.Value))
 						break
 					case "update-program-topic":
-						json.Unmarshal([]byte(msg.Value), &program)
+						err := json.Unmarshal([]byte(msg.Value), &program)
+						if err != nil {
+							fmt.Println(err.Error())
+						}
 						repository.UpdateProgram(&program)
+						fmt.Println(string(msg.Value))
 						break
 					case "delete-program-topic":
-						json.Unmarshal([]byte(msg.Value), &program)
-						repository.DeleteProgram(&program)
+					err :=	json.Unmarshal([]byte(msg.Value), &program)
+					if err != nil {
+						fmt.Println(string(msg.Value))
+					}
+					repository.DeleteProgram(&program)
+					fmt.Println("Berhasil dihapus")
 						break
 					}
 				}
-				fmt.Println("Program berhasil dibuat")
 			}
 		}(topic, consumer)
 	}

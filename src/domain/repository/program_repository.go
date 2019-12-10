@@ -31,6 +31,19 @@ func DeleteProgram(program *model.Program) string {
 	return "berhasil dihapus"
 }
 
+func TotalPoint (id *int,pay *int) int{
+	db := database.ConnectionDB()
+	program := model.Program{}
+	db.Model(&program).Where("id = ?", id).Find(&program)
+	if *pay < *(program.MinPayment) {
+		fmt.Println("Customer Tidak mendapatkan Point")
+		return 0
+	}
+	var total = *pay * *(program.ProgramPoint) / *(program.MinPayment)
+	fmt.Println("Total Point : ", total)
+	return total
+}
+
 func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
 
 	db := database.ConnectionDB()
@@ -149,6 +162,8 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			&t.RedeemRules,
 			&t.RewardTarget,
 			&t.QRCodeId,
+			&t.ProgramPoint,
+			&t.MinPayment,
 		)
 		merchant := new(model.Merchant)
 
