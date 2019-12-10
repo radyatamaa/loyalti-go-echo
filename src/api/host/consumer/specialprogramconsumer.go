@@ -12,10 +12,10 @@ import (
 	"strings"
 )
 
-func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeSpecial(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	fmt.Println("kafka Card is ready")
+	fmt.Println("kafka Special Program is ready")
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -28,7 +28,7 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		 func(topic string, consumer sarama.PartitionConsumer) {
+		func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -38,23 +38,22 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					card := model.CardType{}
+					special := model.SpecialProgram{}
 					switch msg.Topic {
-					case "create-card-topic":
-						json.Unmarshal([]byte(msg.Value), &card)
-						repository.CreateCard(&card)
-						fmt.Println(string(msg.Value))
-						fmt.Println("Card berhasil dibuat")
+					case "create-special-topic":
+						json.Unmarshal([]byte(msg.Value), &special)
+						repository.CreateSpecial(&special)
+						fmt.Println("Special Program berhasil dibuat")
 						break
-					case "update-card-topic":
-						json.Unmarshal([]byte(msg.Value), &card)
-						repository.UpdateCard(&card)
-						fmt.Println("card berhasil diupdate")
+					case "update-special-topic":
+						json.Unmarshal([]byte(msg.Value), &special)
+						repository.UpdateSpecial(&special)
+						fmt.Println("Special program berhasil diupdate")
 						break
-					case "delete-card-topic":
-						json.Unmarshal([]byte(msg.Value), &card)
-						repository.DeleteCard(&card)
-						fmt.Println("card berhasil dihapus")
+					case "delete-special-topic":
+						json.Unmarshal([]byte(msg.Value), &special)
+						repository.DeleteSpecial(&special)
+						fmt.Println("Special Program berhasil dihapus")
 						break
 					}
 				}
@@ -65,7 +64,7 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 	return consumers, errors
 }
 
-func NewCardConsumer() {
+func NewSpecialConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
@@ -95,7 +94,7 @@ func NewCardConsumer() {
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consumeCard(topics, master)
+	consumer, errors := consumeSpecial(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {

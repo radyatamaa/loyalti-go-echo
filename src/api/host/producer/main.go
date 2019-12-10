@@ -3,10 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"log"
-	"time"
-
 	//"time"
 	"github.com/Shopify/sarama"
 )
@@ -49,29 +46,16 @@ func main() {
 		}
 	}()
 
-	var newTopic = "create-employee-topic"
+	var newTopic = "create-special-topic"
 
-	message := model.Employee{
-		Created:       time.Now(),
-		CreatedBy:     "Admin",
-		Modified:      time.Now(),
-		ModifiedBy:    "Admin",
-		Active:        true,
-		IsDeleted:     false,
-		Deleted:       nil,
-		Deleted_by:    "",
-		EmployeeName:  "Zulham",
-		EmployeeEmail: "Zulham@Zamrun@gmail.com",
-		EmployeePin:   "123123",
-		OutletId:      2,
-	}
-	pesan := fmt.Sprint("%s",message)
-	// var updateTopic = "update-merchant-topic"
-	//var createTopic = "new-outlet-topic"
+	message :=`{
+	"program_name":"goride diskon 70% hari sabtu",
+	"program_description":"Diskon GoRide sebesar 70% maksimal 10rb khusus di hari sabtu. Sabtu kami tidak melayani"
+}`
 
 	msg := &sarama.ProducerMessage{
 		Topic: newTopic,
-		Value: sarama.StringEncoder(pesan),
+		Value: sarama.StringEncoder(message),
 	}
 
 	partition, offset, err := producer.SendMessage(msg)

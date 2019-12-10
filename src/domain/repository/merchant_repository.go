@@ -8,7 +8,6 @@ import (
 	//"net/http"
 )
 
-
 func CreateMerchant(merchant *model.Merchant) string{
 	db := database.ConnectionDB()
 	merchantObj := *merchant
@@ -29,7 +28,6 @@ func DeleteMerchant(merchant *model.Merchant) string {
 	db.Model(&merchant).Select("merchant_email = ?", merchant.MerchantEmail).Updates(map[string]interface{}{"active": false})
 	return "berhasil dihapus"
 }
-
 
 func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []model.Merchant {
 
