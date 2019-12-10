@@ -122,6 +122,7 @@ type Program struct {
 	ProgramPoint       *int        `gorm:"NOT NULL";json:"program_point"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
+	MerchantName	   string	  `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`
@@ -149,6 +150,7 @@ type SpecialProgram struct {
 	Card               string     `json:"card"`
 	OutletID           int        `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
+	MerchantName       string     `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`

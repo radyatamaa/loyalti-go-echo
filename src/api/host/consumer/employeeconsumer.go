@@ -132,4 +132,3 @@ func NewEmployeeConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
-

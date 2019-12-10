@@ -30,7 +30,6 @@ func DeleteOutlet(outlet *model.Outlet) string {
 	return "berhasil dihapus"
 }
 
-
 func GetOutlet(page *int, size *int, id *int) []model.Outlet {
 
 	db := database.ConnectionDB()

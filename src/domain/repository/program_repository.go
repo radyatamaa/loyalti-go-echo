@@ -8,8 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-
-func CreateProgram(program *model.Program) string{
+func CreateProgram(program *model.Program) string {
 	db := database.ConnectionDB()
 
 	programObj := *program
@@ -19,15 +18,15 @@ func CreateProgram(program *model.Program) string{
 	return programObj.ProgramName
 }
 
-func UpdateProgram  (program *model.Program) string {
+func UpdateProgram(program *model.Program) string {
 	db := database.ConnectionDB()
 	db.Model(&program).Where("id = ?", program.Id).Update(&program)
 	return "Berhasil diUpdate"
 }
 
 func DeleteProgram(program *model.Program) string {
-	db:= database.ConnectionDB()
-	db.Model(&program).Where("id= ?",program.Id).Delete(&program)
+	db := database.ConnectionDB()
+	db.Model(&program).Where("id= ?", program.Id).Delete(&program)
 	return "berhasil dihapus"
 }
 
@@ -56,65 +55,65 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 	if sort != nil {
 		switch *sort {
 		case 1:
-			if page != nil && size != nil && category == nil{
+			if page != nil && size != nil && category == nil {
 				rows, err = db.Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
-			if category != nil && page != nil && size != nil{
+			if category != nil && page != nil && size != nil {
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
 		case 2:
-			if page != nil && size != nil && category == nil{
+			if page != nil && size != nil && category == nil {
 				rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
-			if category != nil && page != nil && size != nil{
+			if category != nil && page != nil && size != nil {
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
 		case 3:
-			if page != nil && size != nil && category == nil{
+			if page != nil && size != nil && category == nil {
 				rows, err = db.Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
-			if category != nil && page != nil && size != nil{
+			if category != nil && page != nil && size != nil {
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
 		case 4:
-			if page != nil && size != nil && category == nil{
+			if page != nil && size != nil && category == nil {
 				rows, err = db.Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
-			if category != nil && page != nil && size != nil{
+			if category != nil && page != nil && size != nil {
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
 				if err != nil {
 					panic(err)
 				}
 			}
 		}
-	}else {
+	} else {
 		if page != nil && size != nil {
 			rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
 				panic(err)
 			}
-		} else{
+		} else {
 			rows, err = db.Find(&program).Rows()
 			if err != nil {
 				panic(err)
@@ -123,7 +122,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 	}
 	if id != nil {
 		rows, err = db.Where("id = ?", id).First(&program).Rows()
-		if err != nil{
+		if err != nil {
 			panic(err)
 		}
 	}
@@ -135,7 +134,6 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 		fmt.Println(t)
 		benefitmemory := t.Benefit
 		fmt.Println(&benefitmemory)
-
 
 		err = rows.Scan(
 			&t.Id,
@@ -171,13 +169,13 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		//t.MerchantName = merchant.MerchantName
+		t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil
 		}
-		result = append(result,*t)
-		}
-		db.Close()
-	return result
+		result = append(result, *t)
 	}
+	db.Close()
+	return result
+}

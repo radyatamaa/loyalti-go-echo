@@ -137,7 +137,3 @@ func NewProgramConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
-
-
-
-
