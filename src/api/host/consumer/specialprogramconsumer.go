@@ -12,10 +12,10 @@ import (
 	"strings"
 )
 
-func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
+func consumeSpecial(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	fmt.Println("kafka Merchant is ready")
+	fmt.Println("kafka Special Program is ready")
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -28,9 +28,8 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		 go func(topic string, consumer sarama.PartitionConsumer) {
+		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
-				//fmt.Println("membuat merchant baru")
 				select {
 				case consumerError := <-consumer.Errors():
 					errors <- consumerError
@@ -39,24 +38,21 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					merchant := model.Merchant{}
+					special := model.SpecialProgram{}
 					switch msg.Topic {
-					case "create-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.CreateMerchant(&merchant)
+					case "create-special-topic":
+						json.Unmarshal([]byte(msg.Value), &special)
+						repository.CreateSpecial(&special)
+						fmt.Println("berhasil dibuat")
 						fmt.Println(string(msg.Value))
 						break
-					case "update-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
-						repository.UpdateMerchant(&merchant)
+					case "update-special-topic":
+						json.Unmarshal([]byte(msg.Value), &special)
+						repository.UpdateSpecial(&special)
 						break
-					case "delete-merchant-topic":
-						err := json.Unmarshal([]byte(msg.Value), &merchant)
-						if err != nil {
-							fmt.Println(err.Error())
-						}
-						repository.DeleteMerchant(&merchant)
-						fmt.Println("merchant berhasil dihapus")
+					case "delete-special-topic":
+						json.Unmarshal([]byte(msg.Value), &special)
+						repository.DeleteSpecial(&special)
 						break
 					}
 				}
@@ -67,7 +63,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 	return consumers, errors
 }
 
-func NewMerchantConsumer() {
+func NewSpecialConsumer() {
 
 	brokers := []string{"11.11.5.146:9092"}
 
@@ -97,7 +93,7 @@ func NewMerchantConsumer() {
 	}
 	topics, _ := master.Topics()
 	//
-	consumer, errors := consume(topics, master)
+	consumer, errors := consumeSpecial(topics, master)
 	////consumer1, err := master.ConsumePartition(updateTopic, 0, sarama.OffsetNewest)
 	//
 	if errors != nil {
@@ -135,3 +131,4 @@ func NewMerchantConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
+

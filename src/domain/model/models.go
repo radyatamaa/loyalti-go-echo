@@ -118,8 +118,11 @@ type Program struct {
 	ProgramEndDate     time.Time  `json:"program_end_date"`
 	ProgramDescription string     `json:"program_description"`
 	Card               string     `json:"card"`
+	MinPayment         *int       `gorm:"NOT NULL";json:"min_payment"`
+	ProgramPoint       *int       `gorm:"NOT NULL";json:"program_point"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
+	MerchantName       string     `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
 	MerchantName		string		`json:"merchant_name"`
 	Benefit            *string    `json:"benefit"`
@@ -129,6 +132,7 @@ type Program struct {
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
 	ProgramPoint       *int        `json:"program_point"`
+
 }
 
 type SpecialProgram struct {
@@ -149,14 +153,14 @@ type SpecialProgram struct {
 	Card               string     `json:"card"`
 	OutletID           int        `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
-	MerchantName 		string      `json:"merchant_name"`
-	CategoryId		int				`json:"category_id"`
-	Benefit				*string 		`json:"benefit"`
-	TermsAndCondition	*string		`json:"terms_and_condition"`
-	Tier 				*string		`json:"tier"`
-	RedeemRules			*string		`json:"redeem_rules"`
-	RewardTarget		*float64		`json:"reward_target"`
-	QRCodeId			*string		`json:"qr_code_id"`
+	MerchantName       string     `json:"merchant_name"`
+	CategoryId         int        `json:"category_id"`
+	Benefit            *string    `json:"benefit"`
+	TermsAndCondition  *string    `json:"terms_and_condition"`
+	Tier               *string    `json:"tier"`
+	RedeemRules        *string    `json:"redeem_rules"`
+	RewardTarget       *float64   `json:"reward_target"`
+	QRCodeId           *string    `json:"qr_code_id"`
 }
 
 type Product struct {

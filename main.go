@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
 	"github.com/radyatamaa/loyalti-go-echo/src/router"
 	//"github.com/spf13/viper"
 )
@@ -17,8 +18,8 @@ func main() {
 	fmt.Println("Welcome to the webserver")
 	e := router.New()
 	// e.Start(viper.GetString("server.address"))
-	//host.StartKafka()
+	host.StartKafka()
+
 	e.Start(":2525")
-	//host.StartKafka()
 	fmt.Println("Kafka start at port 2525")
 }
