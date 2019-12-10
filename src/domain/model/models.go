@@ -121,13 +121,14 @@ type Program struct {
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
 	CategoryId         int        `json:"category_id"`
+	MerchantName		string		`json:"merchant_name"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`
 	Tier               *string    `json:"tier"`
 	RedeemRules        *string    `json:"redeem_rules"`
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
-	ProgramPoint       int        `json:"program_point"`
+	ProgramPoint       *int        `json:"program_point"`
 }
 
 type SpecialProgram struct {
@@ -214,4 +215,30 @@ type Employee struct {
 	EmployeeEmail string     `json:"employee_email"`
 	EmployeePin   string     `json:"employee_pin"`
 	OutletId      int        `json:"outlet_id"`
+}
+
+type Card struct {
+	Id            int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created       time.Time  `json:"created"`
+	CreatedBy     string     `json:"created_by"`
+	Modified      time.Time  `json:"modified"`
+	ModifiedBy    string     `json:"modified_by"`
+	Active        bool       `json:"active"`
+	IsDeleted     bool       `json:"is_deleted"`
+	Deleted       *time.Time `json:"deleted"`
+	DeletedBy    string     `json:"deleted_by"`
+	Title			string		`json:"title"`
+	Description		string		`json:"description"`
+	FontColor		string		`json:"font_color"`
+	TemplateColor	string		`json:"template_color"`
+	IconImage		string		`json:"icon_image"`
+	TermsAndCondition	string		`json:"terms_and_condition"`
+	Benefit			string		`json:"benefit"`
+	ValidUntil 		time.Time	`json:"valid_until"`
+	RewardTarget	string		`json:"reward_target"`
+	IsValid			bool		`json:"is_valid"`
+	ProgramId		int			`json:"program_id"`
+	CardType		string		`json:"card_type"`
+	IconImageStamp	string		`json:"icon_image_stamp"`
+	MerchantId		int			`json:"merchant_id"`
 }
