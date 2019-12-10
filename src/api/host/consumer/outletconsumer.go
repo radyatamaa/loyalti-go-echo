@@ -1,7 +1,6 @@
 package consumer
 
 import (
-
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
@@ -70,7 +69,7 @@ func NewOutletConsumer() {
 	brokers := []string{"11.11.5.146:9092"}
 
 	//kafkaConfig := consumer.getKafkaConfig("", "")
-	kafkaConfig := Config.GetKafkaConfig("","")
+	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -89,7 +88,6 @@ func NewOutletConsumer() {
 		}
 
 	}()
-
 
 	//topic, err := master.Topics()
 	if err != nil {

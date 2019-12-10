@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	var id = 16
 	var pay = 7000
 	repository.TotalPoint(&id, &pay)

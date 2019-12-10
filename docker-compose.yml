@@ -1,7 +1,14 @@
 version: "2.3"
 services:
   web:
-    image: moonlay/loyalti.merchant:${TAG:-tags-1.0.0}
+    image: moonlay/loyalti.merchant:${TAG:-local-1.7.0}
     container_name: loyalti.merchant
     ports:
       - 2525:2525
+  
+  media:
+    image: moonlay/loyalti.mediaupload:${TAG:-local.1.0.0}
+    container_name: loyalti.media
+    ports:
+      - 50051:50051
+  
