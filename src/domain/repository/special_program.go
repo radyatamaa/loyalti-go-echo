@@ -3,12 +3,33 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/sirupsen/logrus"
 )
 
+func CreateSpecial(special *model.SpecialProgram) string {
+	db := database.ConnectionDB()
+	specialObj := *special
+	db.Create(&specialObj)
+	return specialObj.ProgramName
+}
+
+func UpdateSpecial(special *model.SpecialProgram) string {
+	db := database.ConnectionDB()
+	db.Model(&special).Where("program_name = ?", special.ProgramName).Update(&special)
+	return special.ProgramName
+}
+
+func DeleteSpecial(special *model.SpecialProgram) string {
+	db := database.ConnectionDB()
+	db.Model(&special).Select("program_name = ?", special.ProgramName).Updates(map[string]interface{}{"active": false})
+	return "berhasil dihapus"
+}
+
 func GetSpecialProgram(page *int, size *int, sort *int, category *int, id *int) []model.SpecialProgram {
+
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var program []model.SpecialProgram
@@ -132,7 +153,7 @@ func GetSpecialProgram(page *int, size *int, sort *int, category *int, id *int) 
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		t.MerchantName = merchant.MerchantName
+		//t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil

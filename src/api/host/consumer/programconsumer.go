@@ -16,7 +16,7 @@ import (
 func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	//fmt.Println(topics)
+	fmt.Println("kafka Program is ready")
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -28,8 +28,8 @@ func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.Consu
 			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
 			panic(err)
 		}
-		fmt.Println(" Start consuming topic ", topic)
-		go func(topic string, consumer sarama.PartitionConsumer) {
+		//fmt.Println(" Start consuming topic ", topic)
+		 go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -45,16 +45,25 @@ func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.Consu
 						json.Unmarshal([]byte(msg.Value), &program)
 						repository.CreateProgram(&program)
 						fmt.Println(string(msg.Value))
-
+						break
 					case "update-program-topic":
-						json.Unmarshal([]byte(msg.Value), &program)
+						err := json.Unmarshal([]byte(msg.Value), &program)
+						if err != nil {
+							fmt.Println(err.Error())
+						}
 						repository.UpdateProgram(&program)
+						fmt.Println(string(msg.Value))
+						break
 					case "delete-program-topic":
-						json.Unmarshal([]byte(msg.Value), &program)
-						repository.DeleteProgram(&program)
+					err :=	json.Unmarshal([]byte(msg.Value), &program)
+					if err != nil {
+						fmt.Println(string(msg.Value))
+					}
+					repository.DeleteProgram(&program)
+					fmt.Println("Berhasil dihapus")
+						break
 					}
 				}
-				fmt.Println("Program berhasil dibuat")
 			}
 		}(topic, consumer)
 	}

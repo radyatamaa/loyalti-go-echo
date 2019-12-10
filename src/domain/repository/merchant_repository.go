@@ -8,7 +8,7 @@ import (
 	//"net/http"
 )
 
-func CreateMerchant(merchant *model.Merchant) string {
+func CreateMerchant(merchant *model.Merchant) string{
 	db := database.ConnectionDB()
 	merchantObj := *merchant
 	db.Create(&merchantObj)
@@ -23,7 +23,7 @@ func UpdateMerchant(merchant *model.Merchant) string {
 
 func DeleteMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
-	db.Model(&merchant).Select("merchant_email = ?", merchant.MerchantEmail).Updates(map[string]interface{}{"active": false})
+	db.Where("merchant_email = ?", merchant.MerchantEmail).Updates(model.Merchant{Active: false})
 	return "berhasil dihapus"
 }
 

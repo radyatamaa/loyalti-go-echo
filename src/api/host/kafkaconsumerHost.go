@@ -6,9 +6,10 @@ import (
 
 func StartKafka() {
 	//consumer.NewReceiver()
+	go consumer.NewEmployeeConsumer()
 	go consumer.NewMerchantConsumer()
 	go consumer.NewOutletConsumer()
 	go consumer.NewProgramConsumer()
-	go consumer.NewEmployeeConsumer()
 	go consumer.NewCardConsumer()
+	go consumer.NewSpecialConsumer()
 }
