@@ -118,11 +118,11 @@ type Program struct {
 	ProgramEndDate     time.Time  `json:"program_end_date"`
 	ProgramDescription string     `json:"program_description"`
 	Card               string     `json:"card"`
-	MinPayment         *int        `gorm:"NOT NULL";json:"min_payment"`
-	ProgramPoint       *int        `gorm:"NOT NULL";json:"program_point"`
+	MinPayment         *int       `gorm:"NOT NULL";json:"min_payment"`
+	ProgramPoint       *int       `gorm:"NOT NULL";json:"program_point"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
-	MerchantName	   string	  `json:"merchant_name"`
+	MerchantName       string     `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`
@@ -130,10 +130,6 @@ type Program struct {
 	RedeemRules        *string    `json:"redeem_rules"`
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
-<<<<<<< HEAD
-	ProgramPoint       *int        `json:"program_point"`
-=======
->>>>>>> ab76cfed050dfec0a98f969758eaaf2fb5995e66
 }
 
 type SpecialProgram struct {
