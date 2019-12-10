@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/sirupsen/logrus"
@@ -117,7 +118,12 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 	result := make([]model.Program, 0)
 
 	for rows.Next() {
-		t := new(model.Program)
+		t := &model.Program{}
+		fmt.Println(t)
+		benefitmemory := t.Benefit
+		fmt.Println(&benefitmemory)
+
+
 		err = rows.Scan(
 			&t.Id,
 			&t.Created,

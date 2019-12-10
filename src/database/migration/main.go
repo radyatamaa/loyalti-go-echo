@@ -10,7 +10,8 @@ import (
 func main() {
 
 	db := database.ConnectionDB()
+
 	db.AutoMigrate(model.Program{})
 	fmt.Println("migrasi berhasil")
-	
+
 }

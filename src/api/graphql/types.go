@@ -268,9 +268,6 @@ var programType = graphql.NewObject(graphql.ObjectConfig{
 		"category_id": &graphql.Field{
 			Type:graphql.Int,
 		},
-		"program_title": &graphql.Field{
-			Type:graphql.String,
-		},
 		"benefit": &graphql.Field{
 			Type:graphql.String,
 		},
