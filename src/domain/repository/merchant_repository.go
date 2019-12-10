@@ -2,7 +2,6 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
-
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	//"net/http"
@@ -25,7 +24,7 @@ func UpdateMerchant(merchant *model.Merchant) string {
 
 func DeleteMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
-	db.Where("merchant_email = ?", merchant.MerchantEmail).Updates(model.Merchant{Active: false})
+	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update("active", false)
 	return "berhasil dihapus"
 }
 

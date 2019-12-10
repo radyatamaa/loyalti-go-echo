@@ -215,3 +215,7 @@ type Employee struct {
 	EmployeePin   string     `json:"employee_pin"`
 	OutletId      int        `json:"outlet_id"`
 }
+
+type TotalPoint struct{
+	Total int `json:"total_point"`
+}

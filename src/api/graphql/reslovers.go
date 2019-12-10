@@ -227,6 +227,15 @@ func EmployeeResolver(p graphql.ResolveParams) (interface{}, error) {
 	return employee, nil
 }
 
+func TotalPointResolver(p graphql.ResolveParams)(interface{}, error){
+	id := p.Args["id"].(int)
+	pay := p.Args["pay"].(int)
+	var ids *int = &id
+	var pays *int = &pay
+	total := repository.TotalPoint(ids, pays)
+	return total, nil
+}
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	users := []Song{
 		Song{

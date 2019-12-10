@@ -26,7 +26,7 @@ func UpdateOutlet(outlet *model.Outlet) string {
 
 func DeleteOutlet(outlet *model.Outlet) string {
 	db := database.ConnectionDB()
-	db.Model(&outlet).Where("id= ?", outlet.Id).Delete(&outlet)
+	db.Model(&outlet).Where("id= ?", outlet.Id).Update("active", false)
 	return "berhasil dihapus"
 }
 

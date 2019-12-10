@@ -23,7 +23,7 @@ func UpdateEmployee(employee *model.Employee) string {
 
 func DeleteEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()
-	db.Model(&employee).Select("employee_email = ?", employee.EmployeeEmail).Updates(map[string]interface{}{"active": false})
+	db.Model(&employee).Where("employee_email = ?",employee.EmployeeEmail).Update("active", false)
 	return "berhasil dihapus"
 }
 

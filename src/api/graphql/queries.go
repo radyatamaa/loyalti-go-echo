@@ -167,6 +167,18 @@ func NewRoot() *Root {
 						},
 						Resolve: EmployeeResolver,
 					},
+					"totalpoint" : &graphql.Field{
+						Type:graphql.NewList(totalpointType),
+						Args:graphql.FieldConfigArgument{
+							"id": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"pay": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+						},
+						Resolve: TotalPointResolver,
+					},
 				},
 			},
 		),

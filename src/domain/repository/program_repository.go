@@ -27,21 +27,25 @@ func UpdateProgram  (program *model.Program) string {
 
 func DeleteProgram(program *model.Program) string {
 	db:= database.ConnectionDB()
-	db.Model(&program).Where("id= ?",program.Id).Delete(&program)
+	db.Model(&program).Where("id= ?",program.Id).Update("active", false)
 	return "berhasil dihapus"
 }
 
-func TotalPoint (id *int,pay *int) int{
+func TotalPoint (id *int,pay *int) []model.TotalPoint{
 	db := database.ConnectionDB()
+	totalpoint := []model.TotalPoint{}
 	program := model.Program{}
 	db.Model(&program).Where("id = ?", id).Find(&program)
 	if *pay < *(program.MinPayment) {
 		fmt.Println("Customer Tidak mendapatkan Point")
-		return 0
+		return nil
 	}
 	var total = *pay * *(program.ProgramPoint) / *(program.MinPayment)
+	t := &model.TotalPoint{}
+	t.Total = total
+	updatepoint := append(totalpoint, *t)
 	fmt.Println("Total Point : ", total)
-	return total
+	return updatepoint
 }
 
 func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {

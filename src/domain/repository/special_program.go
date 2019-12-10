@@ -24,7 +24,7 @@ func UpdateSpecial(special *model.SpecialProgram) string {
 
 func DeleteSpecial(special *model.SpecialProgram) string {
 	db := database.ConnectionDB()
-	db.Model(&special).Select("program_name = ?", special.ProgramName).Updates(map[string]interface{}{"active": false})
+	db.Model(&special).Where("program_name = ?",special.ProgramName).Update("active", false)
 	return "berhasil dihapus"
 }
 
