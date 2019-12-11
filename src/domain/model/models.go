@@ -2,6 +2,7 @@ package model
 
 import (
 	"time"
+	"github.com/beevik/guid"
 )
 
 type Song struct {
@@ -118,21 +119,18 @@ type Program struct {
 	ProgramEndDate     time.Time  `json:"program_end_date"`
 	ProgramDescription string     `json:"program_description"`
 	Card               string     `json:"card"`
-	MinPayment         *int       `gorm:"NOT NULL";json:"min_payment"`
-	ProgramPoint       *int       `gorm:"NOT NULL";json:"program_point"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
 	MerchantName       string     `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
-	MerchantName		string		`json:"merchant_name"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`
 	Tier               *string    `json:"tier"`
 	RedeemRules        *string    `json:"redeem_rules"`
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
-	ProgramPoint       *int        `json:"program_point"`
-
+	ProgramPoint       *int       `json:"program_point"`
+	MinPayment         *int       `json:"min_payment"`
 }
 
 type SpecialProgram struct {
@@ -222,7 +220,7 @@ type Employee struct {
 }
 
 type Card struct {
-	Id            int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id            guid.Guid  `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created       time.Time  `json:"created"`
 	CreatedBy     string     `json:"created_by"`
 	Modified      time.Time  `json:"modified"`

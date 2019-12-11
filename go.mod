@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/Shopify/sarama v1.24.1
 	github.com/aws/aws-sdk-go v1.25.41
+	github.com/beevik/guid v0.0.0-20170504223318-d0ea8faecee0
 	github.com/biezhi/gorm-paginator/pagination v0.0.0-20190124091837-7a5c8ed20334
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/felixsiburian/loyalti-go-echo v0.0.0-20191125073729-5f00d893c9c6
