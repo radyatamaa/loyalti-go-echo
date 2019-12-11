@@ -1,39 +1,40 @@
 package webserver
 
 import (
-	"github.com/labstack/echo"
-	"github.com/radyatamaa/loyalti-go-echo/src/router"
-	"log"
-	"sync"
+    "github.com/labstack/echo"
+    "github.com/radyatamaa/loyalti-go-echo/src/router"
+    "log"
+    "sync"
 )
 
-var initWebServer sync.Once
+var initWebServer  sync.Once
 var ws *WebServer
 
 type WebServer struct {
-	router *echo.Echo
+    router          *echo.Echo
 }
 
 func Instance() *WebServer {
-	initWebServer.Do(func() {
-		ws = &WebServer{}
-		ws.router = router.New()
-	})
+    initWebServer.Do(func() {
+        ws = &WebServer{}
+        ws.router = router.New()
+    })
 
-	return ws
+    return ws
 }
 
 func (w *WebServer) Start() {
-	// start the server
+    // start the server
 
-	var wg sync.WaitGroup
+    var wg sync.WaitGroup
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		log.Println("Start HTTP server on port :8000")
-		log.Fatal(w.router.Start(":8000"))
-	}()
+    wg.Add(1)
+    go func() {
+        defer wg.Done()
+        log.Println("Start HTTP server on port :8000")
+        log.Fatal(w.router.Start(":8000"))
+    }()
 
-	wg.Wait()
+
+    wg.Wait()
 }

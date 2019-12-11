@@ -15,7 +15,7 @@ import (
 func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	fmt.Println("kafka Merchant is ready")
+	//fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -27,10 +27,10 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
 			panic(err)
 		}
-		//fmt.Println(" Start consuming topic ", topic)
-		 go func(topic string, consumer sarama.PartitionConsumer) {
+		fmt.Println(" Start consuming topic ", topic)
+		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
-				//fmt.Println("membuat merchant baru")
+				fmt.Println("membuat merchant baru")
 				select {
 				case consumerError := <-consumer.Errors():
 					errors <- consumerError
@@ -45,21 +45,16 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 						json.Unmarshal([]byte(msg.Value), &merchant)
 						repository.CreateMerchant(&merchant)
 						fmt.Println(string(msg.Value))
-						break
+
 					case "update-merchant-topic":
 						json.Unmarshal([]byte(msg.Value), &merchant)
 						repository.UpdateMerchant(&merchant)
-						break
 					case "delete-merchant-topic":
-						err := json.Unmarshal([]byte(msg.Value), &merchant)
-						if err != nil {
-							fmt.Println(err.Error())
-						}
+						json.Unmarshal([]byte(msg.Value), &merchant)
 						repository.DeleteMerchant(&merchant)
-						fmt.Println("merchant berhasil dihapus")
-						break
 					}
 				}
+				fmt.Println("merchant berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -135,3 +130,4 @@ func NewMerchantConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
+
