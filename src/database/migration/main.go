@@ -1,9 +1,13 @@
 package main
 
 import (
+	"fmt"
+
 	_ "github.com/jinzhu/gorm/dialects/mssql"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/repository"
+
+	"time"
 )
 
 func main() {
@@ -11,10 +15,16 @@ func main() {
 	var pay = 7000
 	repository.TotalPoint(&id, &pay)
 
+	//guids := guid.New()
+	//fmt.Println(guids)
+
+)
+
+func main() {
 
 	db := database.ConnectionDB()
-
 	//db.AutoMigrate(model.Card{})
 	fmt.Println("migrasi berhasil")
 
 }
+

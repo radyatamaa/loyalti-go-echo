@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/labstack/echo"
+    "github.com/labstack/echo"
 )
 
 func MainAdmin(c echo.Context) error {
-	return c.String(http.StatusOK, "horay you are on the secret amdin main page!")
+    return c.String(http.StatusOK, "horay you are on the secret amdin main page!")
 }
