@@ -431,7 +431,7 @@ var employeeType = graphql.NewObject(graphql.ObjectConfig{
 	Name:        "Employee",
 	Fields: graphql.Fields{
 		"id" : &graphql.Field{
-			Type:graphql.Int,
+			Type:graphql.String,
 		},
 		"created" : &graphql.Field{
 			Type:graphql.DateTime,
