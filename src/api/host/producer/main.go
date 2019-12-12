@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"log"
+	"time"
+
 	//"time"
 	"github.com/Shopify/sarama"
 )
@@ -55,6 +58,8 @@ func main() {
 		"point_transaction":40,
 		"bill_number":"125"
 	}`
+// var updateTopic = "update-merchant-topic"
+	//var createTopic = "new-outlet-topic"
 
 
 	msg := &sarama.ProducerMessage{
