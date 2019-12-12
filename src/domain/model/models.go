@@ -128,8 +128,9 @@ type Program struct {
 	RedeemRules        *string    `json:"redeem_rules"`
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
-	MinPayment         int        `json:"min_payment"`
-	ProgramPoint       int        `json:"program_point"`
+	ProgramPoint       *int        `json:"program_point"`
+	MinPayment         *int        `json:"min_payment"`
+
  
 }
 

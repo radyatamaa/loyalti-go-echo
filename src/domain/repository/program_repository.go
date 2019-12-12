@@ -52,11 +52,11 @@ func TotalPoint(id int, pay int, pin string, outletid string) []model.TotalPoint
 		return nil
 	}
 	if outletid == employee.OutletId && pin == employee.EmployeePin {
-		if pay < program.MinPayment  {
+		if pay < *(program.MinPayment)  {
 			fmt.Println("Customer tidak mendapatkan poin \n")
 			return nil
 		}
-		var total = pay * program.ProgramPoint / (program.MinPayment)
+		var total = pay * *(program.ProgramPoint) / *(program.MinPayment)
 		t := &model.TotalPoint{}
 		t.Total = total
 		updatepoint := append(totalpoint, *t)
@@ -194,7 +194,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		//t.MerchantName = merchant.MerchantName
+		t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil
