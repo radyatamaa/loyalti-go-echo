@@ -481,3 +481,51 @@ var totalpointType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var transactionType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "TotalPoint",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_id":&graphql.Field{
+			Type: graphql.Int,
+		},
+		"outlet_id":&graphql.Field{
+			Type: graphql.String,
+		},
+		"total_transaction":&graphql.Field{
+			Type: graphql.Int,
+		},
+		"point_transaction":&graphql.Field{
+			Type: graphql.Int,
+		},
+		"bill_number":&graphql.Field{
+			Type:graphql.String,
+		},
+	},
+})
+
