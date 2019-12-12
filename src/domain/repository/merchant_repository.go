@@ -7,6 +7,7 @@ import (
 	//"net/http"
 )
 
+
 func CreateMerchant(merchant *model.Merchant) string{
 	db := database.ConnectionDB()
 	merchantObj := *merchant
@@ -14,17 +15,20 @@ func CreateMerchant(merchant *model.Merchant) string{
 	return merchantObj.MerchantEmail
 }
 
+
 func UpdateMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
 	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update(&merchant)
 	return merchant.MerchantEmail
 }
 
+
 func DeleteMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
 	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update("active", false)
 	return "berhasil dihapus"
 }
+
 
 func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []model.Merchant {
 
@@ -59,14 +63,15 @@ func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []mode
 	if email != nil {
 		if page != nil && size != nil {
 			pagination.Paging(&pagination.Param{
-				DB:      db,
-				Page:    *page,
-				Limit:   *size,
+				DB: 	db,
+				Page: *page,
+				Limit: *size,
 				OrderBy: []string{"merchant_name asc"},
+
 			}, &merchant)
 			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
 
-		} else {
+		} else{
 			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
 		}
 	}
@@ -74,9 +79,9 @@ func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []mode
 	if id != nil {
 		if page != nil && size != nil {
 			pagination.Paging(&pagination.Param{
-				DB:      db,
-				Page:    *page,
-				Limit:   *size,
+				DB:		db,
+				Page:	*page,
+				Limit:	*size,
 				OrderBy: []string{"merchant_name asc"},
 			}, &merchant)
 			db.Order("id").Where("id = ?", id).Find(&merchant)
@@ -85,6 +90,7 @@ func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []mode
 			db.Order("id").Where("id = ?", id).Find(&merchant)
 		}
 	}
+
 
 	db.Close()
 	return merchant

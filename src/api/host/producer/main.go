@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"log"
+	"time"
+
 	//"time"
 	"github.com/Shopify/sarama"
 )
@@ -51,6 +54,8 @@ func main() {
 	message := `{
 	
 	}`
+// var updateTopic = "update-merchant-topic"
+	//var createTopic = "new-outlet-topic"
 
 
 	msg := &sarama.ProducerMessage{

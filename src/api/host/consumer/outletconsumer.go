@@ -1,6 +1,7 @@
 package consumer
 
 import (
+
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
@@ -16,7 +17,7 @@ import (
 func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	fmt.Println("kafka Outlet is ready")
+	fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -28,8 +29,8 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
 			panic(err)
 		}
-		//fmt.Println(" Start consuming topic ", topic)
-		func(topic string, consumer sarama.PartitionConsumer) {
+		fmt.Println(" Start consuming topic ", topic)
+		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -42,18 +43,15 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 					outlet := model.Outlet{}
 					switch msg.Topic {
 					case "create-outlet-topic":
-						fmt.Println("Outlet Berhasil Dibuat")
 						json.Unmarshal([]byte(msg.Value), &outlet)
 						 repository.CreateOutlet(&outlet)
-						break
+						fmt.Println(string(msg.Value))
 					case "update-outlet-topic" :
 						json.Unmarshal([]byte(msg.Value), &outlet)
 						 repository.UpdateOutlet(&outlet)
-						break
 					case "delete-outlet-topic":
 						json.Unmarshal([]byte(msg.Value),&outlet)
 						 repository.DeleteOutlet(&outlet)
-						break
 					}
 				}
 			}
@@ -68,7 +66,7 @@ func NewOutletConsumer() {
 	brokers := []string{"11.11.5.146:9092"}
 
 	//kafkaConfig := consumer.getKafkaConfig("", "")
-	kafkaConfig := Config.GetKafkaConfig("", "")
+	kafkaConfig := Config.GetKafkaConfig("","")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
 
@@ -87,6 +85,7 @@ func NewOutletConsumer() {
 		}
 
 	}()
+
 
 	//topic, err := master.Topics()
 	if err != nil {

@@ -7,7 +7,7 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
-func CreateEmployee(employee *model.Employee) string {
+func CreateEmployee(employee *model.Employee) string{
 	db := database.ConnectionDB()
 	employee.Id = guid.NewString()
 	employeeObj := *employee
@@ -15,11 +15,13 @@ func CreateEmployee(employee *model.Employee) string {
 	return employeeObj.EmployeeEmail
 }
 
+
 func UpdateEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()
 	db.Model(&employee).Where("outlet_id = ?", employee.OutletId).Find(&employee).Delete(&employee)
 	return employee.EmployeeEmail
 }
+
 
 func DeleteEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()

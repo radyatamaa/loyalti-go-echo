@@ -1,14 +1,13 @@
 package handlers
 
 import (
+	"github.com/radyatamaa/loyalti-go-echo/src/api/graphql"
 	"encoding/json"
 	"github.com/graphql-go/graphql"
 	"github.com/labstack/echo"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/graphql"
 	"log"
 	"net/http"
 )
-
 type Server struct {
 	GqlSchema *graphql.Schema
 }
@@ -33,3 +32,5 @@ func QuerySong(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 
 }
+
+
