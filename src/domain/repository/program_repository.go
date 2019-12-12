@@ -11,11 +11,8 @@ import (
 
 func CreateProgram(program *model.Program) string{
 	db := database.ConnectionDB()
-
 	programObj := *program
-
 	db.Create(&programObj)
-
 	return programObj.ProgramName
 }
 
@@ -26,10 +23,49 @@ func UpdateProgram  (program *model.Program) string {
 }
 
 func DeleteProgram(program *model.Program) string {
-	db:= database.ConnectionDB()
-	db.Model(&program).Where("id= ?",program.Id).Delete(&program)
+	db := database.ConnectionDB()
+	db.Model(&program).Where("id= ?", program.Id).Update("active", false)
 	return "berhasil dihapus"
 }
+
+//func FindEmployee (outletid string) []model.TotalPoint{
+//	db := database.ConnectionDB()
+//	employee := model.Employee{}
+//	db.Model(&employee).Where("outlet_id = ?", outletid).Find(&employee)
+//	return nil
+//}
+
+func TotalPoint(id int, pay int, pin string, outletid string) []model.TotalPoint {
+	db := database.ConnectionDB()
+	employee := model.Employee{}
+	totalpoint := []model.TotalPoint{}
+	program := model.Program{}
+	db.Model(&program).Where("id = ?", id).Find(&program)
+	db.Model(&employee).Where("employee_pin = ?", pin).Find(&employee)
+	db.Model(&program).Where("outlet_id = ?", outletid).Find(&program)
+	if outletid != program.OutletID  {
+		fmt.Println("Anda tidak memiliki akses \n")
+		return nil
+	}
+	if  pin != employee.EmployeePin {
+		fmt.Println("Pin Anda Salah. Silahkan Coba Lagi \n")
+		return nil
+	}
+	if outletid == employee.OutletId && pin == employee.EmployeePin {
+		if pay < program.MinPayment  {
+			fmt.Println("Customer tidak mendapatkan poin \n")
+			return nil
+		}
+		var total = pay * program.ProgramPoint / (program.MinPayment)
+		t := &model.TotalPoint{}
+		t.Total = total
+		updatepoint := append(totalpoint, *t)
+		fmt.Printf("Customer mendapatkan %d poin \n", total)
+		return updatepoint
+	}
+	return nil
+}
+
 
 func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
 
@@ -158,7 +194,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		t.MerchantName = merchant.MerchantName
+		//t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil

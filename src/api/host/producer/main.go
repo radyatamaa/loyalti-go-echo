@@ -49,29 +49,18 @@ func main() {
 		}
 	}()
 
-	var newTopic = "create-employee-topic"
+	var newTopic = "update-employee-topic"
 
-	message := model.Employee{
-		Created:       time.Now(),
-		CreatedBy:     "Admin",
-		Modified:      time.Now(),
-		ModifiedBy:    "Admin",
-		Active:        true,
-		IsDeleted:     false,
-		Deleted:       nil,
-		Deleted_by:    "",
-		EmployeeName:  "Zulham",
-		EmployeeEmail: "Zulham@Zamrun@gmail.com",
-		EmployeePin:   "123123",
-		OutletId:      2,
-	}
-	pesan := fmt.Sprint("%s",message)
-	// var updateTopic = "update-merchant-topic"
+	message := `{
+	
+	}`
+// var updateTopic = "update-merchant-topic"
 	//var createTopic = "new-outlet-topic"
+
 
 	msg := &sarama.ProducerMessage{
 		Topic: newTopic,
-		Value: sarama.StringEncoder(pesan),
+		Value: sarama.StringEncoder(message),
 	}
 
 	partition, offset, err := producer.SendMessage(msg)
