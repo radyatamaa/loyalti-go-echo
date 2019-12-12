@@ -21,7 +21,7 @@ func UpdateCard(card *model.CardType) string {
 
 func DeleteCard(card *model.CardType) string {
 	db := database.ConnectionDB()
-	db.Model(&card).Select("id = ?", card.Id).Updates(map[string]interface{}{"active": false})
+	db.Model(&card).Where("id = ?", card.Id).Update("active", false)
 	return "berhasil dihapus"
 }
 

@@ -42,13 +42,22 @@ func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.Consu
 					program := model.Program{}
 					switch msg.Topic {
 					case "create-program-topic":
-						json.Unmarshal([]byte(msg.Value), &program)
+						err := json.Unmarshal([]byte(msg.Value), &program)
+						if err != nil {
+							fmt.Println(err.Error())
+						}
 						repository.CreateProgram(&program)
 						fmt.Println(string(msg.Value))
+						fmt.Println("Berhasil membuat Program")
+						break
 
 					case "update-program-topic":
 						json.Unmarshal([]byte(msg.Value), &program)
 						repository.UpdateProgram(&program)
+						fmt.Println(string(msg.Value))
+						fmt.Println("program berhasil di update")
+						break
+
 					case "delete-program-topic":
 						json.Unmarshal([]byte(msg.Value), &program)
 						repository.DeleteProgram(&program)

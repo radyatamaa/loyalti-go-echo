@@ -471,3 +471,16 @@ var employeeType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var totalpointType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "TotalPoint",
+	Fields: graphql.Fields{
+		"total_point": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})
+
+
+})
+

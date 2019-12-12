@@ -54,7 +54,6 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 						 repository.DeleteOutlet(&outlet)
 					}
 				}
-				fmt.Println("outlet berhasil dibuat")
 			}
 		}(topic, consumer)
 	}

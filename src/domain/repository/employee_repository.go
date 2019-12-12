@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/beevik/guid"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
@@ -8,6 +9,7 @@ import (
 
 func CreateEmployee(employee *model.Employee) string{
 	db := database.ConnectionDB()
+	employee.Id = guid.NewString()
 	employeeObj := *employee
 	db.Create(&employeeObj)
 	return employeeObj.EmployeeEmail
@@ -16,14 +18,14 @@ func CreateEmployee(employee *model.Employee) string{
 
 func UpdateEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()
-	db.Model(&employee).Where("employee_email = ?", employee.EmployeeEmail).Update(&employee)
+	db.Model(&employee).Where("outlet_id = ?", employee.OutletId).Find(&employee).Delete(&employee)
 	return employee.EmployeeEmail
 }
 
 
 func DeleteEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()
-	db.Model(&employee).Select("employee_email = ?", employee.EmployeeEmail).Updates(map[string]interface{}{"active": false})
+	db.Model(&employee).Where("employee_email = ?",employee.EmployeeEmail).Update("active", false)
 	return "berhasil dihapus"
 }
 
