@@ -176,6 +176,12 @@ func NewRoot() *Root {
 							"pay": &graphql.ArgumentConfig{
 								Type:graphql.Int,
 							},
+							"pin": &graphql.ArgumentConfig{
+								Type:graphql.String,
+							},
+							"outletid": &graphql.ArgumentConfig{
+								Type:graphql.String,
+							},
 						},
 						Resolve: TotalPointResolver,
 					},

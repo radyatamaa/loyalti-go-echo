@@ -118,11 +118,8 @@ type Program struct {
 	ProgramEndDate     time.Time  `json:"program_end_date"`
 	ProgramDescription string     `json:"program_description"`
 	Card               string     `json:"card"`
-	MinPayment         *int        `gorm:"NOT NULL";json:"min_payment"`
-	ProgramPoint       *int        `gorm:"NOT NULL";json:"program_point"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
-	MerchantName	   string	  `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`
@@ -130,6 +127,8 @@ type Program struct {
 	RedeemRules        *string    `json:"redeem_rules"`
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
+	MinPayment         int        `json:"min_payment"`
+	ProgramPoint       int        `json:"program_point"`
 }
 
 type SpecialProgram struct {
@@ -148,7 +147,7 @@ type SpecialProgram struct {
 	ProgramEndDate     time.Time  `json:"program_end_date"`
 	ProgramDescription string     `json:"program_description"`
 	Card               string     `json:"card"`
-	OutletID           int        `json:"outlet_id"`
+	OutletID           string        `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
 	MerchantName       string     `json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
@@ -203,7 +202,7 @@ type MerchantStatus struct {
 }
 
 type Employee struct {
-	Id            int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id            string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created       time.Time  `json:"created"`
 	CreatedBy     string     `json:"created_by"`
 	Modified      time.Time  `json:"modified"`
@@ -215,9 +214,9 @@ type Employee struct {
 	EmployeeName  string     `json:"employee_name"`
 	EmployeeEmail string     `json:"employee_email"`
 	EmployeePin   string     `json:"employee_pin"`
-	OutletId      int        `json:"outlet_id"`
+	OutletId      string        `json:"outlet_id"`
 }
 
-type TotalPoint struct{
+type TotalPoint struct {
 	Total int `json:"total_point"`
 }

@@ -28,7 +28,7 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		func(topic string, consumer sarama.PartitionConsumer) {
+		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				//fmt.Println("membuat Employee baru")
 				select {
@@ -42,13 +42,21 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 					employee := model.Employee{}
 					switch msg.Topic {
 					case "create-employee-topic":
-						json.Unmarshal([]byte(msg.Value), &employee)
+						err := json.Unmarshal([]byte(msg.Value), &employee)
+						if err != nil {
+							fmt.Println(err.Error())
+						}
 						repository.CreateEmployee(&employee)
 						fmt.Println(string(msg.Value))
 						break
 					case "update-employee-topic":
-						json.Unmarshal([]byte(msg.Value), &employee)
+						err := json.Unmarshal([]byte(msg.Value), &employee)
+						if err != nil {
+							fmt.Println(err.Error())
+						}
 						repository.UpdateEmployee(&employee)
+						fmt.Println(string(msg.Value))
+						fmt.Println("employee berhasil di update")
 						break
 					case "delete-employee-topic":
 						json.Unmarshal([]byte(msg.Value), &employee)
@@ -56,7 +64,6 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 						break
 					}
 				}
-				fmt.Println("employee berhasil dibuat")
 			}
 		}(topic, consumer)
 	}

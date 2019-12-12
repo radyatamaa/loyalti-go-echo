@@ -56,7 +56,6 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 						break
 					}
 				}
-				fmt.Println("outlet berhasil dibuat")
 			}
 		}(topic, consumer)
 	}

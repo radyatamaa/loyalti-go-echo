@@ -46,11 +46,12 @@ func main() {
 		}
 	}()
 
-	var newTopic = "delete-merchant-topic"
+	var newTopic = "update-employee-topic"
 
-	message :=`{
-	"merchant_email":"contact@jco.com"
-}`
+	message := `{
+	
+	}`
+
 
 	msg := &sarama.ProducerMessage{
 		Topic: newTopic,

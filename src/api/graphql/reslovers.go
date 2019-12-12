@@ -229,9 +229,13 @@ func EmployeeResolver(p graphql.ResolveParams) (interface{}, error) {
 func TotalPointResolver(p graphql.ResolveParams)(interface{}, error){
 	id := p.Args["id"].(int)
 	pay := p.Args["pay"].(int)
-	var ids *int = &id
-	var pays *int = &pay
-	total := repository.TotalPoint(ids, pays)
+	pin := p.Args["pin"].(string)
+	outletid := p.Args["outletid"].(string)
+	var ids int = id
+	var pays int = pay
+	var pins string = pin
+	var outletids string = outletid
+	total := repository.TotalPoint(ids, pays, pins, outletids)
 	return total, nil
 }
 

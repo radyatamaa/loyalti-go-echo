@@ -480,3 +480,4 @@ var totalpointType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
