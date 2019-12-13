@@ -280,6 +280,28 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	return users, nil
 	//return nil, nil
 }
+
+func CardResolver(p graphql.ResolveParams) (interface{}, error) {
+	page,ok := p.Args["page"].(int)
+	size,sip := p.Args["size"].(int)
+	id, top := p.Args["id"].(string)
+	if ok && sip && top{
+		var pages *int = &page
+		var sizes *int = &size
+		var card_id *string = &id
+		outlet := repository.GetCardMerchant(pages, sizes, card_id)
+		fmt.Println(outlet)
+		return outlet,nil
+	} else if ok && sip{
+		var paging *int = &page
+		var sizing *int = &size
+		outlet := repository.GetCardMerchant(paging, sizing, nil)
+		return outlet,nil
+	}
+	outlet := repository.GetCardMerchant(nil,nil, nil)
+	return outlet, nil
+}
+
 func MerchantResolve() {
 
 }
