@@ -2,7 +2,6 @@ package model
 
 import (
 	"time"
-	"github.com/beevik/guid"
 )
 
 type Song struct {
@@ -121,6 +120,7 @@ type Program struct {
 	Card               string     `json:"card"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
+	MerchantName		string		`json:"merchant_name"`
 	CategoryId         int        `json:"category_id"`
 	Benefit            *string    `json:"benefit"`
 	TermsAndCondition  *string    `json:"terms_and_condition"`
@@ -128,8 +128,9 @@ type Program struct {
 	RedeemRules        *string    `json:"redeem_rules"`
 	RewardTarget       *float64   `json:"reward_target"`
 	QRCodeId           *string    `json:"qr_code_id"`
-	MinPayment         int        `json:"min_payment"`
-	ProgramPoint       int        `json:"program_point"`
+	ProgramPoint       *int        `json:"program_point"`
+	MinPayment         *int        `json:"min_payment"`
+
  
 }
 
@@ -162,7 +163,7 @@ type SpecialProgram struct {
 }
 
 type Product struct {
-	Id                int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                string        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created           time.Time  `json:"created"`
 	CreatedBy         string     `json:"created_by"`
 	Modified          time.Time  `json:"modified"`
@@ -178,7 +179,7 @@ type Product struct {
 }
 
 type ProductCategory struct {
-	Id                  int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                  string        `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created             time.Time  `json:"created"`
 	CreatedBy           string     `json:"created_by"`
 	Modified            time.Time  `json:"modified"`
@@ -191,7 +192,7 @@ type ProductCategory struct {
 }
 
 type MerchantStatus struct {
-	Id                 int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                 string        `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created            time.Time  `json:"created"`
 	CreatedBy          string     `json:"created_by"`
 	Modified           time.Time  `json:"modified"`
@@ -240,7 +241,7 @@ type TransactionMerchant struct {
 	BillNumber       string     `json:"bill_number"`
 
 type Card struct {
-	Id            guid.Guid  `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id            string  `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created       time.Time  `json:"created"`
 	CreatedBy     string     `json:"created_by"`
 	Modified      time.Time  `json:"modified"`
