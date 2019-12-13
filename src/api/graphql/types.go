@@ -280,6 +280,18 @@ var programType = graphql.NewObject(graphql.ObjectConfig{
 		"redeem_rules": &graphql.Field{
 			Type:graphql.String,
 		},
+		"reward_target": &graphql.Field{
+			Type:graphql.Float,
+		},
+		"qr_code_id": &graphql.Field{
+			Type:graphql.String,
+		},
+		"program_point": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"min_payment": &graphql.Field{
+			Type:graphql.Int,
+		},
 	},
 })
 
@@ -477,6 +489,45 @@ var totalpointType = graphql.NewObject(graphql.ObjectConfig{
 	Fields: graphql.Fields{
 		"total_point": &graphql.Field{
 			Type: graphql.Int,
+		},
+	},
+})
+
+var card = graphql.NewObject(graphql.ObjectConfig{
+	Name:        "Card",
+	Fields:      graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"created_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"modified" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"modified_by" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"active" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"is_deleted" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"deleted" : &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type:graphql.String,
+		},
+		"title": &graphql.Field{
+			Type:graphql.String,
+		},
+		"description": &graphql.Field{
+			Type:graphql.String,
 		},
 	},
 })

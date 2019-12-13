@@ -65,7 +65,7 @@ func NewRoot() *Root {
 						},
 						Resolve: MerchantCategoryResolver,
 					},
-					"card" : &graphql.Field{
+					"cardtype" : &graphql.Field{
 						Type:graphql.NewList(cardType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
@@ -184,6 +184,21 @@ func NewRoot() *Root {
 							},
 						},
 						Resolve: TotalPointResolver,
+					},
+					"card" : &graphql.Field{
+						Type:graphql.NewList(card),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"id": &graphql.ArgumentConfig{
+								Type:graphql.String,
+							},
+						},
+						Resolve: CardResolver,
 					},
 				},
 			},
