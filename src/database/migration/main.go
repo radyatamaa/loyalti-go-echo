@@ -8,11 +8,7 @@ import (
 
 
 func main() {
-
-
-	//guids := guid.New()
-	//fmt.Println(guids)
-	db := database.ConnectionDB()
+}
 
 }
 

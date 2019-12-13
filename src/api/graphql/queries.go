@@ -185,6 +185,25 @@ func NewRoot() *Root {
 						},
 						Resolve: TotalPointResolver,
 					},
+
+          "merchanttransaction": &graphql.Field{
+						Type: graphql.NewList(transactionType),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"outletid": &graphql.ArgumentConfig{
+								Type: graphql.String,
+							},
+						},
+						Resolve: TransactionResolver,
+
 					"card" : &graphql.Field{
 						Type:graphql.NewList(card),
 						Args:graphql.FieldConfigArgument{

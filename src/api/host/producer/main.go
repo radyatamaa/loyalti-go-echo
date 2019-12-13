@@ -49,10 +49,14 @@ func main() {
 		}
 	}()
 
-	var newTopic = "update-employee-topic"
+	var newTopic = "create-transaction-topic"
 
 	message := `{
-	
+		"merchant_id":0,
+		"outlet_id":"2",
+		"total_transaction":3000,
+		"point_transaction":40,
+		"bill_number":"125"
 	}`
 // var updateTopic = "update-merchant-topic"
 	//var createTopic = "new-outlet-topic"

@@ -240,6 +240,26 @@ func TotalPointResolver(p graphql.ResolveParams)(interface{}, error){
 	return total, nil
 }
 
+func TransactionResolver (p graphql.ResolveParams)(interface{}, error){
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
+	sort, top := p.Args["sort"].(int)
+	outletid, tap := p.Args["outletid"].(string)
+	if ok && sip && top && tap{
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		var outletids *string = &outletid
+		transaction := repository.GetTransaction(pages, sizes, sorts, outletids)
+		fmt.Println(transaction)
+		return transaction, nil
+	}
+
+	transaction := repository.GetTransaction(nil, nil, nil, nil)
+
+	return transaction, nil
+}
+
 func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 	users := []Song{
 		Song{
