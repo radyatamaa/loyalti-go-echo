@@ -237,7 +237,7 @@ func NewRoot() *Root {
 								Type: graphql.Int,
 							},
 							"id": &graphql.ArgumentConfig{
-								Type: graphql.String,
+								Type: graphql.Int,
 							},
 						},
 						Resolve: CardResolver,
