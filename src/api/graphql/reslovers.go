@@ -270,6 +270,7 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 		var sizes *int = &size
 		var card_id *string = &id
 		outlet := repository.GetCardMerchant(pages, sizes, card_id)
+
 		fmt.Println(outlet)
 		return outlet,nil
 	} else if ok && sip{
