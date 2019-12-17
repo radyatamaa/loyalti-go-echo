@@ -25,7 +25,8 @@ func UpdateEmployee(employee *model.Employee) string {
 
 func DeleteEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()
-	db.Model(&employee).Where("employee_email = ?",employee.EmployeeEmail).Update("active", false)
+	db.Model(&employee).Where("outlet_id = ?", employee.OutletId).Delete(&employee)
+	//db.Model(&employee).Where("employee_email = ?",employee.EmployeeEmail).Update("active", false)
 	return "berhasil dihapus"
 }
 

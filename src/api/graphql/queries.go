@@ -9,7 +9,7 @@ type Root struct {
 	Query *graphql.Object
 }
 
-type Page struct{
+type Page struct {
 	page int `json:"null"`
 }
 
@@ -26,11 +26,11 @@ func NewRoot() *Root {
 				Fields: graphql.Fields{
 					"songs": &graphql.Field{
 						// Slice of User type which can be found in types.go
-						Type: graphql.NewList(songType),
+						Type:    graphql.NewList(songType),
 						Resolve: SongResolver,
 					},
-					"merchant" : &graphql.Field{
-						Type:graphql.NewList(merchantType),
+					"merchant": &graphql.Field{
+						Type: graphql.NewList(merchantType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
 								Type: graphql.Int,
@@ -41,17 +41,17 @@ func NewRoot() *Root {
 							"sort": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
-							"email" : &graphql.ArgumentConfig{
+							"email": &graphql.ArgumentConfig{
 								Type: graphql.String,
 							},
-							"id" : &graphql.ArgumentConfig{
+							"id": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
 						},
 						Resolve: MerchantResolver,
 					},
-					"category" : &graphql.Field{
-						Type:graphql.NewList(categoryType),
+					"category": &graphql.Field{
+						Type: graphql.NewList(categoryType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
 								Type: graphql.Int,
@@ -60,13 +60,13 @@ func NewRoot() *Root {
 								Type: graphql.Int,
 							},
 							"sort": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 						},
 						Resolve: MerchantCategoryResolver,
 					},
-					"cardtype" : &graphql.Field{
-						Type:graphql.NewList(cardType),
+					"cardtype": &graphql.Field{
+						Type: graphql.NewList(cardType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
 								Type: graphql.Int,
@@ -80,9 +80,9 @@ func NewRoot() *Root {
 						},
 						Resolve: MerchantCardResolver,
 					},
-					"socialmedia" : &graphql.Field{
-						Type:graphql.NewList(socialmediaType),
-						Args:graphql.FieldConfigArgument{
+					"socialmedia": &graphql.Field{
+						Type: graphql.NewList(socialmediaType),
+						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
@@ -95,107 +95,149 @@ func NewRoot() *Root {
 						},
 						Resolve: SocialMediaResolver,
 					},
-					"program" : &graphql.Field{
-						Type:graphql.NewList(programType),
-						Args:graphql.FieldConfigArgument{
+					"program": &graphql.Field{
+						Type: graphql.NewList(programType),
+						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"sort": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"category": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"id": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 						},
 						Resolve: ProgramResolver,
 					},
-					"special" : &graphql.Field{
-						Type:graphql.NewList(specialprogramType),
-						Args:graphql.FieldConfigArgument{
+					"special": &graphql.Field{
+						Type: graphql.NewList(specialprogramType),
+						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"sort": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"category": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"id": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 						},
 						Resolve: SpecialProgramResolver,
 					},
-					"outlet" : &graphql.Field{
-						Type:graphql.NewList(outletType),
-						Args:graphql.FieldConfigArgument{
+					"outlet": &graphql.Field{
+						Type: graphql.NewList(outletType),
+						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"id": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 						},
 						Resolve: OutletResolver,
 					},
-					"employee" : &graphql.Field{
-						Type:graphql.NewList(employeeType),
-						Args:graphql.FieldConfigArgument{
+					"employee": &graphql.Field{
+						Type: graphql.NewList(employeeType),
+						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"sort": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 						},
 						Resolve: EmployeeResolver,
 					},
-					"totalpoint" : &graphql.Field{
-						Type:graphql.NewList(totalpointType),
-						Args:graphql.FieldConfigArgument{
+					"totalpoint": &graphql.Field{
+						Type: graphql.NewList(totalpointType),
+						Args: graphql.FieldConfigArgument{
 							"id": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"pay": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"pin": &graphql.ArgumentConfig{
-								Type:graphql.String,
+								Type: graphql.String,
 							},
 							"outletid": &graphql.ArgumentConfig{
-								Type:graphql.String,
+								Type: graphql.String,
+							},
+							"cardtype": &graphql.ArgumentConfig{
+								Type: graphql.String,
 							},
 						},
 						Resolve: TotalPointResolver,
 					},
-					"card" : &graphql.Field{
-						Type:graphql.NewList(card),
-						Args:graphql.FieldConfigArgument{
+					"totalchop": &graphql.Field{
+						Type: graphql.NewList(totalchopType),
+						Args: graphql.FieldConfigArgument{
+							"id": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"pay": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"pin": &graphql.ArgumentConfig{
+								Type: graphql.String,
+							},
+							"outletid": &graphql.ArgumentConfig{
+								Type: graphql.String,
+							},
+							"cardtype": &graphql.ArgumentConfig{
+								Type: graphql.String,
+							},
+						},
+						Resolve: TotalChopResolver,
+					},
+					"merchanttransaction": &graphql.Field{
+						Type: graphql.NewList(transactionType),
+						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
 							},
 							"size": &graphql.ArgumentConfig{
-								Type:graphql.Int,
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"outletid": &graphql.ArgumentConfig{
+								Type: graphql.String,
+							},
+						},
+						Resolve: TransactionResolver,
+					},
+					"card": &graphql.Field{
+						Type: graphql.NewList(card),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
 							},
 							"id": &graphql.ArgumentConfig{
-								Type:graphql.String,
+								Type: graphql.String,
 							},
 						},
 						Resolve: CardResolver,

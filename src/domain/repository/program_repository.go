@@ -36,7 +36,7 @@ func DeleteProgram(program *model.Program) string {
 //}
 
 
-func TotalPoint(id int, pay int, pin string, outletid string) []model.TotalPoint {
+func TotalPoint(id int, pay int, pin string, outletid string, cardtype string) []model.TotalPoint {
 	db := database.ConnectionDB()
 	employee := model.Employee{}
 	totalpoint := []model.TotalPoint{}
@@ -44,6 +44,13 @@ func TotalPoint(id int, pay int, pin string, outletid string) []model.TotalPoint
 	db.Model(&program).Where("id = ?", id).Find(&program)
 	db.Model(&employee).Where("employee_pin = ?", pin).Find(&employee)
 	db.Model(&program).Where("outlet_id = ?", outletid).Find(&program)
+	db.Model(&program).Where("card = ?", cardtype).Find(&program)
+
+	if cardtype != program.Card {
+		fmt.Println("Customer tidak mendapatkan point dengan kartu ini")
+		return nil
+	}
+
 	if outletid != program.OutletID  {
 		fmt.Println("Anda tidak memiliki akses \n")
 		return nil
@@ -67,6 +74,46 @@ func TotalPoint(id int, pay int, pin string, outletid string) []model.TotalPoint
 	return nil
 }
 
+func TotalChop(id int, pay int, pin string, outletid string, cardtype string) []model.TotalChop {
+	db := database.ConnectionDB()
+	employee := model.Employee{}
+	totalchop := []model.TotalChop{}
+	program := model.Program{}
+	db.Model(&program).Where("id = ?", id).Find(&program)
+	db.Model(&employee).Where("employee_pin = ?", pin).Find(&employee)
+	db.Model(&program).Where("outlet_id = ?", outletid).Find(&program)
+	db.Model(&program).Where("card = ?", cardtype).Find(&program)
+
+	if cardtype != program.Card {
+		fmt.Println("Customer tidak mendapatkan chop dengan kartu ini")
+		return nil
+	}
+
+	if outletid != program.OutletID  {
+		fmt.Println("Anda tidak memiliki akses \n")
+		return nil
+	}
+	if  pin != employee.EmployeePin {
+		fmt.Println("Pin Anda Salah. Silahkan Coba Lagi \n")
+		return nil
+	}
+	if outletid == employee.OutletId && pin == employee.EmployeePin {
+		if pay < *(program.MinPayment)  {
+			fmt.Println("Customer tidak mendapatkan tambahan chop \n")
+			return nil
+		}
+
+		if pay >= *(program.MinPayment){
+		var total = pay / pay * 1
+		t := &model.TotalChop{}
+		t.Total = total
+		updatechop := append(totalchop, *t)
+		fmt.Printf("Customer mendapatkan %d chop \n", total)
+		return updatechop
+		}
+	}
+	return nil
+}
 
 func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
 
@@ -195,7 +242,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		t.MerchantName = merchant.MerchantName
+		//t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil
