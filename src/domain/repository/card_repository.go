@@ -15,7 +15,7 @@ const (
 	PlatinumTier 	= "Platinum"
 )
 
-func GetCardMerchant(page *int, size *int, id *string) []model.Card {
+func GetCardMerchant(page *int, size *int, id *int) []model.Card {
 
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
@@ -27,7 +27,7 @@ func GetCardMerchant(page *int, size *int, id *string) []model.Card {
 	if id != nil {
 		if page != nil && size != nil {
 			fmt.Println("2")
-			rows, err = db.Where("id = ?", id).Find(&kartu).Order("title").Count(total).Limit(*size).Offset(*page).Rows()
+			rows, err = db.Where("program_id = ?", id).Find(&kartu).Order("title").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
 				panic(err)
 			}

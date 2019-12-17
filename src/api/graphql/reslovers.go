@@ -301,11 +301,11 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	id, top := p.Args["id"].(string)
+	id, top := p.Args["id"].(int)
 	if ok && sip && top{
 		var pages *int = &page
 		var sizes *int = &size
-		var card_id *string = &id
+		var card_id *int = &id
 		outlet := repository.GetCardMerchant(pages, sizes, card_id)
 
 		fmt.Println(outlet)
