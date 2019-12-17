@@ -35,6 +35,7 @@ func DeleteProgram(program *model.Program) string {
 //	return nil
 //}
 
+
 func TotalPoint(id int, pay int, pin string, outletid string, cardtype string) []model.TotalPoint {
 	db := database.ConnectionDB()
 	employee := model.Employee{}

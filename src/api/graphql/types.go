@@ -40,10 +40,10 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 		"modified_by": &graphql.Field{
 			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
+		"is_deleted": &graphql.Field{
 			Type: graphql.Boolean,
 		},
 		"deleted": &graphql.Field{
@@ -95,112 +95,112 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var socialmediaType = graphql.NewObject(graphql.ObjectConfig{
-	Name:        "Card",
+	Name: "Card",
 	Fields: graphql.Fields{
-		"id" : &graphql.Field{
-			Type:graphql.Int,
+		"id": &graphql.Field{
+			Type: graphql.Int,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"social_media_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"image_url": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 	},
 })
 
 var cardType = graphql.NewObject(graphql.ObjectConfig{
-	Name:        "Card",
+	Name: "Card",
 	Fields: graphql.Fields{
-		"id" : &graphql.Field{
-			Type:graphql.Int,
+		"id": &graphql.Field{
+			Type: graphql.Int,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"card_type_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 	},
 })
 
 var categoryType = graphql.NewObject(graphql.ObjectConfig{
-	Name:        "Category",
+	Name: "Category",
 	Fields: graphql.Fields{
-		"id" : &graphql.Field{
-			Type:graphql.Int,
+		"id": &graphql.Field{
+			Type: graphql.Int,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"category_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"image_url": &graphql.Field{
 			Type: graphql.String,
@@ -209,277 +209,283 @@ var categoryType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var programType = graphql.NewObject(graphql.ObjectConfig{
-	Name : "Program",
+	Name: "Program",
 	Fields: graphql.Fields{
-		"id" : &graphql.Field{
-			Type:graphql.Int,
+		"id": &graphql.Field{
+			Type: graphql.Int,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_image": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_start_date": &graphql.Field{
-			Type:graphql.DateTime,
+			Type: graphql.DateTime,
 		},
 		"program_end_date": &graphql.Field{
-			Type:graphql.DateTime,
+			Type: graphql.DateTime,
 		},
 		"program_description": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"card": &graphql.Field{
 			Type: graphql.String,
 		},
 		"outlet_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"merchant_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"merchant_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"category_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"benefit": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"terms_and_condition": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"tier": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"redeem_rules": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"reward_target": &graphql.Field{
-			Type:graphql.Float,
+			Type: graphql.Float,
 		},
 		"qr_code_id": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_point": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"min_payment": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 	},
 })
 
 var specialprogramType = graphql.NewObject(graphql.ObjectConfig{
-	Name : "SpecialProgram",
+	Name: "SpecialProgram",
 	Fields: graphql.Fields{
-		"id" : &graphql.Field{
-			Type:graphql.Int,
+		"id": &graphql.Field{
+			Type: graphql.Int,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_image": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"program_start_date": &graphql.Field{
-			Type:graphql.DateTime,
+			Type: graphql.DateTime,
 		},
 		"program_end_date": &graphql.Field{
-			Type:graphql.DateTime,
+			Type: graphql.DateTime,
 		},
 		"program_description": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"card": &graphql.Field{
 			Type: graphql.String,
 		},
 		"outlet_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"merchant_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"merchant_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"category_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 		"program_title": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"benefit": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"terms_and_condition": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"tier": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"redeem_rules": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
+		},
+		"reward_target": &graphql.Field{
+			Type: graphql.Float,
+		},
+		"qr_code_id": &graphql.Field{
+			Type: graphql.String,
 		},
 	},
 })
 
 var outletType = graphql.NewObject(graphql.ObjectConfig{
-	Name:        "Outlet",
-	Fields:      graphql.Fields{
-		"id" : &graphql.Field{
+	Name: "Outlet",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_address": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_phone": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_city": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_province": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_postal_code": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_longitude": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_latitude": &graphql.Field{
 			Type: graphql.String,
 		},
 		"merchant_id": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_day": &graphql.Field{
-			Type:graphql.DateTime,
+			Type: graphql.DateTime,
 		},
 		"outlet_hour": &graphql.Field{
-			Type:graphql.DateTime,
+			Type: graphql.DateTime,
 		},
 	},
 })
 
 var employeeType = graphql.NewObject(graphql.ObjectConfig{
-	Name:        "Employee",
+	Name: "Employee",
 	Fields: graphql.Fields{
-		"id" : &graphql.Field{
-			Type:graphql.String,
+		"id": &graphql.Field{
+			Type: graphql.String,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"employee_name": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"employee_email": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"employee_pin": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"outlet_id": &graphql.Field{
-			Type:graphql.Int,
+			Type: graphql.Int,
 		},
 	},
 })
@@ -551,42 +557,80 @@ var transactionType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var card = graphql.NewObject(graphql.ObjectConfig{
-	Name:        "Card",
-	Fields:      graphql.Fields{
+	Name: "Card",
+	Fields: graphql.Fields{
 		"id": &graphql.Field{
 			Type: graphql.String,
 		},
-		"created" : &graphql.Field{
-			Type:graphql.DateTime,
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"created_by" : &graphql.Field{
-			Type:graphql.String,
+		"created_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"modified" : &graphql.Field{
-			Type:graphql.DateTime,
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
 		},
-		"modified_by" : &graphql.Field{
-			Type:graphql.String,
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
 		},
-		"active" : &graphql.Field{
-			Type:graphql.Boolean,
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"is_deleted" : &graphql.Field{
-			Type:graphql.Boolean,
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
-		"deleted" : &graphql.Field{
-			Type:graphql.DateTime,
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
 		},
 		"deleted_by": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"title": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
 		},
 		"description": &graphql.Field{
-			Type:graphql.String,
+			Type: graphql.String,
+		},
+		"font_color": &graphql.Field{
+			Type: graphql.String,
+		},
+		"template_color": &graphql.Field{
+			Type: graphql.String,
+		},
+		"icon_image": &graphql.Field{
+			Type: graphql.String,
+		},
+		"terms_and_condition": &graphql.Field{
+			Type: graphql.String,
+		},
+		"benefit": &graphql.Field{
+			Type: graphql.String,
+		},
+		"valid_until": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"current_point": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"is_valid": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"program_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"card_type": &graphql.Field{
+			Type: graphql.String,
+		},
+		"icon_image_stamp": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"tier": &graphql.Field{
+			Type: graphql.String,
 		},
 	},
 })
-
 

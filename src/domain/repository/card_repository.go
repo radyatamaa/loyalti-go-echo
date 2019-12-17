@@ -8,6 +8,13 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
+const (
+	MemberTypeCard 	= "Member"
+	GoldTier 		= "Gold"
+	SilverTier 		= "Silver"
+	PlatinumTier 	= "Platinum"
+)
+
 func GetCardMerchant(page *int, size *int, id *string) []model.Card {
 
 	db := database.ConnectionDB()
@@ -61,13 +68,25 @@ func GetCardMerchant(page *int, size *int, id *string) []model.Card {
 			&o.TermsAndCondition,
 			&o.Benefit,
 			&o.ValidUntil,
-			&o.RewardTarget,
+			&o.CurrentPoint,
 			&o.IsValid,
 			&o.ProgramId,
 			&o.CardType,
 			&o.IconImageStamp,
 			&o.MerchantId,
 		)
+		//add tier
+		if o.CardType == MemberTypeCard{
+			if o.CurrentPoint >= 0 && o.CurrentPoint <= 100{
+				o.Tier = SilverTier
+			}else if o.CurrentPoint > 100 && o.CurrentPoint <= 230{
+				o.Tier = GoldTier
+			}else if o.CurrentPoint > 230 && o.CurrentPoint <= 400{
+				o.Tier = PlatinumTier
+			}
+		}else{
+			o.Tier = "Ga ada tier"
+		}
 
 		result = append(result, *o)
 	}
