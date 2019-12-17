@@ -15,6 +15,7 @@ import (
 func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
+	fmt.Println("Kafka Card is Ready")
 	//fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
@@ -27,8 +28,8 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
 			panic(err)
 		}
-		fmt.Println(" Start consuming topic ", topic)
-		go func(topic string, consumer sarama.PartitionConsumer) {
+		//fmt.Println(" Start consuming topic ", topic)
+		func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -41,16 +42,28 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 					card := model.CardType{}
 					switch msg.Topic {
 					case "create-card-topic":
-						json.Unmarshal([]byte(msg.Value), &card)
+						err := json.Unmarshal([]byte(msg.Value), &card)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.CreateCard(&card)
 						fmt.Println(string(msg.Value))
 						fmt.Println("Card berhasil dibuat")
 					case "update-card-topic":
-						json.Unmarshal([]byte(msg.Value), &card)
+						err := json.Unmarshal([]byte(msg.Value), &card)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.UpdateCard(&card)
 						fmt.Println("card berhasil diupdate")
 					case "delete-card-topic":
-						json.Unmarshal([]byte(msg.Value), &card)
+						err := json.Unmarshal([]byte(msg.Value), &card)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.DeleteCard(&card)
 						fmt.Println("card berhasil dihapus")
 					}

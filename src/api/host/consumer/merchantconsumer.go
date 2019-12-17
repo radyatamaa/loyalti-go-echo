@@ -15,6 +15,7 @@ import (
 func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
+	fmt.Println("Kafka Merchant is Ready")
 	//fmt.Println(topics)
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
@@ -27,10 +28,9 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
 			panic(err)
 		}
-		fmt.Println(" Start consuming topic ", topic)
-		go func(topic string, consumer sarama.PartitionConsumer) {
+		//fmt.Println(" Start consuming topic ", topic)
+		 func(topic string, consumer sarama.PartitionConsumer) {
 			for {
-				fmt.Println("membuat merchant baru")
 				select {
 				case consumerError := <-consumer.Errors():
 					errors <- consumerError
@@ -42,19 +42,35 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 					merchant := model.Merchant{}
 					switch msg.Topic {
 					case "create-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
+						err := json.Unmarshal([]byte(msg.Value), &merchant)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.CreateMerchant(&merchant)
 						fmt.Println(string(msg.Value))
-
+						fmt.Println("Merchant berhasil dibuat")
+						break
 					case "update-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
+						err := json.Unmarshal([]byte(msg.Value), &merchant)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.UpdateMerchant(&merchant)
+						fmt.Println(string(msg.Value))
+						fmt.Println("Merchant berhasil di-Update")
 					case "delete-merchant-topic":
-						json.Unmarshal([]byte(msg.Value), &merchant)
+						err := json.Unmarshal([]byte(msg.Value), &merchant)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.DeleteMerchant(&merchant)
+						fmt.Println(string(msg.Value))
+						fmt.Println("Merchant berhasil dihapus")
 					}
 				}
-				fmt.Println("merchant berhasil dibuat")
 			}
 		}(topic, consumer)
 	}
@@ -130,4 +146,3 @@ func NewMerchantConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
-

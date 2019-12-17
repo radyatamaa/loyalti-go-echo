@@ -3,6 +3,7 @@ package router
 import (
     "github.com/labstack/echo"
     "github.com/radyatamaa/loyalti-go-echo/src/api"
+    "github.com/radyatamaa/loyalti-go-echo/src/api/host"
     "github.com/radyatamaa/loyalti-go-echo/src/api/middlewares"
 )
 
@@ -28,5 +29,6 @@ func New() *echo.Echo {
     api.CookieGroup(cookieGroup)
     api.JwtGroup(jwtGroup)
 
+    host.StartKafka()
     return e
 }

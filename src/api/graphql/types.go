@@ -493,6 +493,15 @@ var totalpointType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var totalchopType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "TotalChop",
+	Fields: graphql.Fields{
+		"total_chop": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})
+
 var transactionType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "TotalPoint",
 	Fields: graphql.Fields{
@@ -523,19 +532,23 @@ var transactionType = graphql.NewObject(graphql.ObjectConfig{
 		"deleted_by": &graphql.Field{
 			Type: graphql.String,
 		},
-		"merchant_id":&graphql.Field{
+		"merchant_id": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"outlet_id":&graphql.Field{
+		"outlet_id": &graphql.Field{
 			Type: graphql.String,
 		},
-		"total_transaction":&graphql.Field{
+		"total_transaction": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"point_transaction":&graphql.Field{
+		"point_transaction": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"bill_number":&graphql.Field{
+		"bill_number": &graphql.Field{
+			Type : graphql.String,
+		},
+	},
+})
 
 var card = graphql.NewObject(graphql.ObjectConfig{
 	Name:        "Card",
