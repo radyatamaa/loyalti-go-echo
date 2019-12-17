@@ -3,10 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
-	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"log"
-	"time"
-
 	//"time"
 	"github.com/Shopify/sarama"
 )
@@ -49,15 +46,23 @@ func main() {
 		}
 	}()
 
-	var newTopic = "create-transaction-topic"
+	var newTopic = "create-special-topic"
 
 	message := `{
-		"merchant_id":0,
-		"outlet_id":"2",
-		"total_transaction":3000,
-		"point_transaction":40,
-		"bill_number":"125"
+		"program_name":"GORide100",
+		"program_description":"Diskon GoRide 100% maksimal 10k",
+		"card":"chop",
+		"outlet_id":"11",
+		"tier":"Gold",
+		"benefit":"Tidak ada"
 	}`
+
+	//message := `{
+	//	"employee_name":"Felix",
+	//	"employee_email":"felfolful10@gmail.com",
+	//	"employee_pin":"123321",
+	//	"outlet_id":"11"
+	//}`
 // var updateTopic = "update-merchant-topic"
 	//var createTopic = "new-outlet-topic"
 

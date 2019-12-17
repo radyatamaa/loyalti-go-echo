@@ -28,7 +28,7 @@ func consumeTransaction(topics []string, master sarama.Consumer) (chan *sarama.C
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		func(topic string, consumer sarama.PartitionConsumer) {
+		 func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -51,12 +51,20 @@ func consumeTransaction(topics []string, master sarama.Consumer) (chan *sarama.C
 						fmt.Println("Transaksi berhasil dibuat")
 						break
 					case "update-transaction-topic":
-						json.Unmarshal([]byte(msg.Value), &transaction)
+						err := json.Unmarshal([]byte(msg.Value), &transaction)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.UpdateTransaction(&transaction)
 						fmt.Println("transaksi berhasil diupdate")
 						break
 					case "delete-transaction-topic":
-						json.Unmarshal([]byte(msg.Value), &transaction)
+						err := json.Unmarshal([]byte(msg.Value), &transaction)
+						if err != nil {
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.DeleteTransaction(&transaction)
 						fmt.Println("transaksi berhasil dihapus")
 						break

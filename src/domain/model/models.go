@@ -120,18 +120,16 @@ type Program struct {
 	Card               string     `json:"card"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
-	MerchantName		string		`json:"merchant_name"`
-	CategoryId         int        `json:"category_id"`
-	Benefit            *string    `json:"benefit"`
-	TermsAndCondition  *string    `json:"terms_and_condition"`
-	Tier               *string    `json:"tier"`
-	RedeemRules        *string    `json:"redeem_rules"`
-	RewardTarget       *float64   `json:"reward_target"`
-	QRCodeId           *string    `json:"qr_code_id"`
-	ProgramPoint       *int        `json:"program_point"`
-	MinPayment         *int        `json:"min_payment"`
-
- 
+	//MerchantName		string		`json:"merchant_name"`
+	CategoryId        int      `json:"category_id"`
+	Benefit           *string  `json:"benefit"`
+	TermsAndCondition *string  `json:"terms_and_condition"`
+	Tier              *string  `json:"tier"`
+	RedeemRules       *string  `json:"redeem_rules"`
+	RewardTarget      *float64 `json:"reward_target"`
+	QRCodeId          *string  `json:"qr_code_id"`
+	ProgramPoint      *int     `json:"program_point"`
+	MinPayment        *int     `json:"min_payment"`
 }
 
 type SpecialProgram struct {
@@ -152,18 +150,18 @@ type SpecialProgram struct {
 	Card               string     `json:"card"`
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
-	MerchantName 		string      `json:"merchant_name"`
-	CategoryId		int				`json:"category_id"`
-	Benefit				*string 		`json:"benefit"`
-	TermsAndCondition	*string		`json:"terms_and_condition"`
-	Tier 				*string		`json:"tier"`
-	RedeemRules			*string		`json:"redeem_rules"`
-	RewardTarget		*float64		`json:"reward_target"`
-	QRCodeId			*string		`json:"qr_code_id"`
+	//MerchantName 		string      `json:"merchant_name"`
+	CategoryId        int      `json:"category_id"`
+	Benefit           *string  `json:"benefit"`
+	TermsAndCondition *string  `json:"terms_and_condition"`
+	Tier              *string  `json:"tier"`
+	RedeemRules       *string  `json:"redeem_rules"`
+	RewardTarget      *float64 `json:"reward_target"`
+	QRCodeId          *string  `json:"qr_code_id"`
 }
 
 type Product struct {
-	Id                string        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                string     `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created           time.Time  `json:"created"`
 	CreatedBy         string     `json:"created_by"`
 	Modified          time.Time  `json:"modified"`
@@ -179,7 +177,7 @@ type Product struct {
 }
 
 type ProductCategory struct {
-	Id                  string        `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                  string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created             time.Time  `json:"created"`
 	CreatedBy           string     `json:"created_by"`
 	Modified            time.Time  `json:"modified"`
@@ -192,7 +190,7 @@ type ProductCategory struct {
 }
 
 type MerchantStatus struct {
-	Id                 string        `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                 string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created            time.Time  `json:"created"`
 	CreatedBy          string     `json:"created_by"`
 	Modified           time.Time  `json:"modified"`
@@ -224,6 +222,10 @@ type TotalPoint struct {
 	Total int `json:"total_point"`
 }
 
+type TotalChop struct {
+	Total int `json:"total_chop"`
+}
+
 type TransactionMerchant struct {
 	Id               int        `gorm:"PRIMARY_KEY;NOT NUll"; json:"id"`
 	Created          time.Time  `json:"created"`
@@ -239,29 +241,30 @@ type TransactionMerchant struct {
 	TotalTransaction int        `json:"total_transaction"`
 	PointTransaction int        `json:"point_transaction"`
 	BillNumber       string     `json:"bill_number"`
+}
 
 type Card struct {
-	Id            string  `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created       time.Time  `json:"created"`
-	CreatedBy     string     `json:"created_by"`
-	Modified      time.Time  `json:"modified"`
-	ModifiedBy    string     `json:"modified_by"`
-	Active        bool       `json:"active"`
-	IsDeleted     bool       `json:"is_deleted"`
-	Deleted       *time.Time `json:"deleted"`
-	DeletedBy    string     `json:"deleted_by"`
-	Title			string		`json:"title"`
-	Description		string		`json:"description"`
-	FontColor		string		`json:"font_color"`
-	TemplateColor	string		`json:"template_color"`
-	IconImage		string		`json:"icon_image"`
-	TermsAndCondition	string		`json:"terms_and_condition"`
-	Benefit			string		`json:"benefit"`
-	ValidUntil 		time.Time	`json:"valid_until"`
-	RewardTarget	string		`json:"reward_target"`
-	IsValid			bool		`json:"is_valid"`
-	ProgramId		int			`json:"program_id"`
-	CardType		string		`json:"card_type"`
-	IconImageStamp	string		`json:"icon_image_stamp"`
-	MerchantId		int			`json:"merchant_id"`
+	Id                string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created           time.Time  `json:"created"`
+	CreatedBy         string     `json:"created_by"`
+	Modified          time.Time  `json:"modified"`
+	ModifiedBy        string     `json:"modified_by"`
+	Active            bool       `json:"active"`
+	IsDeleted         bool       `json:"is_deleted"`
+	Deleted           *time.Time `json:"deleted"`
+	DeletedBy         string     `json:"deleted_by"`
+	Title             string     `json:"title"`
+	Description       string     `json:"description"`
+	FontColor         string     `json:"font_color"`
+	TemplateColor     string     `json:"template_color"`
+	IconImage         string     `json:"icon_image"`
+	TermsAndCondition string     `json:"terms_and_condition"`
+	Benefit           string     `json:"benefit"`
+	ValidUntil        time.Time  `json:"valid_until"`
+	RewardTarget      int        `json:"reward_target"`
+	IsValid           bool       `json:"is_valid"`
+	ProgramId         int        `json:"program_id"`
+	CardType          string     `json:"card_type"`
+	IconImageStamp    string     `json:"icon_image_stamp"`
+	MerchantId        int        `json:"merchant_id"`
 }

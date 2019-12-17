@@ -232,11 +232,28 @@ func TotalPointResolver(p graphql.ResolveParams)(interface{}, error){
 	pay := p.Args["pay"].(int)
 	pin := p.Args["pin"].(string)
 	outletid := p.Args["outletid"].(string)
+	cardtype := p.Args["cardtype"].(string)
 	var ids int = id
 	var pays int = pay
 	var pins string = pin
 	var outletids string = outletid
-	total := repository.TotalPoint(ids, pays, pins, outletids)
+	var cardtypes string = cardtype
+	total := repository.TotalPoint(ids, pays, pins, outletids, cardtypes)
+	return total, nil
+}
+
+func TotalChopResolver(p graphql.ResolveParams)(interface{}, error){
+	id := p.Args["id"].(int)
+	pay := p.Args["pay"].(int)
+	pin := p.Args["pin"].(string)
+	outletid := p.Args["outletid"].(string)
+	cardtype := p.Args["cardtype"].(string)
+	var ids int = id
+	var pays int = pay
+	var pins string = pin
+	var outletids string = outletid
+	var cardtypes string = cardtype
+	total := repository.TotalChop(ids, pays, pins, outletids, cardtypes)
 	return total, nil
 }
 

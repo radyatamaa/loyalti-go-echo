@@ -15,7 +15,7 @@ import (
 func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMessage, chan *sarama.ConsumerError) {
 	consumers := make(chan *sarama.ConsumerMessage)
 	errors := make(chan *sarama.ConsumerError)
-	//fmt.Println(topics)
+	fmt.Println("Kafka Employee is Ready")
 	for _, topic := range topics {
 		if strings.Contains(topic, "__consumer_offsets") {
 			continue
@@ -29,7 +29,7 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 		}
 		//fmt.Println(" Start consuming topic ", topic)
 
-		go func(topic string, consumer sarama.PartitionConsumer) {
+		func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():
@@ -45,16 +45,18 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 						err := json.Unmarshal([]byte(msg.Value), &employee)
 						if err != nil {
 							fmt.Println(err.Error())
+							os.Exit(1)
 						}
 						repository.CreateEmployee(&employee)
 						fmt.Println(string(msg.Value))
 						fmt.Println("employee berhasil dibuat")
-            break
-            
+						break
+
 					case "update-employee-topic":
 						err := json.Unmarshal([]byte(msg.Value), &employee)
 						if err != nil {
 							fmt.Println(err.Error())
+							os.Exit(1)
 						}
 						repository.UpdateEmployee(&employee)
 						fmt.Println(string(msg.Value))
@@ -62,10 +64,14 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 						break
 
 					case "delete-employee-topic":
-						json.Unmarshal([]byte(msg.Value), &employee)
+						err := json.Unmarshal([]byte(msg.Value), &employee)
+						if err != nil{
+							fmt.Println(err.Error())
+							os.Exit(1)
+						}
 						repository.DeleteEmployee(&employee)
 						fmt.Println("employee berhasil dihapus")
-            break
+						break
 					}
 				}
 			}
@@ -143,4 +149,3 @@ func NewEmployeeConsumer() {
 	fmt.Println("Processed", msgCount, "messages")
 
 }
-
