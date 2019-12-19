@@ -8,9 +8,9 @@ import (
 
 
 func main() {
-}
+	db := database.ConnectionDB()
 
-	db.Model(&model.Card{}).DropColumn("tier_id")
+	db.AutoMigrate(&model.Card{})
 }
 
 
