@@ -239,6 +239,9 @@ func NewRoot() *Root {
 							"id": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
+							"card_type": &graphql.ArgumentConfig{
+									Type:graphql.String,
+							},
 						},
 						Resolve: CardResolver,
 					},
