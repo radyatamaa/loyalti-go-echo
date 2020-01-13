@@ -15,7 +15,7 @@ const (
 	PlatinumTier 	= "Platinum"
 )
 
-func GetCardMerchant(page *int, size *int, id *int) []model.Card {
+func GetCardMerchant(page *int, size *int, id *int, card_type *string) []model.Card {
 
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
@@ -25,26 +25,31 @@ func GetCardMerchant(page *int, size *int, id *int) []model.Card {
 	var total int
 
 	if id != nil {
+
 		if page != nil && size != nil {
-			fmt.Println("2")
+
 			rows, err = db.Where("program_id = ?", id).Find(&kartu).Order("title").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
 				panic(err)
 			}
-		}
-	} else {
-		if page != nil && size != nil {
-			rows, err = db.Find(&kartu).Order("title").Count(total).Limit(*size).Offset(*page).Rows()
-			if err != nil {
-				panic(err)
+
+			if card_type != nil {
+				if page != nil && size != nil && id != nil {
+					fmt.Println("card type dapat ga")
+					rows, err = db.Where("program_id = ? AND card_type = ?", id, card_type).Find(&kartu).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+					if err != nil {
+						panic(err)
+					}
+				}
 			}
-		} else {
-			rows, err = db.Find(&kartu).Rows()
-			if err != nil {
-				panic(err)
+		}  else {
+				rows, err = db.Find(&kartu).Rows()
+				if err != nil {
+					panic(err)
+				}
 			}
 		}
-	}
+
 
 	result := make([]model.Card, 0)
 
