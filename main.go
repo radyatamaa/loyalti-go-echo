@@ -20,7 +20,7 @@ func main() {
 
 
 	//host.StartKafka()
-	e.Start(":2525")
+	e.Start(":5000")
 	//host.StartKafka()
 	fmt.Println("Kafka start at port 2525")
 }
