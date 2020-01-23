@@ -2,19 +2,39 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	//"net/http"
 )
 
+type Merchant struct {
+	IGorm
+}
 
-func CreateMerchant(merchant *model.Merchant) string{
-	db := database.ConnectionDB()
+type IGorm interface {
+	Create(value interface{}) *gorm.DB
+}
+
+func (m Merchant) CreateMerchant2(merchant *model.Merchant) string {
+	//database := m.ConnectionDB2()
+	//database.SqlDB.Create(&merchant)
+	//db := database.ConnectionDB()
 	merchantObj := *merchant
-	db.Create(&merchantObj)
+	//db.Create(&merchantObj)
+	//m.IGorm.Create(&merchantObj)
 	return merchantObj.MerchantEmail
 }
 
+func CreateMerchant(merchant *model.Merchant) string {
+	db := database.Connection{}
+	database := db.ConnectionDB2()
+	//db := database.ConnectionDB()
+	merchantObj := *merchant
+	//db.Create(&merchantObj)
+	database.Create(&merchant)
+	return merchantObj.MerchantEmail
+}
 
 func UpdateMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
@@ -22,13 +42,11 @@ func UpdateMerchant(merchant *model.Merchant) string {
 	return merchant.MerchantEmail
 }
 
-
 func DeleteMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
 	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update("active", false)
 	return "berhasil dihapus"
 }
-
 
 func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []model.Merchant {
 
@@ -63,15 +81,14 @@ func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []mode
 	if email != nil {
 		if page != nil && size != nil {
 			pagination.Paging(&pagination.Param{
-				DB: 	db,
-				Page: *page,
-				Limit: *size,
+				DB:      db,
+				Page:    *page,
+				Limit:   *size,
 				OrderBy: []string{"merchant_name asc"},
-
 			}, &merchant)
 			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
 
-		} else{
+		} else {
 			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
 		}
 	}
@@ -79,9 +96,9 @@ func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []mode
 	if id != nil {
 		if page != nil && size != nil {
 			pagination.Paging(&pagination.Param{
-				DB:		db,
-				Page:	*page,
-				Limit:	*size,
+				DB:      db,
+				Page:    *page,
+				Limit:   *size,
 				OrderBy: []string{"merchant_name asc"},
 			}, &merchant)
 			db.Order("id").Where("id = ?", id).Find(&merchant)
@@ -90,7 +107,6 @@ func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []mode
 			db.Order("id").Where("id = ?", id).Find(&merchant)
 		}
 	}
-
 
 	db.Close()
 	return merchant

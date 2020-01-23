@@ -15,7 +15,7 @@ func CreateTransaction(transaction *model.TransactionMerchant) string {
 
 func UpdateTransaction(transaction *model.TransactionMerchant) string {
 	db := database.ConnectionDB()
-	db.Model(&transaction).Where("outlet_id = ?", transaction.OutletId).Find(&transaction)
+	db.Model(&transaction).Where("outlet_id = ?", transaction.OutletId).Update(&transaction)
 	return transaction.OutletId
 }
 

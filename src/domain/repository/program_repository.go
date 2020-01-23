@@ -53,16 +53,16 @@ func TotalPoint(id int, pay int, pin string, outletid string, cardtype string) [
 	}
 
 	if outletid != program.OutletID  {
-		fmt.Println("Anda tidak memiliki akses \n")
+		fmt.Println("Anda tidak memiliki akses ")
 		return nil
 	}
 	if  pin != employee.EmployeePin {
-		fmt.Println("Pin Anda Salah. Silahkan Coba Lagi \n")
+		fmt.Println("Pin Anda Salah. Silahkan Coba Lagi ")
 		return nil
 	}
 	if outletid == employee.OutletId && pin == employee.EmployeePin {
 		if pay < *(program.MinPayment)  {
-			fmt.Println("Customer tidak mendapatkan poin \n")
+			fmt.Println("Customer tidak mendapatkan poin ")
 			return nil
 		}
 		var total = pay * *(program.ProgramPoint) / *(program.MinPayment)
@@ -91,16 +91,16 @@ func TotalChop(id int, pay int, pin string, outletid string, cardtype string) []
 	}
 
 	if outletid != program.OutletID  {
-		fmt.Println("Anda tidak memiliki akses \n")
+		fmt.Println("Anda tidak memiliki akses ")
 		return nil
 	}
 	if  pin != employee.EmployeePin {
-		fmt.Println("Pin Anda Salah. Silahkan Coba Lagi \n")
+		fmt.Println("Pin Anda Salah. Silahkan Coba Lagi ")
 		return nil
 	}
 	if outletid == employee.OutletId && pin == employee.EmployeePin {
 		if pay < *(program.MinPayment)  {
-			fmt.Println("Customer tidak mendapatkan tambahan chop \n")
+			fmt.Println("Customer tidak mendapatkan tambahan chop ")
 			return nil
 		}
 
