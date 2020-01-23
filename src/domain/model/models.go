@@ -203,7 +203,7 @@ type MerchantStatus struct {
 }
 
 type Employee struct {
-	Id            string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id            string        `gorm:"PRIMARY_KEY;NOT_NULL"; json:"id"`
 	Created       time.Time  `json:"created"`
 	CreatedBy     string     `json:"created_by"`
 	Modified      time.Time  `json:"modified"`
@@ -215,7 +215,9 @@ type Employee struct {
 	EmployeeName  string     `json:"employee_name"`
 	EmployeeEmail string     `json:"employee_email"`
 	EmployeePin   string     `json:"employee_pin"`
+	EmployeeRole  string     `json:"employee_role"`
 	OutletId      string     `json:"outlet_id"`
+	OutletName    string     `json:"outlet_name"`
 }
 
 type TotalPoint struct {

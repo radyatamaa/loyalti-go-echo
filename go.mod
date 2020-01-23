@@ -18,6 +18,7 @@ require (
 	github.com/pkg/errors v0.8.0
 	github.com/rs/cors v1.7.0
 	github.com/sirupsen/logrus v1.2.0
+	github.com/stretchr/testify v1.4.0
 	github.com/valyala/fasttemplate v1.1.0 // indirect
 	golang.org/x/crypto v0.0.0-20191122220453-ac88ee75c92c // indirect
 	golang.org/x/net v0.0.0-20190522155817-f3200d17e092

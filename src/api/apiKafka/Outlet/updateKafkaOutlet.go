@@ -1,4 +1,4 @@
-package Merchant
+package Outlet
 
 import (
 	"encoding/json"
@@ -8,27 +8,26 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"log"
-	"net/http"
 )
 
-func PublishCreateMerchant(c echo.Context) error {
+func PublishUpdateOutlet(c echo.Context) error {
 	//var data model.Merchant
-	data := new(model.Merchant)
+	data := new(model.Outlet)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)
-	//err := c.Bind(data)
+	//err := c.Bind(data)WWW
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println(data)
 
-	if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {
-		return c.String(http.StatusBadRequest, "Nama dan Email kosong")
-	} else if len(data.MerchantEmail) == 0 {
-		return c.String(http.StatusBadRequest, "Email tidak boleh kosong")
-	} else if len(data.MerchantName) == 0 {
-		return c.String(http.StatusBadRequest, "Name tidak boleh kosong")
-	}
+	//if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {
+	//	return c.String(http.StatusBadRequest, "Nama dan Email kosong")
+	//} else if len(data.MerchantEmail) == 0 {
+	//	return c.String(http.StatusBadRequest, "Email tidak boleh kosong")
+	//} else if len(data.MerchantName) == 0 {
+	//	return c.String(http.StatusBadRequest, "Name tidak boleh kosong")
+	//}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
@@ -46,7 +45,7 @@ func PublishCreateMerchant(c echo.Context) error {
 		}
 	}()
 
-	var newTopic = "create-merchant-topic"
+	var newTopic = "update-outlet-topic"
 
 	message, _ := json.Marshal(data)
 	//message := `{
@@ -65,3 +64,4 @@ func PublishCreateMerchant(c echo.Context) error {
 	fmt.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", newTopic, partition, offset)
 	return nil
 }
+

@@ -46,11 +46,11 @@ func main() {
 		}
 	}()
 
-	var newTopic = "update-merchant-topic"
+	var newTopic = "update-transaction-topic"
 
 	message := `{
-		"merchant_name":"aa",
-		"merchant_email":"contact@jco.com"
+		"outlet_id":"2",
+		"total_transaction":7000
 	}`
 
 	//message := `{

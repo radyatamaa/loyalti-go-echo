@@ -2,25 +2,43 @@ package repository
 
 import (
 	"github.com/biezhi/gorm-paginator/pagination"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	//"net/http"
 )
 
-type Merchant_interface interface {
+type Merchant struct {
+	IGorm
+}
+
+type IGorm interface {
+	Create(value interface{}) *gorm.DB
+}
+
+func (m Merchant) CreateMerchant2(merchant *model.Merchant) string {
+	//database := m.ConnectionDB2()
+	//database.SqlDB.Create(&merchant)
+	//db := database.ConnectionDB()
+	merchantObj := *merchant
+	//db.Create(&merchantObj)
+	//m.IGorm.Create(&merchantObj)
+	return merchantObj.MerchantEmail
 }
 
 func CreateMerchant(merchant *model.Merchant) string {
-	db := database.ConnectionDB()
+	db := database.Connection{}
+	database := db.ConnectionDB2()
+	//db := database.ConnectionDB()
 	merchantObj := *merchant
-	db.Create(&merchantObj)
+	//db.Create(&merchantObj)
+	database.Create(&merchant)
 	return merchantObj.MerchantEmail
 }
 
 func UpdateMerchant(merchant *model.Merchant) string {
 	db := database.ConnectionDB()
 	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update(&merchant)
-
 	return merchant.MerchantEmail
 }
 

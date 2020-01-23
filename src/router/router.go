@@ -3,7 +3,13 @@ package router
 import (
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Employee"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Merchant"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Outlet"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Program"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/SpecialProgram"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/TransactionMerchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/middlewares"
 	"net/http"
@@ -32,7 +38,41 @@ func New() *echo.Echo {
 	api.JwtGroup(jwtGroup)
 
 	e.GET("/ping", Ping)
-	e.POST("/merchant", Merchant.PublishMerchant)
+
+	//Kafka Merchant
+	e.POST("/create-merchant", Merchant.PublishCreateMerchant)
+	e.POST("/update-merchant", Merchant.PublishUpdateMerchant)
+	e.POST("/delete-merchant", Merchant.PublishDeleteMerchant)
+
+	//Kafka Card
+	e.POST("/create-card", Card.PublishCreateCard)
+	e.POST("/update-card", Card.PublishUpdateCard)
+	e.POST("/delete-card", Card.PublishDeleteCard)
+
+	//Kafka Employee
+	e.POST("/create-employee", Employee.PublishCreateEmployee)
+	e.POST("/update-employee", Employee.PublishUpdateEmployee)
+	e.POST("/delete-employee", Employee.PublishDeleteEmployee)
+
+	//Kafka Outlet
+	e.POST("/create-outlet", Outlet.PublishCreateOutlet)
+	e.POST("update-outlet", Outlet.PublishUpdateOutlet)
+	e.POST("/delete-outlet", Outlet.PublishDeleteOutlet)
+
+	//Kafka Program
+	e.POST("/create-program", Program.PublishCreateProgram)
+	e.POST("/update-program ", Program.PublishUpdateProgram)
+	e.POST("/delete-program", Program.PublishDeleteProgram)
+
+	//Kafka Special Program
+	e.POST("/create-special", SpecialProgram.PublishCreateSpecial)
+	e.POST("/update-special", SpecialProgram.PublishUpdateSpecial)
+	e.POST("/delete-special", SpecialProgram.PublishDeleteSpecial)
+
+	//Kafka Transaction Merchant
+	e.POST("/create-transaction", TransactionMerchant.PublishCreateTransaction)
+	e.POST("/update-transaction", TransactionMerchant.PublishUpdateTransaction)
+	e.POST("/delete-transaction", TransactionMerchant.PublishDeleteTransaction)
 
 	host.StartKafka()
 	return e

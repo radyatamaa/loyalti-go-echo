@@ -478,8 +478,14 @@ var employeeType = graphql.NewObject(graphql.ObjectConfig{
 		"employee_pin": &graphql.Field{
 			Type:graphql.String,
 		},
+		"employee_role": &graphql.Field{
+			Type:graphql.String,
+		},
 		"outlet_id": &graphql.Field{
 			Type:graphql.Int,
+		},
+		"outlet_name": &graphql.Field{
+			Type:graphql.String,
 		},
 	},
 })

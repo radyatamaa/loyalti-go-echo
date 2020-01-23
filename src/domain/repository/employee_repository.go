@@ -18,7 +18,7 @@ func CreateEmployee(employee *model.Employee) string{
 
 func UpdateEmployee(employee *model.Employee) string {
 	db := database.ConnectionDB()
-	db.Model(&employee).Where("outlet_id = ?", employee.OutletId).Find(&employee).Delete(&employee)
+	db.Model(&employee).Where("employee_email = ?", employee.EmployeeEmail).Update(&employee)
 	return employee.EmployeeEmail
 }
 

@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-func PublishCreateMerchant(c echo.Context) error {
+func PublishDeleteMerchant(c echo.Context) error {
 	//var data model.Merchant
 	data := new(model.Merchant)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)
@@ -65,3 +65,4 @@ func PublishCreateMerchant(c echo.Context) error {
 	fmt.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", newTopic, partition, offset)
 	return nil
 }
+
