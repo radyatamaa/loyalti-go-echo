@@ -29,7 +29,7 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 			panic(err)
 		}
 		//fmt.Println(" Start consuming topic ", topic)
-		func(topic string, consumer sarama.PartitionConsumer) {
+		go func(topic string, consumer sarama.PartitionConsumer) {
 			for {
 				select {
 				case consumerError := <-consumer.Errors():

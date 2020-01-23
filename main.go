@@ -14,8 +14,10 @@ import (
 // 	}
 // }
 func main() {
+
 	fmt.Println("Welcome to the webserver")
 	e := router.New()
+
 	// e.Start(viper.GetString("server.address"))
 
 
