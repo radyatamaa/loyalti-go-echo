@@ -8,6 +8,7 @@ import (
 	"time"
 
 	//"github.com/radyatamaa/loyalti-go-echo/src/database"
+
 )
 
 func main() {
@@ -32,5 +33,6 @@ func main() {
 	db.Create(&employee)
 	//db.AutoMigrate(&employee)
 	}
+
 
 

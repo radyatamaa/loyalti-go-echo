@@ -301,21 +301,30 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
-	id, top := p.Args["id"].(string)
-	if ok && sip && top{
+	id, top := p.Args["id"].(int)
+	card_type, tipe := p.Args["card_type"].(string)
+	if ok && sip && top && tipe{
 		var pages *int = &page
 		var sizes *int = &size
-		var card_id *string = &id
-		outlet := repository.GetCardMerchant(pages, sizes, card_id)
+		var top *int = &id
+		var types *string =&card_type
+		outlet := repository.GetCardMerchant(pages, sizes, top, types)
+		return outlet, nil
+	} else if ok && sip && top{
+		var pages *int = &page
+		var sizes *int = &size
+		var card_id *int = &id
+		outlet := repository.GetCardMerchant(pages, sizes, card_id,nil)
+
 		fmt.Println(outlet)
 		return outlet,nil
 	} else if ok && sip{
 		var paging *int = &page
 		var sizing *int = &size
-		outlet := repository.GetCardMerchant(paging, sizing, nil)
+		outlet := repository.GetCardMerchant(paging, sizing, nil, nil)
 		return outlet,nil
 	}
-	outlet := repository.GetCardMerchant(nil,nil, nil)
+	outlet := repository.GetCardMerchant(nil,nil, nil, nil)
 	return outlet, nil
 }
 

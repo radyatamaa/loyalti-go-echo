@@ -35,17 +35,19 @@ func DeleteProgram(program *model.Program) string {
 //	return nil
 //}
 
+
 func TotalPoint(id int, pay int, pin string, outletid string, cardtype string) []model.TotalPoint {
 	db := database.ConnectionDB()
 	employee := model.Employee{}
 	totalpoint := []model.TotalPoint{}
 	program := model.Program{}
+	card := model.Card{}
 	db.Model(&program).Where("id = ?", id).Find(&program)
 	db.Model(&employee).Where("employee_pin = ?", pin).Find(&employee)
 	db.Model(&program).Where("outlet_id = ?", outletid).Find(&program)
-	db.Model(&program).Where("card = ?", cardtype).Find(&program)
+	db.Model(&card).Where("card_type = ?", cardtype).Find(&card)
 
-	if cardtype != program.Card {
+	if cardtype != card.CardType {
 		fmt.Println("Customer tidak mendapatkan point dengan kartu ini")
 		return nil
 	}
@@ -235,13 +237,18 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			&t.ProgramPoint,
 			&t.MinPayment,
 		)
+
+		//add alert
+
+
+
 		merchant := new(model.Merchant)
 
 		db.Table("merchants").
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		//t.MerchantName = merchant.MerchantName
+		t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil
