@@ -1,10 +1,18 @@
 package repository
 
 import (
+	"bytes"
+	"crypto/tls"
+	"encoding/json"
+	"fmt"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"net/http"
+	"os"
+	"time"
+
 	//"net/http"
 )
 
@@ -26,25 +34,79 @@ func (m Merchant) CreateMerchant2(merchant *model.Merchant) string {
 	return merchantObj.MerchantEmail
 }
 
-func CreateMerchant(merchant *model.Merchant) string {
-	db := database.Connection{}
-	database := db.ConnectionDB2()
-	//db := database.ConnectionDB()
-	merchantObj := *merchant
-	//db.Create(&merchantObj)
-	database.Create(&merchant)
-	return merchantObj.MerchantEmail
+func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, error) {
+	user := model.AccountMerchant{
+		Username: newmerchant.MerchantEmail,
+		Password: newmerchant.MerchantPassword,
+	}
+	data, _:= json.Marshal(user)
+	fmt.Println("Ini datanya : ",string(data))
+
+	req, err := http.NewRequest("POST", "https://11.11.5.146:9443/scim2/Users", bytes.NewReader(data))
+	fmt.Println("ini isi bytes reader : ",)
+	fmt.Println(bytes.NewReader(data))
+	//os.Exit(1)
+	req.Header.Set("Authorization", "Basic YWRtaW5AZ21haWwuY29tOmFkbWlu")
+	req.Header.Set("Content-Type","application/json")
+	if err != nil {
+		fmt.Println("Error : ", err.Error())
+		os.Exit(1)
+	}
+
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify:true},
+	}
+
+	client := &http.Client{Transport: tr}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error : ", err.Error())
+		os.Exit(1)
+	}
+	fmt.Println("ini response : ", resp)
+
+	return resp, err
 }
 
-func UpdateMerchant(merchant *model.Merchant) string {
+func CreateMerchant(newmerchant *model.NewMerchantCommand) string {
+	merchant := model.Merchant{
+		Created:               time.Now(),
+		CreatedBy:             "",
+		Modified:              time.Now(),
+		ModifiedBy:            "",
+		Active:                true,
+		IsDeleted:             false,
+		Deleted:               nil,
+		Deleted_by:            "",
+		MerchantName:          newmerchant.MerchantName,
+		MerchantEmail:         newmerchant.MerchantEmail,
+		MerchantPhoneNumber:   newmerchant.MerchantPhoneNumber,
+		MerchantProvince:      newmerchant.MerchantProvince,
+		MerchantCity:          newmerchant.MerchantCity,
+		MerchantAddress:       newmerchant.MerchantAddress,
+		MerchantPostalCode:    newmerchant.MerchantPostalCode,
+		MerchantCategoryId:    newmerchant.MerchantCategoryId,
+		MerchantWebsite:       newmerchant.MerchantWebsite,
+		MerchantMediaSocialId: newmerchant.MerchantMediaSocialId,
+		MerchantDescription:   newmerchant.MerchantDescription,
+		MerchantImageProfile:  newmerchant.MerchantImageProfile,
+		MerchantGallery:       newmerchant.MerchantGallery,
+	}
 	db := database.ConnectionDB()
-	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update(&merchant)
+	db.Create(&merchant)
 	return merchant.MerchantEmail
 }
 
-func DeleteMerchant(merchant *model.Merchant) string {
+func UpdateMerchant(newmerchant *model.NewMerchantCommand) string {
 	db := database.ConnectionDB()
-	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update("active", false)
+	db.Model(&newmerchant).Where("merchant_email = ?", newmerchant.MerchantEmail).Update(&newmerchant)
+	return newmerchant.MerchantEmail
+}
+
+func DeleteMerchant(newmerchant *model.NewMerchantCommand) string {
+	db := database.ConnectionDB()
+	db.Model(&newmerchant).Where("merchant_email = ?", newmerchant.MerchantEmail).Update("active", false)
 	return "berhasil dihapus"
 }
 

@@ -12,6 +12,37 @@ type Song struct {
 	Type     string `json:"type"`
 }
 
+type AccountMerchant struct {
+	Username string `json:"userName"`
+	Password string `json:"password"`
+}
+
+type NewMerchantCommand struct {
+	Id                    int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Created               time.Time  `json:"created"`
+	CreatedBy             string     `json:"created_by"`
+	Modified              time.Time  `json:"modified"`
+	ModifiedBy            string     `json:"modified_by"`
+	Active                bool       `json:"active"`
+	IsDeleted             bool       `json:"is_deleted"`
+	Deleted               *time.Time `json:"deleted"`
+	Deleted_by            string     `json:"deleted_by"`
+	MerchantName          string     `json:"merchant_name"`
+	MerchantEmail         string     `json:"merchant_email"`
+	MerchantPhoneNumber   string     `json:"merchant_phone_number"`
+	MerchantProvince      string     `json:"merchant_province"`
+	MerchantCity          string     `json:"merchant_city"`
+	MerchantAddress       string     `json:"merchant_address"`
+	MerchantPostalCode    string     `json:"merchant_postal_code"`
+	MerchantCategoryId    int        `json:"merchant_category_id"`
+	MerchantWebsite       string     `json:"merchant_website"`
+	MerchantMediaSocialId int        `json:"merchant_media_social_id"`
+	MerchantDescription   string     `json:"merchant_description"`
+	MerchantImageProfile  string     `json:"merchant_image_profile"`
+	MerchantGallery       string     `json:"merchant_gallery"`
+	MerchantPassword      string     `json:"merchant_password"`
+}
+
 type Merchant struct {
 	//GeneralModels
 	Id                    int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
@@ -203,7 +234,7 @@ type MerchantStatus struct {
 }
 
 type Employee struct {
-	Id            string        `gorm:"PRIMARY_KEY;NOT_NULL"; json:"id"`
+	Id            string     `gorm:"PRIMARY_KEY;NOT_NULL"; json:"id"`
 	Created       time.Time  `json:"created"`
 	CreatedBy     string     `json:"created_by"`
 	Modified      time.Time  `json:"modified"`

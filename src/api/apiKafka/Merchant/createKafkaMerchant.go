@@ -8,12 +8,11 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"log"
-	"net/http"
 )
 
 func PublishCreateMerchant(c echo.Context) error {
 	//var data model.Merchant
-	data := new(model.Merchant)
+	data := new(model.NewMerchantCommand)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)
 	//err := c.Bind(data)
 	if err != nil {
@@ -22,13 +21,19 @@ func PublishCreateMerchant(c echo.Context) error {
 
 	fmt.Println(data)
 
-	if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {
-		return c.String(http.StatusBadRequest, "Nama dan Email kosong")
-	} else if len(data.MerchantEmail) == 0 {
-		return c.String(http.StatusBadRequest, "Email tidak boleh kosong")
-	} else if len(data.MerchantName) == 0 {
-		return c.String(http.StatusBadRequest, "Name tidak boleh kosong")
-	}
+	//if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {
+	//	return c.String(http.StatusBadRequest, "Nama dan Email kosong")
+	//} else if len(data.MerchantEmail) == 0 {
+	//	return c.String(http.StatusBadRequest, "Email tidak boleh kosong")
+	//} else if len(data.MerchantName) == 0 {
+	//	return c.String(http.StatusBadRequest, "Name tidak boleh kosong")
+	//}if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {
+	//	//	return c.String(http.StatusBadRequest, "Nama dan Email kosong")
+	//	//} else if len(data.MerchantEmail) == 0 {
+	//	//	return c.String(http.StatusBadRequest, "Email tidak boleh kosong")
+	//	//} else if len(data.MerchantName) == 0 {
+	//	//	return c.String(http.StatusBadRequest, "Name tidak boleh kosong")
+	//	//}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 

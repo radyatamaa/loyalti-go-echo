@@ -22,6 +22,18 @@ var songType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var accountType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Account",
+	Fields: graphql.Fields{
+		"merchant_email": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"merchant_password": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+	},
+})
+
 var merchantType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Merchant",
 	Fields: graphql.Fields{
@@ -89,6 +101,81 @@ var merchantType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"merchant_gallery": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var merchantCommandType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "MerchantCommand",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"active" : &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"is_deleted" : &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_phone_number": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_email": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_postal_code": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_address": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_city": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_province": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_website": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_category_id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_media_social_id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_description": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_image_profile": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_gallery": &graphql.Field{
+			Type: graphql.String,
+		},
+		"merchant_password": &graphql.Field{
 			Type: graphql.String,
 		},
 	},
