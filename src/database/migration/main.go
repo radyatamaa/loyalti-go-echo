@@ -13,22 +13,30 @@ import (
 
 func main() {
 	db := database.ConnectionDB()
-	employee := model.Employee{
-		Id:            guid.NewString(),
-		Created:       time.Now(),
-		CreatedBy:     "",
-		Modified:      time.Now(),
-		ModifiedBy:    "",
-		Active:        true,
-		IsDeleted:     false,
-		Deleted:       nil,
-		Deleted_by:    "",
-		EmployeeName:  "Patro Cashback",
-		EmployeeEmail: "PatroCashback@gmail.com",
-		EmployeePin:   "123123",
-		EmployeeRole:  "Manager",
-		OutletId:      "2",
-		OutletName:    "Chatime fx",
+	employee := model.Card{
+		Id:                guid.NewString(),
+		Created:           time.Now(),
+		CreatedBy:         "Admin",
+		Modified:          time.Now(),
+		ModifiedBy:        "Admin",
+		Active:            true,
+		IsDeleted:         false,
+		Deleted:           nil,
+		DeletedBy:         "",
+		Title:             "February Blast",
+		Description:       "Redeem you point to get FREE Lipstick & Mascara",
+		FontColor:         "Black",
+		TemplateColor:     "https://loyalti-storage.s3-ap-southeast-1.amazonaws.com/card/pointcard.png",
+		IconImage:         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTroxoLpVqjJbxzunhPdgB0l4geUC0f_TvDGRRFz_x4gR1vST5Y",
+		TermsAndCondition: "TERM AND CONDITION",
+		Benefit:           "FREE Lipstick & Mascara",
+		ValidUntil:        time.Time{},
+		CurrentPoint:      100,
+		IsValid:           true,
+		ProgramId:         5,
+		CardType:          "Voucher",
+		IconImageStamp:    "Stamp",
+		MerchantId:        5,
 	}
 	db.Create(&employee)
 	//db.AutoMigrate(&employee)
