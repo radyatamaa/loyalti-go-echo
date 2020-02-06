@@ -149,6 +149,9 @@ func NewRoot() *Root {
 							"id": &graphql.ArgumentConfig{
 								Type: graphql.Int,
 							},
+							"email": &graphql.ArgumentConfig{
+									Type: graphql.String,
+							},
 						},
 						Resolve: OutletResolver,
 					},

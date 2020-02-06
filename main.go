@@ -24,7 +24,7 @@ func main() {
 	// e.Start(viper.GetString("server.address"))
 
 	//host.StartKafka()
-	e.Start(":2525")
+	e.Start(":5353")
 	//host.StartKafka()
 	fmt.Println("Kafka start at port 2525")
 }

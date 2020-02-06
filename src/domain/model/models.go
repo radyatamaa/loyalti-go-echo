@@ -153,7 +153,6 @@ type Outlet struct {
 	OutletDay        time.Time  `json:"outlet_day"`
 	OutletHour       time.Time  `json:"outlet_hour"`
 	MerchantId       int        `json:"merchant_id"`
-	MerchantName     string     `json:"merchant_name"`
 }
 
 type Program struct {
