@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
@@ -30,7 +29,7 @@ func DeleteOutlet(outlet *model.Outlet) string {
 	return "berhasil dihapus"
 }
 
-func GetOutlet(page *int, size *int, id *int) []model.Outlet {
+func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
@@ -38,11 +37,29 @@ func GetOutlet(page *int, size *int, id *int) []model.Outlet {
 	var rows *sql.Rows
 	var err error
 	var total int
+	var merchantID int
+	merchant_email := model.Merchant{}
+	db.Model(&merchant_email).Where("merchant_email = ?", email).Find(&merchant_email)
+	if email != nil {
+
+		merchantID = merchant_email.Id
+	}
+	fmt.Println("email", email)
 
 	if id != nil {
+
 		if page != nil && size != nil {
-			fmt.Println("2")
+			//fmt.Println("2")
 			rows, err = db.Where("merchant_id = ?", id).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
+			if err != nil {
+				panic(err)
+			}
+		}
+	} else if  merchantID != 0 {
+
+		if page != nil && size != nil {
+			//fmt.Println("2")
+			rows, err = db.Where("merchant_id = ?", merchantID).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
 				panic(err)
 			}
@@ -87,6 +104,17 @@ func GetOutlet(page *int, size *int, id *int) []model.Outlet {
 			&o.OutletHour,
 			&o.MerchantId,
 		)
+
+		//merchantEmail := new(model.Merchant)
+		//db.Table("merchants").
+		//	Select("merchants.merchant_email").
+		//	Where("id = ?", o.MerchantId).
+		//	First(&merchantEmail)
+		//o.MerchantEmail = merchantEmail.MerchantEmail
+		//if err != nil {
+		//	logrus.Error(err)
+		//	return nil
+		//}
 
 		result = append(result, *o)
 	}

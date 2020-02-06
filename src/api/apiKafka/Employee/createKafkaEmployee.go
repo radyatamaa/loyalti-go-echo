@@ -45,7 +45,7 @@ func PublishCreateEmployee(c echo.Context) error {
 		}
 	}()
 
-	var newTopic = "create-emmployee-topic"
+	var newTopic = "create-employee-topic"
 
 	message, _ := json.Marshal(data)
 	//message := `{

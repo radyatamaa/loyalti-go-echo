@@ -185,23 +185,37 @@ func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 }
 
 func OutletResolver(p graphql.ResolveParams) (interface{}, error) {
-	page,ok := p.Args["page"].(int)
-	size,sip := p.Args["size"].(int)
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
 	id, top := p.Args["id"].(int)
-	if ok && sip && top{
+	email, mail := p.Args["email"].(string)
+	if ok && sip && top && mail{
 		var pages *int = &page
 		var sizes *int = &size
 		var merchant_id *int = &id
-		outlet := repository.GetOutlet(pages, sizes, merchant_id)
+		var emails *string = &email
+		outlet := repository.GetOutlet(pages, sizes, merchant_id, emails)
 		fmt.Println(outlet)
+		return outlet,nil
+	} else if ok && sip && mail {
+		var paging *int = &page
+		var sizing *int = &size
+		var emails *string = &email
+		outlet := repository.GetOutlet(paging, sizing, nil, emails)
+		return outlet, nil
+	} else if ok && sip && top{
+		var paging *int = &page
+		var sizing *int = &size
+		var merchant *int = &id
+		outlet := repository.GetOutlet(paging, sizing, merchant, nil)
 		return outlet,nil
 	} else if ok && sip{
 		var paging *int = &page
 		var sizing *int = &size
-		outlet := repository.GetOutlet(paging, sizing, nil)
+		outlet := repository.GetOutlet(paging, sizing, nil, nil)
 		return outlet,nil
 	}
-	outlet := repository.GetOutlet(nil,nil, nil)
+	outlet := repository.GetOutlet(nil,nil, nil, nil)
 	return outlet, nil
 }
 
