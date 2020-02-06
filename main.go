@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/radyatamaa/loyalti-go-echo/src/router"
 	//"github.com/spf13/viper"
 )
@@ -17,9 +18,10 @@ func main() {
 
 	fmt.Println("Welcome to the webserver")
 	e := router.New()
+	//c := echo.New()
+	//middlewares.SetCorsMiddlewares(c)
 
 	// e.Start(viper.GetString("server.address"))
-
 
 	//host.StartKafka()
 	e.Start(":5353")

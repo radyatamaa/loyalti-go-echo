@@ -7,16 +7,16 @@ import (
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/Config"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
-	"log"
 )
 
 func PublishCreateEmployee(c echo.Context) error {
 	//var data model.Merchant
+	fmt.Println("masuk ke publisher")
 	data := new(model.Employee)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)
 	//err := c.Bind(data)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error Publisher : ", err.Error())
 	}
 
 	fmt.Println(data)
@@ -47,7 +47,10 @@ func PublishCreateEmployee(c echo.Context) error {
 
 	var newTopic = "create-employee-topic"
 
-	message, _ := json.Marshal(data)
+	message, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println("error marshal : ", err.Error())
+	}
 	//message := `{
 	//	"merchant_name":`+data.MerchantName+`,
 	//	"merchant_email":"contact@jco.com"
@@ -59,7 +62,7 @@ func PublishCreateEmployee(c echo.Context) error {
 
 	partition, offset, err := producer.SendMessage(msg)
 	if err != nil {
-		log.Println(err)
+		fmt.Println("Error bawah publisher : ", err.Error())
 	}
 	fmt.Printf("Message is stored in topic(%s)/partition(%d)/offset(%d)\n", newTopic, partition, offset)
 	return nil

@@ -10,9 +10,8 @@ import (
 func CreateEmployee(employee *model.Employee) string{
 	db := database.ConnectionDB()
 	employee.Id = guid.NewString()
-	employeeObj := *employee
-	db.Create(&employeeObj)
-	return employeeObj.EmployeeEmail
+	db.Create(&employee)
+	return employee.EmployeeEmail
 }
 
 
@@ -35,6 +34,8 @@ func GetEmployee(page *int, size *int, sort *int) []model.Employee {
 	//db := database.ConnectPostgre()
 	var employee []model.Employee
 	db.Find(&employee)
+
+
 
 	if sort != nil {
 		switch *sort {

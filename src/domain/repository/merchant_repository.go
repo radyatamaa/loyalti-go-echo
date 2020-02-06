@@ -100,13 +100,59 @@ func CreateMerchant(newmerchant *model.NewMerchantCommand) string {
 
 func UpdateMerchant(newmerchant *model.NewMerchantCommand) string {
 	db := database.ConnectionDB()
-	db.Model(&newmerchant).Where("merchant_email = ?", newmerchant.MerchantEmail).Update(&newmerchant)
-	return newmerchant.MerchantEmail
+	merchant := model.Merchant{
+		Created:               time.Time{},
+		CreatedBy:             "",
+		Modified:              time.Now(),
+		ModifiedBy:            "",
+		Active:                true,
+		IsDeleted:             false,
+		Deleted:               nil,
+		Deleted_by:            "",
+		MerchantName:          newmerchant.MerchantName,
+		MerchantEmail:         newmerchant.MerchantEmail,
+		MerchantPhoneNumber:   newmerchant.MerchantPhoneNumber,
+		MerchantProvince:      newmerchant.MerchantProvince,
+		MerchantCity:          newmerchant.MerchantCity,
+		MerchantAddress:       newmerchant.MerchantAddress,
+		MerchantPostalCode:    newmerchant.MerchantPostalCode,
+		MerchantCategoryId:    newmerchant.MerchantCategoryId,
+		MerchantWebsite:       newmerchant.MerchantWebsite,
+		MerchantMediaSocialId: newmerchant.MerchantMediaSocialId,
+		MerchantDescription:   newmerchant.MerchantDescription,
+		MerchantImageProfile:  newmerchant.MerchantImageProfile,
+		MerchantGallery:       newmerchant.MerchantGallery,
+	}
+	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update(&merchant)
+	return merchant.MerchantEmail
 }
 
 func DeleteMerchant(newmerchant *model.NewMerchantCommand) string {
 	db := database.ConnectionDB()
-	db.Model(&newmerchant).Where("merchant_email = ?", newmerchant.MerchantEmail).Update("active", false)
+	merchant := model.Merchant{
+		Created:               time.Time{},
+		CreatedBy:             "",
+		Modified:              time.Now(),
+		ModifiedBy:            "",
+		Active:                true,
+		IsDeleted:             false,
+		Deleted:               nil,
+		Deleted_by:            "",
+		MerchantName:          newmerchant.MerchantName,
+		MerchantEmail:         newmerchant.MerchantEmail,
+		MerchantPhoneNumber:   newmerchant.MerchantPhoneNumber,
+		MerchantProvince:      newmerchant.MerchantProvince,
+		MerchantCity:          newmerchant.MerchantCity,
+		MerchantAddress:       newmerchant.MerchantAddress,
+		MerchantPostalCode:    newmerchant.MerchantPostalCode,
+		MerchantCategoryId:    newmerchant.MerchantCategoryId,
+		MerchantWebsite:       newmerchant.MerchantWebsite,
+		MerchantMediaSocialId: newmerchant.MerchantMediaSocialId,
+		MerchantDescription:   newmerchant.MerchantDescription,
+		MerchantImageProfile:  newmerchant.MerchantImageProfile,
+		MerchantGallery:       newmerchant.MerchantGallery,
+	}
+	db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update("active", false)
 	return "berhasil dihapus"
 }
 
