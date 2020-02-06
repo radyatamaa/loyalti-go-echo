@@ -1,4 +1,4 @@
-package processToken
+package getToken
 
 import (
 	"fmt"
@@ -8,8 +8,9 @@ import (
 
 func RouterProcessToken (c echo.Context) error{
 	fmt.Println("masuk ke router proces Token")
-	resp := ProcessToken()
-	fmt.Println("Respon", resp)
+	token := c.Request().Header.Get("Authorization")
+	response := ProcessToken(token)
+	fmt.Println("response : ", response)
 
-	return c.JSON(http.StatusOK, resp)
+	return c.JSON(http.StatusOK, response)
 }

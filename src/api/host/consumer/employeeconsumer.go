@@ -42,13 +42,15 @@ func consumeEmployee(topics []string, master sarama.Consumer) (chan *sarama.Cons
 					employee := model.Employee{}
 					switch msg.Topic {
 					case "create-employee-topic":
+						fmt.Println("masuk ke consumer")
 						err := json.Unmarshal([]byte(msg.Value), &employee)
 						if err != nil {
-							fmt.Println(err.Error())
+							fmt.Println("ini error: ",err.Error())
 							os.Exit(1)
 						}
+						fmt.Println("masuk ke employee")
 						repository.CreateEmployee(&employee)
-						fmt.Println(string(msg.Value))
+						fmt.Println("ini hasil : ",string(msg.Value))
 						fmt.Println("employee berhasil dibuat")
 						break
 
