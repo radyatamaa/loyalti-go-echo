@@ -217,6 +217,9 @@ var socialmediaType = graphql.NewObject(graphql.ObjectConfig{
 		"image_url": &graphql.Field{
 			Type: graphql.String,
 		},
+		"tier": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
 

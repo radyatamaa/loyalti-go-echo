@@ -322,5 +322,12 @@ type Card struct {
 	CardType          string     `json:"card_type"`
 	IconImageStamp    string     `json:"icon_image_stamp"`
 	MerchantId        int        `json:"merchant_id"`
-	Tier              string     `gorm:"-";json:"tier, omitempty"`
+	//Tier              string     `gorm:"-";json:", tieromitempty"`
+	Tier string `json:"tier"`
+}
+
+type Member struct {
+	Silver   string
+	Gold     string
+	Platinum string
 }
