@@ -52,7 +52,7 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 			fmt.Println("2")
 			rows, err = db.Where("merchant_id = ?", id).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
-				panic(err)
+			fmt.Println("Error : ", err.Error())
       }
 		}
 	} else if  merchantID != 0 {
@@ -61,7 +61,7 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 			//fmt.Println("2")
 			rows, err = db.Where("merchant_id = ?", merchantID).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
-				panic(err)
+				fmt.Println("Error : ", err.Error())
 			}
 		}
 	} else {
@@ -109,7 +109,6 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 			&o.OutletDay,
 			&o.OutletHour,
 			&o.MerchantId,
-			&o.MerchantName,
 		)
 
 		//merchantEmail := new(model.Merchant)

@@ -239,7 +239,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 		)
 
 		//add alert
-		merchant := new(model.Merchant)
+		merchant := new  (model.Merchant)
 
 		db.Table("merchants").
 			Select("merchants.merchant_name").
