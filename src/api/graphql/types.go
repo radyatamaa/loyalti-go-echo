@@ -604,6 +604,15 @@ var totalchopType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var cardtier = graphql.NewObject(graphql.ObjectConfig{
+	Name: "CardTier",
+	Fields: graphql.Fields{
+		"cardtier": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})
+
 var transactionType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "TotalPoint",
 	Fields: graphql.Fields{

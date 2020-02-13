@@ -78,8 +78,17 @@ func NewRoot() *Root {
 								Type: graphql.Int,
 							},
 						},
-						Resolve: MerchantCardResolver,
+						Resolve: MerchantCardTypeResolver,
 					},
+					//"cardtier": &graphql.Field{
+					//	Type: graphql.NewList(card),
+					//	Args: graphql.FieldConfigArgument{
+					//		"program_id": &graphql.ArgumentConfig{
+					//			Type: graphql.Int,
+					//		},
+					//	},
+					//	Resolve: MerchantCardMemberResolver,
+					//},
 					"socialmedia": &graphql.Field{
 						Type: graphql.NewList(socialmediaType),
 						Args: graphql.FieldConfigArgument{

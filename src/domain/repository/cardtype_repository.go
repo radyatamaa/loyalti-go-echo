@@ -25,7 +25,7 @@ func DeleteCard(card *model.CardType) string {
 	return "berhasil dihapus"
 }
 
-func GetCard(page *int, size *int, sort *int) []model.CardType {
+func GetCardType(page *int, size *int, sort *int) []model.CardType {
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var card []model.CardType

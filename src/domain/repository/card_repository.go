@@ -165,3 +165,17 @@ func GetCardMerchant(page *int, size *int, id *int, card_type *string) []model.C
 	db.Close()
 	return result
 }
+
+
+func GetCardMember(program_id int )[]model.Card{
+	db := database.ConnectionDB()
+	card := &model.Card{}
+	db.Model("card").Where("program_id = ?", program_id).Order("tier asc").First(&card)
+
+	tier := make([]model.Card, 0)
+	tier = append(tier, *card)
+
+	fmt.Println("tier : ", tier)
+
+	return tier
+}
