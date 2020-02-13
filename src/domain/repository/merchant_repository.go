@@ -105,7 +105,7 @@ func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, 
 	return resp, err
 }
 
-func  CreateMerchant (newmerchant *model.NewMerchantCommand) string {
+func  CreateMerchant2 (newmerchant *model.NewMerchantCommand) string {
 	merchant := model.Merchant{
 		Created:               time.Now(),
 		CreatedBy:             "",
