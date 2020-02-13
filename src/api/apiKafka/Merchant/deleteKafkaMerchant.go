@@ -46,7 +46,7 @@ func PublishDeleteMerchant(c echo.Context) error {
 		}
 	}()
 
-	var newTopic = "create-merchant-topic"
+	var newTopic = "delete-merchant-topic"
 
 	message, _ := json.Marshal(data)
 	//message := `{

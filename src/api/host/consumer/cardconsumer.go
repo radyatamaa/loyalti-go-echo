@@ -39,33 +39,33 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 				case msg := <-consumer.Messages():
 					//*messageCountStart++
 					//Deserialize
-					card := model.CardType{}
+					card := model.Card{}
 					switch msg.Topic {
 					case "create-card-topic":
 						err := json.Unmarshal([]byte(msg.Value), &card)
 						if err != nil {
-							fmt.Println(err.Error())
+							fmt.Println("Error : ",err.Error())
 							os.Exit(1)
 						}
-						repository.CreateCard(&card)
+						repository.CreateCardMerchant(&card)
 						fmt.Println(string(msg.Value))
 						fmt.Println("Card berhasil dibuat")
-					case "update-card-topic":
-						err := json.Unmarshal([]byte(msg.Value), &card)
-						if err != nil {
-							fmt.Println(err.Error())
-							os.Exit(1)
-						}
-						repository.UpdateCard(&card)
-						fmt.Println("card berhasil diupdate")
-					case "delete-card-topic":
-						err := json.Unmarshal([]byte(msg.Value), &card)
-						if err != nil {
-							fmt.Println(err.Error())
-							os.Exit(1)
-						}
-						repository.DeleteCard(&card)
-						fmt.Println("card berhasil dihapus")
+					//case "update-card-topic":
+					//	err := json.Unmarshal([]byte(msg.Value), &card)
+					//	if err != nil {
+					//		fmt.Println(err.Error())
+					//		os.Exit(1)
+					//	}
+					//	repository.UpdateCard(&card)
+					//	fmt.Println("card berhasil diupdate")
+					//case "delete-card-topic":
+					//	err := json.Unmarshal([]byte(msg.Value), &card)
+					//	if err != nil {
+					//		fmt.Println(err.Error())
+					//		os.Exit(1)
+					//	}
+					//	repository.DeleteCard(&card)
+					//	fmt.Println("card berhasil dihapus")
 					}
 				}
 			}

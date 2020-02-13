@@ -15,3 +15,15 @@ var Enum = &List{
 	OrderByLocation:  3,
 	Program_name: 4,
 }
+
+type Member struct {
+	Silver string
+	Gold string
+	Platinum string
+}
+
+var EnumMember = &Member{
+	Silver:   "1",
+	Gold:     "2",
+	Platinum: "3",
+}
