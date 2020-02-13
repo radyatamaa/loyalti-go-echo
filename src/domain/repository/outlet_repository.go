@@ -43,19 +43,18 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 	merchant_email := model.Merchant{}
 	db.Model(&merchant_email).Where("merchant_email = ?", email).Find(&merchant_email)
 	if email != nil {
-
 		merchantID = merchant_email.Id
 	}
 	fmt.Println("email", email)
 
 	if id != nil {
 
-		if page != nil && size != nil {
-			//fmt.Println("2")
+		if page != nil && size != nil  {
+			fmt.Println("2")
 			rows, err = db.Where("merchant_id = ?", id).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
-				panic(err)
-			}
+			fmt.Println("Error : ", err.Error())
+      }
 		}
 	} else if  merchantID != 0 {
 
@@ -63,7 +62,7 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 			//fmt.Println("2")
 			rows, err = db.Where("merchant_id = ?", merchantID).Find(&outlet).Order("outlet_name").Count(total).Limit(*size).Offset(*page).Rows()
 			if err != nil {
-				panic(err)
+				fmt.Println("Error : ", err.Error())
 			}
 		}
 	} else {
@@ -79,6 +78,12 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 			}
 		}
 	}
+	if id != nil {
+		if page == nil && size == nil {
+			db.Model(&outlet).Where("merchant_id = ? ", id).Find(&outlet)
+		}
+	}
+
 
 	result := make([]model.Outlet, 0)
 

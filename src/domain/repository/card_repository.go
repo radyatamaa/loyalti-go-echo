@@ -3,9 +3,11 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-
+	"github.com/beevik/guid"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
+	"github.com/radyatamaa/loyalti-go-echo/src/domain"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"time"
 )
 
 const (
@@ -14,6 +16,70 @@ const (
 	SilverTier 		= "Silver"
 	PlatinumTier 	= "Platinum"
 )
+
+type MemberTier string
+
+const (
+	Silver MemberTier = "1"
+	Gold MemberTier = "2"
+	Platinum MemberTier = "3"
+)
+
+//func getValues() string {
+//	var mt MemberTier
+//	res := ""
+//
+//}
+
+
+func CreateCardMerchant(card *model.Card) string {
+	db := database.ConnectionDB()
+
+	for i := 0; i <= 2; i++ {
+		cards := model.Card{
+			Id:                guid.NewString(),
+			Created:           time.Now(),
+			CreatedBy:         "",
+			Modified:          time.Now(),
+			ModifiedBy:        "",
+			Active:            true,
+			IsDeleted:         false,
+			Deleted:           nil,
+			DeletedBy:         "",
+			Title:             card.Title,
+			Description:       card.Description,
+			FontColor:         card.FontColor,
+			TemplateColor:     card.TemplateColor,
+			IconImage:         card.IconImage,
+			TermsAndCondition: card.TermsAndCondition,
+			Benefit:           card.Benefit,
+			ValidUntil:        time.Now(),
+			CurrentPoint:      card.CurrentPoint,
+			IsValid:           card.IsValid,
+			ProgramId:         card.ProgramId,
+			CardType:          card.CardType,
+			IconImageStamp:    card.IconImageStamp,
+			MerchantId:        card.MerchantId,
+		}
+		if(i == 0){
+			fmt.Println("masuk ke if == 0")
+			fmt.Println("isi enum silver", domain.EnumMember.Silver)
+			cards.Tier = domain.EnumMember.Silver
+			db.Create(&cards)
+		}else if(i == 1){
+			fmt.Println("masuk ke if == 1")
+			fmt.Println("isi enum silver", domain.EnumMember.Gold)
+			cards.Tier = domain.EnumMember.Gold
+			db.Create(&cards)
+		}else {
+			fmt.Println("masuk ke if == 2")
+			fmt.Println("isi enum silver", domain.EnumMember.Platinum)
+			cards.Tier = domain.EnumMember.Platinum
+			db.Create(&cards)
+		}
+	}
+	return card.Description
+}
 
 func GetCardMerchant(page *int, size *int, id *int, card_type *string) []model.Card {
 
@@ -98,4 +164,18 @@ func GetCardMerchant(page *int, size *int, id *int, card_type *string) []model.C
 
 	db.Close()
 	return result
+}
+
+
+func GetCardMember(program_id int )[]model.Card{
+	db := database.ConnectionDB()
+	card := &model.Card{}
+	db.Model("card").Where("program_id = ?", program_id).Order("tier asc").First(&card)
+
+	tier := make([]model.Card, 0)
+	tier = append(tier, *card)
+
+	fmt.Println("tier : ", tier)
+
+	return tier
 }

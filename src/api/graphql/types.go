@@ -217,6 +217,9 @@ var socialmediaType = graphql.NewObject(graphql.ObjectConfig{
 		"image_url": &graphql.Field{
 			Type: graphql.String,
 		},
+		"tier": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 })
 
@@ -596,6 +599,15 @@ var totalchopType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "TotalChop",
 	Fields: graphql.Fields{
 		"total_chop": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})
+
+var cardtier = graphql.NewObject(graphql.ObjectConfig{
+	Name: "CardTier",
+	Fields: graphql.Fields{
+		"cardtier": &graphql.Field{
 			Type: graphql.Int,
 		},
 	},
