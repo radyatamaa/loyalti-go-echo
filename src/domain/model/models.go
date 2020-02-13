@@ -39,6 +39,11 @@ type User struct {
 	Password string
 }
 
+type NewMerchantTest struct {
+	Id int `json:"id"`
+	MerchantEmail string `json:"merchant_email"`
+}
+
 type NewMerchantCommand struct {
 	Id                    int        `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
 	Created               time.Time  `json:"created"`
