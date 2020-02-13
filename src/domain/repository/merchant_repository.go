@@ -3,35 +3,71 @@ package repository
 import (
 	"bytes"
 	"crypto/tls"
+	"github.com/jinzhu/gorm"
+
 	"encoding/json"
 	"fmt"
+
 	"github.com/biezhi/gorm-paginator/pagination"
-	"github.com/jinzhu/gorm"
+	_ "github.com/go-sql-driver/mysql"
+
+	_ "github.com/jinzhu/gorm/dialects/mssql"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	//"github.com/stretchr/testify/require"
+
 	"net/http"
 	"os"
 	"time"
-
-	//"net/http"
 )
 
-type Merchant struct {
-	IGorm
+type Repository interface {
+	CreateMerchant (newmerchant *model.NewMerchantCommand) error
 }
 
-type IGorm interface {
-	Create(value interface{}) *gorm.DB
+type repo struct {
+	DB *gorm.DB
 }
 
-func (m Merchant) CreateMerchant2(merchant *model.Merchant) string {
-	//database := m.ConnectionDB2()
-	//database.SqlDB.Create(&merchant)
-	//db := database.ConnectionDB()
-	merchantObj := *merchant
-	//db.Create(&merchantObj)
-	//m.IGorm.Create(&merchantObj)
-	return merchantObj.MerchantEmail
+func (p *repo) CreateMerchant (newmerchant *model.NewMerchantCommand) error {
+	fmt.Println("masuk ke fungsi ")
+	merchant := model.Merchant{
+		Created:               time.Now(),
+		CreatedBy:             "",
+		Modified:              time.Now(),
+		ModifiedBy:            "",
+		Active:                true,
+		IsDeleted:             false,
+		Deleted:               nil,
+		Deleted_by:            "",
+		MerchantName:          newmerchant.MerchantName,
+		MerchantEmail:         newmerchant.MerchantEmail,
+		MerchantPhoneNumber:   newmerchant.MerchantPhoneNumber,
+		MerchantProvince:      newmerchant.MerchantProvince,
+		MerchantCity:          newmerchant.MerchantCity,
+		MerchantAddress:       newmerchant.MerchantAddress,
+		MerchantPostalCode:    newmerchant.MerchantPostalCode,
+		MerchantCategoryId:    newmerchant.MerchantCategoryId,
+		MerchantWebsite:       newmerchant.MerchantWebsite,
+		MerchantMediaSocialId: newmerchant.MerchantMediaSocialId,
+		MerchantDescription:   newmerchant.MerchantDescription,
+		MerchantImageProfile:  newmerchant.MerchantImageProfile,
+		MerchantGallery:       newmerchant.MerchantGallery,
+	}
+	fmt.Println("error nil ini ")
+	err := database.ConnectionDB().Create(&merchant).Error
+	if err != nil{
+		fmt.Println("Error : ", err.Error())
+	}
+	fmt.Println("sukses")
+	//_, err := p.DB.Query("INSERT INTO merchants VALUES ($1)", merchant.MerchantEmail)
+	return err
+}
+
+func CreateRepository(db *gorm.DB) Repository {
+	return &repo{
+		DB:db,
+	}
 }
 
 func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, error) {
@@ -69,7 +105,7 @@ func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, 
 	return resp, err
 }
 
-func CreateMerchant(newmerchant *model.NewMerchantCommand) string {
+func  CreateMerchant (newmerchant *model.NewMerchantCommand) string {
 	merchant := model.Merchant{
 		Created:               time.Now(),
 		CreatedBy:             "",
