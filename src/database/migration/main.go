@@ -11,7 +11,8 @@ import (
 
 func main() {
 	db := database.ConnectionDB()
-	db.AutoMigrate(&model.Card{})
+
+
 	}
 
 
