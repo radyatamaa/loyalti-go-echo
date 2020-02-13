@@ -43,7 +43,6 @@ func GetOutlet(page *int, size *int, id *int, email *string) []model.Outlet {
 	merchant_email := model.Merchant{}
 	db.Model(&merchant_email).Where("merchant_email = ?", email).Find(&merchant_email)
 	if email != nil {
-
 		merchantID = merchant_email.Id
 	}
 	fmt.Println("email", email)

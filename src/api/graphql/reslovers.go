@@ -69,7 +69,7 @@ func MerchantCategoryResolver(p graphql.ResolveParams) (interface{}, error) {
 	return category, nil
 }
 
-func MerchantCardResolver(p graphql.ResolveParams) (interface{}, error) {
+func MerchantCardTypeResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
 	sort, top := p.Args["sort"].(int)
@@ -78,11 +78,11 @@ func MerchantCardResolver(p graphql.ResolveParams) (interface{}, error) {
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
-	card := repository.GetCard(pages, sizes, sorts)
+	card := repository.GetCardType(pages, sizes, sorts)
 	fmt.Println(card)
 	return card, nil
 	}
-	card := repository.GetCard(nil,nil, nil)
+	card := repository.GetCardType(nil,nil, nil)
 	return card, nil
 }
 
@@ -271,6 +271,15 @@ func TotalChopResolver(p graphql.ResolveParams)(interface{}, error){
 	return total, nil
 }
 
+//func MerchantCardMemberResolver(p graphql.ResolveParams)(interface{}, error){
+//	fmt.Println("masuk ke resolver member")
+//	program_id := p.Args["program_id"].(int)
+//	var program_ids int = program_id
+//	card := repository.GetCardMember(program_ids)
+//	fmt.Println(card)
+//	return card, nil
+//}
+
 func TransactionResolver (p graphql.ResolveParams)(interface{}, error){
 	page, ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
@@ -313,18 +322,31 @@ func SongResolver(p graphql.ResolveParams) (interface{}, error) {
 }
 
 func CardResolver(p graphql.ResolveParams) (interface{}, error) {
+	fmt.Println("masuk ke resolver card")
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
 	id, top := p.Args["id"].(int)
 	card_type, tipe := p.Args["card_type"].(string)
+
+	var outlet []model.Card
+
+	if (card_type == "Member"){
+		fmt.Println("masuk ke if member")
+		outlet = repository.GetCardMember(id)
+	}
+
+	fmt.Println("keluar dari if member")
+
 	if ok && sip && top && tipe{
+		fmt.Println("masuk ke if pertama")
 		var pages *int = &page
 		var sizes *int = &size
 		var top *int = &id
-		var types *string =&card_type
+		var types *string = &card_type
 		outlet := repository.GetCardMerchant(pages, sizes, top, types)
 		return outlet, nil
 	} else if ok && sip && top{
+		fmt.Println("masuk ke if kedua")
 		var pages *int = &page
 		var sizes *int = &size
 		var card_id *int = &id
@@ -333,15 +355,18 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 		fmt.Println(outlet)
 		return outlet,nil
 	} else if ok && sip{
+		fmt.Println("masuk ke if ketiga")
 		var paging *int = &page
 		var sizing *int = &size
 		outlet := repository.GetCardMerchant(paging, sizing, nil, nil)
 		return outlet,nil
 	}
-	outlet := repository.GetCardMerchant(nil,nil, nil, nil)
+	fmt.Println("lewat semua")
+	//outlet := repository.GetCardMerchant(nil,nil, nil, nil)
+
 	return outlet, nil
 }
 
-func MerchantResolve() {
-
-}
+//func MerchantResolve() {
+//
+//}
