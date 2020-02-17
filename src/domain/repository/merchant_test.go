@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/jinzhu/gorm"
@@ -10,7 +9,6 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
-	"regexp"
 	"testing"
 )
 
@@ -72,12 +70,12 @@ func (s *Suite) Test_Create_Merchant(){
 	)
 	fmt.Println("test 2 aman")
 	//rows := sqlmock.Rows{}
-	sql := regexp.QuoteMeta(`INSERT INTO "merchants" (id,merchant_email} VALUES (?,?)`)
-	fmt.Println("sql : ",sql)
-	a :=  s.mock.ExpectQuery(sql).WithArgs(merchant.Id,merchant.MerchantEmail).WillReturnRows(sqlmock.NewRows([]string{"merchant_email"}).AddRow(merchant.MerchantEmail))
-	b := s.mock.ExpectExec(sql).WithArgs(merchant.Id, merchant.MerchantEmail).WillReturnError(errors.New("test error"))
-	fmt.Println("isi a = ", a)
-	fmt.Println("isi b = ", b)
+	//sql := regexp.QuoteMeta(`INSERT INTO "merchants" (id,merchant_email} VALUES (?,?)`)
+	//fmt.Println("sql : ",sql)
+	//a :=  s.mock.ExpectQuery(sql).WithArgs(merchant.Id,merchant.MerchantEmail).WillReturnRows(sqlmock.NewRows([]string{"merchant_email"}).AddRow(merchant.MerchantEmail))
+	//b := s.mock.ExpectExec(sql).WithArgs(merchant.Id, merchant.MerchantEmail).WillReturnError(errors.New("test error"))
+	fmt.Println("lewat 1")
+	fmt.Println("lewat 2")
 
 	//s.mock.ExpectQuery(regexp.QuoteMeta(
 	//	`INSERT INTO "merchants"("id","merchant_email")
