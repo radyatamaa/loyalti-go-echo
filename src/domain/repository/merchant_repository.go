@@ -22,43 +22,27 @@ import (
 )
 
 type Repository interface {
-	CreateMerchant (newmerchant *model.NewMerchantCommand) error
+	CreateMerchant (newmerchant *model.NewMerchantTest) error
 }
 
 type repo struct {
 	DB *gorm.DB
+	database.Connection_Interface
 }
 
-func (p *repo) CreateMerchant (newmerchant *model.NewMerchantCommand) error {
+func (p *repo) CreateMerchant (newmerchant *model.NewMerchantTest) error {
 	fmt.Println("masuk ke fungsi ")
-	merchant := model.Merchant{
-		Created:               time.Now(),
-		CreatedBy:             "",
-		Modified:              time.Now(),
-		ModifiedBy:            "",
-		Active:                true,
-		IsDeleted:             false,
-		Deleted:               nil,
-		Deleted_by:            "",
-		MerchantName:          newmerchant.MerchantName,
-		MerchantEmail:         newmerchant.MerchantEmail,
-		MerchantPhoneNumber:   newmerchant.MerchantPhoneNumber,
-		MerchantProvince:      newmerchant.MerchantProvince,
-		MerchantCity:          newmerchant.MerchantCity,
-		MerchantAddress:       newmerchant.MerchantAddress,
-		MerchantPostalCode:    newmerchant.MerchantPostalCode,
-		MerchantCategoryId:    newmerchant.MerchantCategoryId,
-		MerchantWebsite:       newmerchant.MerchantWebsite,
-		MerchantMediaSocialId: newmerchant.MerchantMediaSocialId,
-		MerchantDescription:   newmerchant.MerchantDescription,
-		MerchantImageProfile:  newmerchant.MerchantImageProfile,
-		MerchantGallery:       newmerchant.MerchantGallery,
+	merchant := model.NewMerchantTest{
+		Id:                    4,
+		MerchantEmail:         "asd@gmail.com",
 	}
 	fmt.Println("error nil ini ")
-	err := database.ConnectionDB().Create(&merchant).Error
-	if err != nil{
-		fmt.Println("Error : ", err.Error())
+
+	err := p.DB.Create(&merchant).Error
+	if err != nil {
+		fmt.Println("Error DB.Create", err.Error())
 	}
+	//}
 	fmt.Println("sukses")
 	//_, err := p.DB.Query("INSERT INTO merchants VALUES ($1)", merchant.MerchantEmail)
 	return err
