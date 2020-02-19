@@ -8,6 +8,8 @@ import (
 
 func main() {
 
+	db := database.ConnectionDB()
+
 
 	}
 
