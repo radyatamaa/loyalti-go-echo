@@ -1,11 +1,43 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/beevik/guid"
 	"github.com/biezhi/gorm-paginator/pagination"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
+
+type EmployeeRepository interface {
+	CreateEmployee (newemployee *model.Employee) error
+}
+
+type employee_repo struct {
+	DB *gorm.DB
+	database.Connection_Interface
+}
+
+func (p employee_repo) CreateEmployee (newemployee *model.Employee) error {
+	fmt.Println("masuk fungsi")
+	employee := model.Employee{
+	}
+	fmt.Println("error nil")
+
+	err := p.DB.Create(&employee).Error
+	if err != nil {
+		fmt.Println("Error DB.Create", err.Error())
+	}
+	fmt.Println("selamat/sukses")
+
+	return err
+}
+
+func CreateEmployeeRepository (db *gorm.DB) EmployeeRepository {
+	return &employee_repo{
+		DB:db,
+	}
+}
 
 func CreateEmployee(employee *model.Employee) string{
 	db := database.ConnectionDB()

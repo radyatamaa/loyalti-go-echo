@@ -11,7 +11,8 @@ import (
 
 func main() {
 	db := database.ConnectionDB()
-
+	employ := model.Employee{}
+	db.AutoMigrate(&employ)
 
 	}
 

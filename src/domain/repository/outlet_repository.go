@@ -3,10 +3,61 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"time"
 )
+
+type OutletRepository interface {
+	CreateOutlet (newoutlet *model.Outlet) error
+}
+
+type outlet_repo struct {
+	DB *gorm.DB
+	database.Connection_Interface
+}
+
+func (p outlet_repo) CreateOutlet (newoutlet *model.Outlet) error {
+	fmt.Println("masuk fungsi")
+	outlet := model.Outlet{
+		Id:               0,
+		Created:          time.Time{},
+		CreatedBy:        "",
+		Modified:         time.Time{},
+		ModifiedBy:       "",
+		Active:           false,
+		IsDeleted:        false,
+		Deleted:          nil,
+		Deleted_by:       "",
+		OutletName:       "",
+		OutletAddress:    "",
+		OutletPhone:      "",
+		OutletCity:       "",
+		OutletProvince:   "",
+		OutletPostalCode: "",
+		OutletLongitude:  "",
+		OutletLatitude:   "",
+		OutletDay:        time.Time{},
+		OutletHour:       time.Time{},
+		MerchantId:       0,
+	}
+	fmt.Println("error nil")
+
+	err := p.DB.Create(&outlet).Error
+	if err != nil {
+		fmt.Println("Error DB.Create", err.Error())
+	}
+	fmt.Println("sukses")
+
+	return err
+}
+
+func CreateOutletRepository (db *gorm.DB) OutletRepository {
+	return &outlet_repo{
+		DB:db,
+	}
+}
 
 func CreateOutlet(outlet *model.Outlet) string {
 	db := database.ConnectionDB()
