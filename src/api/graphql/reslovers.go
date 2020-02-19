@@ -332,7 +332,7 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	if (card_type == "Member"){
 		fmt.Println("masuk ke if member")
-		outlet = repository.GetCardMember(id)
+		outlet =  repository.GetCardMember(id)
 	}
 
 	fmt.Println("keluar dari if member")

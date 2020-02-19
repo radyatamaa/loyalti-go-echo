@@ -44,7 +44,7 @@ func (s *Suite) SetupSuite(){
 }
 
 func (s *Suite) AfterTest(_, _ string){
-	//require.NoError(s.T(), s.mock.ExpectationsWereMet())
+	require.NoError(s.T(), s.mock.ExpectationsWereMet())
 }
 
 func TestInit(t *testing.T){
@@ -63,61 +63,40 @@ func (c connection_mock) ConnectionDB2() (gorm *gorm.DB){
 func (s *Suite) Test_Create_Merchant(){
 	fmt.Println("test 1 aman")
 	var (
-		merchant = model.NewMerchantTest{
+		merchant = model.NewMerchantCommand{
 			Id:            100,
 			MerchantEmail: "abcd",
 		}
 	)
 	fmt.Println("test 2 aman")
-	//rows := sqlmock.Rows{}
-	//sql := regexp.QuoteMeta(`INSERT INTO "merchants" (id,merchant_email} VALUES (?,?)`)
-	//fmt.Println("sql : ",sql)
-	//a :=  s.mock.ExpectQuery(sql).WithArgs(merchant.Id,merchant.MerchantEmail).WillReturnRows(sqlmock.NewRows([]string{"merchant_email"}).AddRow(merchant.MerchantEmail))
-	//b := s.mock.ExpectExec(sql).WithArgs(merchant.Id, merchant.MerchantEmail).WillReturnError(errors.New("test error"))
-	fmt.Println("lewat 1")
-	fmt.Println("lewat 2")
-
-	//s.mock.ExpectQuery(regexp.QuoteMeta(
-	//	`INSERT INTO "merchants"("id","merchant_email")
-	//		VALUES ($1, $2) RETURNING "merchants"."merchant_email"
-	//		`,
-	//	)).
-	//	WithArgs(sqlmock.AnyArg(), sqlmock.AnyArg()).
-	//	//WillReturnError(nil)
-	//	WillReturnRows(
-	//		//&rows,
-	//		sqlmock.NewRows([]string{"merchant_email"}).
-	//			AddRow(merchant.MerchantEmail),
-	//		)
+	 err := s.repository.CreateMerchant(&merchant)
 	fmt.Println("test 3 aman")
-	err := s.repository.CreateMerchant(&merchant)
-	fmt.Println("test 4 aman")
-
-	if err == nil {
-		fmt.Println("Unit Test Aman")
-	}
-
-	//require.NoError(s.T(), err)
-	fmt.Println("test 5 aman")
+	 require.NoError(s.T(), err)
+	 fmt.Println("test 4 aman", err)
 }
 
-//func Test_Create_Merchant (t *testing.T){
-//	fmt.Println("masuk ke testing")
-//	repo := Repo{}
+func (s *Suite) Test_Update_Merchant(){
+	fmt.Println("test 1 update aman")
+	var (
+		merchant = model.NewMerchantCommand{
+			MerchantEmail: "abcd",
+			MerchantAddress: "jalan 1",
+		}
+	)
+	fmt.Println("test 2 update aman")
+	err := s.repository.UpdateMerchant(&merchant)
+	fmt.Println("test 3 update aman")
+	require.NoError(s.T(), err)
+	fmt.Println("test 4 update aman", err)
+}
+//func (s *Suite) Test_Update_Merrchant(){
+//	fmt.Println("test update 1 aman")
+//	var (
+//		merchant = model.NewMerchantTest{
+//			Id:            100,
+//			MerchantEmail: "abcd",
+//		}
+//	)
 //
-//	merchant := model.NewMerchantCommand{}
-//
-//	//inisialisasi sqlmock
-//	db, mock, err := sqlmock.New()
-//	repo.DB = db
-//
-//	//mock agar insert tidak masuk ke DB
-//	mock.ExpectQuery("INSERT INTO").WillReturnRows(sqlmock.NewRows([]string{"merchant_email"}))
-//
-//	err = repo.CreateMerchant(&merchant)
-//
-//	if err != nil {
-//		//kasih tau error di repo.CreateMerchant
-//		t.Errorf("Error : %s", err.Error())
-//	}
+//	err := s.repository.UpdateMerchant()
 //}
