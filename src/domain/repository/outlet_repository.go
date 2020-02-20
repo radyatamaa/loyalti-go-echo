@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"time"
 )
 
 func CreateOutlet(outlet *model.Outlet) string {
 	db := database.ConnectionDB()
-
+	outlet.Created = time.Now()
+	outlet.Modified = time.Now()
 	outletObj := *outlet
 
 	db.Create(&outletObj)
