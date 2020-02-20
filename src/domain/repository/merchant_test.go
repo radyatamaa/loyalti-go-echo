@@ -65,7 +65,8 @@ func (s *Suite) Test_Create_Merchant(){
 	var (
 		merchant = model.NewMerchantCommand{
 			Id:            100,
-			MerchantEmail: "abcd",
+			MerchantEmail: "abc",
+			Active:true,
 		}
 	)
 	fmt.Println("test 2 aman")
@@ -89,14 +90,18 @@ func (s *Suite) Test_Update_Merchant(){
 	require.NoError(s.T(), err)
 	fmt.Println("test 4 update aman", err)
 }
-//func (s *Suite) Test_Update_Merrchant(){
-//	fmt.Println("test update 1 aman")
-//	var (
-//		merchant = model.NewMerchantTest{
-//			Id:            100,
-//			MerchantEmail: "abcd",
-//		}
-//	)
-//
-//	err := s.repository.UpdateMerchant()
-//}
+
+func (s *Suite) Test_Delete_Merchant(){
+	fmt.Println("test 1 delete aman")
+	var (
+		merchant = model.NewMerchantCommand{
+			MerchantEmail: "abcd",
+		}
+	)
+	fmt.Println("test 2 delete aman")
+	err := s.repository.DeleteMerchant(&merchant)
+	fmt.Println("test 3 delete aman")
+	require.NoError(s.T(), err)
+	fmt.Println("test 4 delete aman")
+}
+

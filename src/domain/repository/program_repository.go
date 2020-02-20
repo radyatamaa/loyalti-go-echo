@@ -3,23 +3,67 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/sirupsen/logrus"
 )
 
+type RepositoryProgram interface {
+	CreateProgram(program *model.Program) error
+	UpdateProgram  (program *model.Program) error
+	DeleteProgram(program *model.Program) error
+}
 
-func CreateProgram(program *model.Program) string{
+type repoProgram struct {
+	DB *gorm.DB
+}
+
+func (p *repoProgram) CreateProgram(program *model.Program) error{
+	db := database.ConnectionDB()
+	programObj := *program
+	err := db.Create(&programObj).Error
+	if err != nil {
+		fmt.Println("Error : ", err.Error)
+	}
+	return err
+}
+
+func CreateRepositoryProgram(db *gorm.DB) RepositoryProgram {
+	return &repoProgram{
+		DB:db,
+	}
+}
+
+func CreateProgram2(program *model.Program) string{
 	db := database.ConnectionDB()
 	programObj := *program
 	db.Create(&programObj)
 	return programObj.ProgramName
 }
 
+func (p *repoProgram) UpdateProgram  (program *model.Program) error {
+	db := database.ConnectionDB()
+	err := db.Model(&program).Where("id = ?", program.Id).Update(&program).Error
+	if err != nil {
+		fmt.Println("Error : ", err.Error())
+	}
+	return err
+}
+
 func UpdateProgram  (program *model.Program) string {
 	db := database.ConnectionDB()
 	db.Model(&program).Where("id = ?", program.Id).Update(&program)
 	return "Berhasil diUpdate"
+}
+
+func (p *repoProgram) DeleteProgram(program *model.Program) error {
+	db := database.ConnectionDB()
+	err := db.Model(&program).Where("id= ?", program.Id).Update("active", false).Error
+	if err != nil {
+		fmt.Println("Error : ", err.Error())
+	}
+	return err
 }
 
 func DeleteProgram(program *model.Program) string {

@@ -24,6 +24,7 @@ import (
 type Repository interface {
 	CreateMerchant (newmerchant *model.NewMerchantCommand) error
 	UpdateMerchant(newmerchant *model.NewMerchantCommand) error
+	DeleteMerchant(newmerchant *model.NewMerchantCommand) error
 }
 
 type repo struct {
@@ -190,7 +191,39 @@ func UpdateMerchant2(newmerchant *model.NewMerchantCommand) string {
 	return merchant.MerchantEmail
 }
 
-func DeleteMerchant(newmerchant *model.NewMerchantCommand) string {
+func (p *repo) DeleteMerchant(newmerchant *model.NewMerchantCommand) error {
+	db := database.ConnectionDB()
+	merchant := model.Merchant{
+		Created:               time.Time{},
+		CreatedBy:             "",
+		Modified:              time.Now(),
+		ModifiedBy:            "",
+		Active:                true,
+		IsDeleted:             false,
+		Deleted:               nil,
+		Deleted_by:            "",
+		MerchantName:          newmerchant.MerchantName,
+		MerchantEmail:         newmerchant.MerchantEmail,
+		MerchantPhoneNumber:   newmerchant.MerchantPhoneNumber,
+		MerchantProvince:      newmerchant.MerchantProvince,
+		MerchantCity:          newmerchant.MerchantCity,
+		MerchantAddress:       newmerchant.MerchantAddress,
+		MerchantPostalCode:    newmerchant.MerchantPostalCode,
+		MerchantCategoryId:    newmerchant.MerchantCategoryId,
+		MerchantWebsite:       newmerchant.MerchantWebsite,
+		MerchantMediaSocialId: newmerchant.MerchantMediaSocialId,
+		MerchantDescription:   newmerchant.MerchantDescription,
+		MerchantImageProfile:  newmerchant.MerchantImageProfile,
+		MerchantGallery:       newmerchant.MerchantGallery,
+	}
+	err := db.Model(&merchant).Where("merchant_email = ?", merchant.MerchantEmail).Update("active", false).Error
+	if err == nil {
+		fmt.Println("Tidak ada error")
+	}
+	return err
+}
+
+func DeleteMerchant2(newmerchant *model.NewMerchantCommand) string {
 	db := database.ConnectionDB()
 	merchant := model.Merchant{
 		Created:               time.Time{},
