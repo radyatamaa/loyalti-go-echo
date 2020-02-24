@@ -7,9 +7,10 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/sirupsen/logrus"
+	"time"
 )
 
-type RepositoryProgram interface {
+type ProgramRepository interface {
 	CreateProgram(program *model.Program) error
 	UpdateProgram  (program *model.Program) error
 	DeleteProgram(program *model.Program) error
@@ -19,23 +20,45 @@ type repoProgram struct {
 	DB *gorm.DB
 }
 
-func (p *repoProgram) CreateProgram(program *model.Program) error{
-	fmt.Println("masuk 1")
-	db := database.ConnectionDB()
-	fmt.Println("masuk 2")
+func (p *repoProgram) CreateProgram(newprogram *model.Program) error{
+	fmt.Println("masuk fungsi")
+	program := model.Program{
+		Created:            time.Now(),
+		CreatedBy:          "Admin",
+		Modified:           time.Now(),
+		ModifiedBy:         "",
+		Active:             true,
+		IsDeleted:          false,
+		Deleted:            nil,
+		Deleted_by:         "",
+		ProgramName:        newprogram.ProgramName,
+		ProgramImage:       newprogram.ProgramImage,
+		ProgramStartDate:   newprogram.ProgramStartDate,
+		ProgramEndDate:     newprogram.ProgramEndDate,
+		ProgramDescription: newprogram.ProgramDescription,
+		Card:               newprogram.Card,
+		OutletID:           newprogram.OutletID,
+		MerchantId:         newprogram.MerchantId,
+		CategoryId:         newprogram.CategoryId,
+		Benefit:            newprogram.Benefit,
+		TermsAndCondition:  newprogram.TermsAndCondition,
+		Tier:               newprogram.Tier,
+		RedeemRules:        newprogram.RedeemRules,
+		RewardTarget:       newprogram.RewardTarget,
+		QRCodeId:           newprogram.QRCodeId,
+		ProgramPoint:       newprogram.ProgramPoint,
+		MinPayment:         newprogram.MinPayment,
+	}
 
-	fmt.Println("masuk 3")
-	//programObj := *program
-	err := db.Create(&program).Error
-	fmt.Println("masuk 4")
+	db := database.ConnectionDB()
+	err:= db.Create(&program).Error
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 	}
-	fmt.Println("masuk 5")
 	return err
 }
 
-func CreateRepositoryProgram(db *gorm.DB) RepositoryProgram {
+func CreateRepositoryProgram(db *gorm.DB) ProgramRepository {
 	return &repoProgram{
 		DB:db,
 	}
@@ -50,7 +73,7 @@ func CreateProgram2(program *model.Program) string{
 
 func (p *repoProgram) UpdateProgram  (program *model.Program) error {
 	db := database.ConnectionDB()
-	err := db.Model(&program).Where("id = ?", program.Id).Update(&program).Error
+	err := db.Model(&program).Where("merchant_id = ?", program.MerchantId).Update(&program).Error
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 	}
@@ -65,7 +88,7 @@ func UpdateProgram  (program *model.Program) string {
 
 func (p *repoProgram) DeleteProgram(program *model.Program) error {
 	db := database.ConnectionDB()
-	err := db.Model(&program).Where("id= ?", program.Id).Update("active", false).Error
+	err := db.Model(&program).Where("id = ?", program.Id).Update("active", false).Error
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 	}
