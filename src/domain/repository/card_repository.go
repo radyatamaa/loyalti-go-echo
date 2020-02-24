@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/beevik/guid"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
@@ -30,6 +31,56 @@ const (
 //	res := ""
 //
 //}
+
+
+type CardRepository interface {
+	CreateCard (newcard *model.Card) error
+}
+
+type card_repo struct {
+	DB *gorm.DB
+}
+
+func (p *card_repo) CreateCard (newcard *model.Card) error {
+	kartu := model.Card{
+		Id:                guid.NewString(),
+		Created:           time.Now(),
+		CreatedBy:         "System",
+		Modified:          time.Now(),
+		ModifiedBy:        "System",
+		Active:            true,
+		IsDeleted:         false,
+		Deleted:           nil,
+		DeletedBy:         "",
+		Title:             newcard.Title,
+		Description:       newcard.Description,
+		FontColor:         newcard.FontColor,
+		TemplateColor:     newcard.TemplateColor,
+		IconImage:         newcard.IconImage,
+		TermsAndCondition: newcard.TermsAndCondition,
+		Benefit:           newcard.Benefit,
+		ValidUntil:        time.Time{},
+		CurrentPoint:      newcard.CurrentPoint,
+		IsValid:           true,
+		ProgramId:         newcard.ProgramId,
+		CardType:          newcard.CardType,
+		IconImageStamp:    newcard.IconImageStamp,
+		MerchantId:        newcard.MerchantId,
+		Tier:              "",
+	}
+	db := database.ConnectionDB()
+	err := db.Create(&kartu).Error
+	if err == nil {
+		fmt.Println("Error")
+	}
+	return err
+}
+
+func CreateCardRepository (db *gorm.DB) CardRepository {
+	return &card_repo{
+		DB:db,
+	}	
+}
 
 //func CreateCardMerchant(card *model.Card) error {
 //	db := database.ConnectionDB()

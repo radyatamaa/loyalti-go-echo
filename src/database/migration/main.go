@@ -10,7 +10,6 @@ func main() {
 	db := database.ConnectionDB()
 	program := model.Program{}
 	db.AutoMigrate(&program)
-	}
 
 
 

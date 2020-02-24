@@ -1,11 +1,80 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/beevik/guid"
 	"github.com/biezhi/gorm-paginator/pagination"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
+	"time"
 )
+
+type EmployeeRepository interface {
+	CreateEmployee (newemployee *model.Employee) error
+	UpdateEmployee (newemployee *model.Employee) error
+}
+
+type employee_repo struct {
+	DB *gorm.DB
+}
+
+func (p employee_repo) CreateEmployee (newemployee *model.Employee) error {
+	fmt.Println("masuk fungsi")
+	employee := model.Employee{
+		Id:            guid.NewString(),
+		Created:       time.Now(),
+		CreatedBy:     "",
+		Modified:      time.Now(),
+		ModifiedBy:    "",
+		Active:        false,
+		IsDeleted:     false,
+		Deleted:       nil,
+		Deleted_by:    "",
+		EmployeeName:  newemployee.EmployeeName,
+		EmployeeEmail: newemployee.EmployeeEmail,
+		EmployeePin:   newemployee.EmployeePin,
+		EmployeeRole:  newemployee.EmployeeRole,
+		OutletId:      newemployee.OutletId,
+		OutletName:    newemployee.OutletName,
+	}
+
+	db := database.ConnectionDB()
+	err := db.Create(&employee).Error
+	if err != nil {
+		fmt.Println("Tak ada error")
+	}
+	return err
+}
+
+func CreateEmployeeRepository (db *gorm.DB) EmployeeRepository {
+	return &employee_repo{
+		DB:db,
+	}
+}
+
+func (p *employee_repo) UpdateEmployee(updateemployee *model.Employee) error{
+	db := database.ConnectionDB()
+	employee := model.Employee{
+		Id:            guid.NewString(),
+		Created:       time.Now(),
+		CreatedBy:     "",
+		Modified:      time.Now(),
+		ModifiedBy:    "",
+		Active:        true,
+		IsDeleted:     false,
+		Deleted:       nil,
+		Deleted_by:    "",
+		EmployeeName:  updateemployee.EmployeeName,
+		EmployeeEmail: updateemployee.EmployeeEmail,
+		EmployeePin:   updateemployee.EmployeePin,
+		EmployeeRole:  updateemployee.EmployeeRole,
+		OutletId:      updateemployee.OutletId,
+		OutletName:    updateemployee.OutletName,
+	}
+	err := db.Model(&employee).Where("outlet_id = ?", employee.OutletId).Update(&employee).Error
+	return err
+}
 
 func CreateEmployee(employee *model.Employee) string{
 	db := database.ConnectionDB()
