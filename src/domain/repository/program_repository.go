@@ -20,12 +20,18 @@ type repoProgram struct {
 }
 
 func (p *repoProgram) CreateProgram(program *model.Program) error{
+	fmt.Println("masuk 1")
 	db := database.ConnectionDB()
-	programObj := *program
-	err := db.Create(&programObj).Error
+	fmt.Println("masuk 2")
+
+	fmt.Println("masuk 3")
+	//programObj := *program
+	err := db.Create(&program).Error
+	fmt.Println("masuk 4")
 	if err != nil {
-		fmt.Println("Error : ", err.Error)
+		fmt.Println("Error : ", err.Error())
 	}
+	fmt.Println("masuk 5")
 	return err
 }
 
