@@ -46,7 +46,7 @@ func (s *EmployeeSuite) SetupSuite(){
 }
 
 func (s *EmployeeSuite) AfterTest(_, _ string){
-
+	require.NoError(s.T(), s.mock.ExpectationsWereMet())
 }
 
 func TestInitEmployee(t *testing.T){
@@ -75,21 +75,44 @@ func (s *EmployeeSuite) Test_Create_Employee(){
 			IsDeleted:     false,
 			Deleted:       nil,
 			Deleted_by:    "",
-			EmployeeName:  "David",
-			EmployeeEmail: "david@email.com",
-			EmployeePin:   "969696",
+			EmployeeName:  "Felix",
+			EmployeeEmail: "felix@email.com",
+			EmployeePin:   "123456",
 			EmployeeRole:  "Cashier",
-			OutletId:      "1",
-			OutletName:    "Bu Nanik",
+			OutletId:      "2",
+			OutletName:    "Bu Bejo",
 		}
 	)
 	fmt.Println("test 2 aman")
 	err := s.employee_repository.CreateEmployee(&employee)
 	fmt.Println("test 3 aman")
-
-	if err == nil {
-		fmt.Println("Unit Test Aman")
-	}
-
+	require.NoError(s.T(), err)
 	fmt.Println("test 4 aman")
+}
+
+func (s *EmployeeSuite) Test_Update_Employee(){
+	fmt.Println("Test update employee")
+	var (
+		employe = model.Employee{
+			Created:       time.Time{},
+			CreatedBy:     "",
+			Modified:      time.Time{},
+			ModifiedBy:    "",
+			Active:        false,
+			IsDeleted:     false,
+			Deleted:       nil,
+			Deleted_by:    "",
+			EmployeeName:  "David",
+			EmployeeEmail: "david@email.com -update",
+			EmployeePin:   "969696",
+			EmployeeRole:  "Cashier -update",
+			OutletId:      "1",
+			OutletName:    "Bu Nanik -update",
+		}
+	)
+	fmt.Println("test update 1")
+	err := s.employee_repository.UpdateEmployee(&employe)
+	fmt.Println("test update 2")
+	require.NoError(s.T(), err)
+	fmt.Println("test update 3")
 }

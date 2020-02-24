@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	"testing"
+	"time"
 )
 
 type OutletSuite struct {
@@ -44,7 +45,7 @@ func (s *OutletSuite) SetupSuite(){
 }
 
 func (s *OutletSuite) AfterTest(_, _ string){
-
+	require.NoError(s.T(), s.mock.ExpectationsWereMet())
 }
 
 func TestInitOutlet(t *testing.T){
@@ -64,22 +65,62 @@ func (s *OutletSuite) Test_Create_Outlet(){
 	fmt.Println("test 1 aman")
 	var (
 		outlet = model.Outlet{
-			OutletName:       "Tokopedia",
-			OutletAddress:    "JKt",
+			Created:          time.Now(),
+			CreatedBy:        "",
+			Modified:         time.Now(),
+			ModifiedBy:       "",
+			Active:           true,
+			IsDeleted:        false,
+			Deleted:          nil,
+			Deleted_by:       "",
+			OutletName:       "P3",
+			OutletAddress:    "Energy Tower",
+			OutletPhone:      "081357867890",
+			OutletCity:       "Jakarta",
+			OutletProvince:   "DKI Jakarta",
+			OutletPostalCode: "14078",
+			OutletLongitude:  "",
+			OutletLatitude:   "",
+			OutletDay:        time.Time{},
+			OutletHour:       time.Time{},
+			MerchantId:       2,
 		}
 	)
 	fmt.Println("test 2 aman")
-
-	fmt.Println("lewat yg pertama")
-	fmt.Println("lewat yg kedua")
-
-	fmt.Println("test 3 aman")
 	err := s.outlet_repository.CreateOutlet(&outlet)
+	fmt.Println("test 3 aman")
+	require.NoError(s.T(), err)
 	fmt.Println("test 4 aman")
+}
 
-	if err == nil {
-		fmt.Println("Unit test Aman")
-	}
-
-	fmt.Println("test 5 aman")
+func (s *OutletSuite) Test_Update_Outlet(){
+	fmt.Println("test 1 update outlet")
+	var (
+		outlet = model.Outlet{
+			Created:          time.Time{},
+			CreatedBy:        "",
+			Modified:         time.Time{},
+			ModifiedBy:       "",
+			Active:           false,
+			IsDeleted:        false,
+			Deleted:          nil,
+			Deleted_by:       "",
+			OutletName:       "P3",
+			OutletAddress:    "Energy Building",
+			OutletPhone:      "081357867890",
+			OutletCity:       "Jakarta",
+			OutletProvince:   "DKI Jakarta -update",
+			OutletPostalCode: "14078",
+			OutletLongitude:  "",
+			OutletLatitude:   "",
+			OutletDay:        time.Time{},
+			OutletHour:       time.Time{},
+			MerchantId:       2,
+		}
+	)
+	fmt.Println("test 2 update")
+	err := s.outlet_repository.UpdateOutlet(&outlet)
+	fmt.Println("test 3 update")
+	require.NoError(s.T(), err)
+	fmt.Println("test4 update")
 }

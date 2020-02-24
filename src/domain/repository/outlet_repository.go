@@ -11,17 +11,54 @@ import (
 
 type OutletRepository interface {
 	CreateOutlet (newoutlet *model.Outlet) error
+	UpdateOutlet (newoutlet *model.Outlet) error
 }
 
 type outlet_repo struct {
 	DB *gorm.DB
-	database.Connection_Interface
+	//database.Connection_Interface
 }
 
-func (p outlet_repo) CreateOutlet (newoutlet *model.Outlet) error {
+func (p *outlet_repo) CreateOutlet (newoutlet *model.Outlet) error {
 	fmt.Println("masuk fungsi")
 	outlet := model.Outlet{
-		Id:               0,
+		Created:          time.Now(),
+		CreatedBy:        "",
+		Modified:         time.Now(),
+		ModifiedBy:       "",
+		Active:           true,
+		IsDeleted:        false,
+		Deleted:          nil,
+		Deleted_by:       "",
+		OutletName:       newoutlet.OutletName,
+		OutletAddress:    newoutlet.OutletAddress,
+		OutletPhone:      newoutlet.OutletPhone,
+		OutletCity:       newoutlet.OutletCity,
+		OutletProvince:   newoutlet.OutletProvince,
+		OutletPostalCode: newoutlet.OutletPostalCode,
+		OutletLongitude:  newoutlet.OutletLongitude,
+		OutletLatitude:   newoutlet.OutletLatitude,
+		OutletDay:        time.Time{},
+		OutletHour:       time.Time{},
+		MerchantId:       1,
+	}
+	db := database.ConnectionDB()
+	err := db.Create(&outlet).Error
+	if err != nil {
+		fmt.Println("Tak ada error")
+	}
+	return err
+}
+
+func CreateOutletRepository (db *gorm.DB) OutletRepository {
+	return &outlet_repo{
+		DB:db,
+	}
+}
+
+func (p *outlet_repo) UpdateOutlet(newoutlet *model.Outlet) error {
+	db := database.ConnectionDB()
+	outlet := model.Outlet{
 		Created:          time.Time{},
 		CreatedBy:        "",
 		Modified:         time.Time{},
@@ -30,33 +67,20 @@ func (p outlet_repo) CreateOutlet (newoutlet *model.Outlet) error {
 		IsDeleted:        false,
 		Deleted:          nil,
 		Deleted_by:       "",
-		OutletName:       "",
-		OutletAddress:    "",
-		OutletPhone:      "",
-		OutletCity:       "",
-		OutletProvince:   "",
-		OutletPostalCode: "",
-		OutletLongitude:  "",
-		OutletLatitude:   "",
+		OutletName:       newoutlet.OutletName,
+		OutletAddress:    newoutlet.OutletAddress,
+		OutletPhone:      newoutlet.OutletPhone,
+		OutletCity:       newoutlet.OutletCity,
+		OutletProvince:   newoutlet.OutletProvince,
+		OutletPostalCode: newoutlet.OutletPostalCode,
+		OutletLongitude:  newoutlet.OutletLongitude,
+		OutletLatitude:   newoutlet.OutletLatitude,
 		OutletDay:        time.Time{},
 		OutletHour:       time.Time{},
-		MerchantId:       0,
+		MerchantId:       newoutlet.MerchantId,
 	}
-	fmt.Println("error nil")
-
-	err := p.DB.Create(&outlet).Error
-	if err != nil {
-		fmt.Println("Error DB.Create", err.Error())
-	}
-	fmt.Println("sukses")
-
+	err := db.Model(&outlet).Where("merchant_id = ?", outlet.MerchantId).Update(&outlet).Error
 	return err
-}
-
-func CreateOutletRepository (db *gorm.DB) OutletRepository {
-	return &outlet_repo{
-		DB:db,
-	}
 }
 
 func CreateOutlet(outlet *model.Outlet) string {
