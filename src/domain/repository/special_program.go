@@ -8,6 +8,36 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+//type SpecialRepository interface {
+//	CreateSpecial (newspecial *model.SpecialProgram) error
+//	UpdateSpecial (newspecial *model.SpecialProgram) error
+//	DeleteSpecial (newspecial *model.SpecialProgram) error
+//}
+//
+//type special_repo struct {
+//	DB *gorm.DB
+//}
+//
+//func CreateSpecialRepository (db *gorm.DB) SpecialRepository {
+//	return  &special_repo{
+//		DB:db,
+//	}
+//}
+//
+//func (p *special_repo) CreateSpecial (newspecial *model.SpecialProgram) error {
+//	db:= database.ConnectionDB()
+//	err := db.Create(&newspecial).Error
+//	if err == nil {
+//		fmt.Println("Tidak ada Error!")
+//	}
+//	return err
+//}
+//
+//func (p *special_repo) UpdateSpecial (newspecial *model.SpecialProgram) error {
+//	db := database.ConnectionDB()
+//
+//}
+
 func CreateSpecial(special *model.SpecialProgram) string {
 	db := database.ConnectionDB()
 	specialObj := *special

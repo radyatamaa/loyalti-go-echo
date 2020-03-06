@@ -35,6 +35,8 @@ const (
 
 type CardRepository interface {
 	CreateCard (newcard *model.Card) error
+	DeleteCard (newcard *model.Card) error
+	UpdateCard (newcard *model.Card) error
 }
 
 type card_repo struct {
@@ -80,6 +82,22 @@ func CreateCardRepository (db *gorm.DB) CardRepository {
 	return &card_repo{
 		DB:db,
 	}	
+}
+
+func (p *card_repo) DeleteCard (newcard *model.Card) error {
+	db := database.ConnectionDB()
+	err := db.Model(&newcard).Where("id = ?", newcard.Id).Update("active", false).Error
+	if err == nil {
+		fmt.Println("tidak ada error")
+	}
+	return err
+}
+
+func (p *card_repo) UpdateCard (newcard *model.Card) error {
+	db := database.ConnectionDB()
+	err := db.Model(&newcard).Where("id = ?", newcard.Id).Update(&newcard).Error
+
+	return err
 }
 
 //func CreateCardMerchant(card *model.Card) error {

@@ -32,8 +32,8 @@ type Connection struct {
 
 func ConnectionDB() *gorm.DB{
 
-	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=Loyalti.MerchantDb.Test")
-	//db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=Loyalti.MerchantDb.Dev")
+	//db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=Loyalti.MerchantDb.Test")
+	db, err := gorm.Open("mssql", "sqlserver://moonlay:Standar123.@loyaltiexpress.database.windows.net?database=Loyalti.MerchantDb.Dev")
 
 	if err != nil {
 		panic("failed to connect database")

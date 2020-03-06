@@ -64,7 +64,7 @@ func CreateRepositoryProgram(db *gorm.DB) ProgramRepository {
 	}
 }
 
-func CreateProgram2(program *model.Program) string{
+func CreateProgram(program *model.Program) string{
 	db := database.ConnectionDB()
 	programObj := *program
 	db.Create(&programObj)

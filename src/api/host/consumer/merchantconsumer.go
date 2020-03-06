@@ -52,7 +52,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 						}
 						fmt.Println("ini hasilnya : ",merchant)
 						resp , err := repository.CreateMerchantWSO2(&merchant)
-						repository.CreateMerchant(&merchant)
+						repository.CreateMerchantWSO2(&merchant)
 						fmt.Println("masuk ke fungsi WSO2")
 						if err != nil {
 							fmt.Println("Error :",err.Error())
@@ -90,7 +90,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 							fmt.Println(err.Error())
 							os.Exit(1)
 						}
-						repository.UpdateMerchant(&merchant)
+						repository.UpdateMerchant2(&merchant)
 						fmt.Println(string(msg.Value))
 						fmt.Println("Merchant berhasil di-Update")
 
@@ -100,7 +100,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 							fmt.Println(err.Error())
 							os.Exit(1)
 						}
-						repository.DeleteMerchant(&merchant)
+						repository.DeleteMerchant2(&merchant)
 						fmt.Println(string(msg.Value))
 						fmt.Println("Merchant berhasil dihapus")
 					}
