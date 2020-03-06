@@ -124,3 +124,17 @@ func (s *OutletSuite) Test_Update_Outlet(){
 	require.NoError(s.T(), err)
 	fmt.Println("test4 update")
 }
+
+func (s *OutletSuite) Test_Delete_Outlet(){
+	fmt.Println("test 1")
+	var (
+		outlet = model.Outlet{
+			Id:               1,
+		}
+	)
+	fmt.Println("test 2")
+	err := s.outlet_repository.DeleteOutlet(&outlet)
+	fmt.Println("test 3")
+	require.NoError(s.T(), err)
+	fmt.Println("test 4")
+}

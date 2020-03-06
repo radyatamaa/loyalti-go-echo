@@ -13,6 +13,7 @@ import (
 type EmployeeRepository interface {
 	CreateEmployee (newemployee *model.Employee) error
 	UpdateEmployee (newemployee *model.Employee) error
+	DeleteEmployee (newemployee *model.Employee) error
 }
 
 type employee_repo struct {
@@ -73,6 +74,16 @@ func (p *employee_repo) UpdateEmployee(updateemployee *model.Employee) error{
 		OutletName:    updateemployee.OutletName,
 	}
 	err := db.Model(&employee).Where("outlet_id = ?", employee.OutletId).Update(&employee).Error
+	return err
+}
+
+func (p *employee_repo) DeleteEmployee(deleteemployee *model.Employee) error {
+	db := database.ConnectionDB()
+
+	err := db.Model(&deleteemployee).Where("id = ?", deleteemployee.Id).Update("active", true).Error
+	if err == nil {
+		fmt.Println("tidak ada error")
+	}
 	return err
 }
 
