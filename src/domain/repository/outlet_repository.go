@@ -12,6 +12,7 @@ import (
 type OutletRepository interface {
 	CreateOutlet (newoutlet *model.Outlet) error
 	UpdateOutlet (newoutlet *model.Outlet) error
+	DeleteOutlet (newoutlet *model.Outlet) error
 }
 
 type outlet_repo struct {
@@ -80,6 +81,16 @@ func (p *outlet_repo) UpdateOutlet(newoutlet *model.Outlet) error {
 		MerchantId:       newoutlet.MerchantId,
 	}
 	err := db.Model(&outlet).Where("merchant_id = ?", outlet.MerchantId).Update(&outlet).Error
+	return err
+}
+
+func (p *outlet_repo) DeleteOutlet(newoutlet *model.Outlet) error {
+	db := database.ConnectionDB()
+
+	err := db.Model(&newoutlet).Where("id = ?", newoutlet.Id).Update("active", false).Error
+	if err == nil {
+		fmt.Println("tidak ada error")
+	}
 	return err
 }
 
