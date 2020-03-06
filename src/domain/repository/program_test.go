@@ -55,8 +55,7 @@ func (s *ProgramSuite) Test_Create_Program(){
 	fmt.Println("test 1 aman")
 	var (
 			program = model.Program{
-				Id: 1,
-				ProgramName: "asasaw",
+				ProgramName: "dsfgsdf",
 				Active:true,
 			}
 	)
@@ -86,7 +85,7 @@ func (s *ProgramSuite) Test_Delete_Program(){
 	fmt.Println("test delete 1 aman")
 	var (
 		program = model.Program{
-			Id: 1,
+			Id: 2,
 		}
 	)
 	fmt.Println("test delete 2 aman")
@@ -94,4 +93,8 @@ func (s *ProgramSuite) Test_Delete_Program(){
 	fmt.Println("test delete 3 aman")
 	require.NoError(s.T(), err)
 	fmt.Println("test 4 delete aman")
+}
+
+func (s *ProgramSuite) Test_Get_Program() {
+
 }

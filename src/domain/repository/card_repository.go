@@ -26,13 +26,6 @@ const (
 	Platinum MemberTier = "3"
 )
 
-//func getValues() string {
-//	var mt MemberTier
-//	res := ""
-//
-//}
-
-
 type CardRepository interface {
 	CreateCard (newcard *model.Card) error
 }

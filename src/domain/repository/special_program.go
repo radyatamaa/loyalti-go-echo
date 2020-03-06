@@ -3,10 +3,46 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 	"github.com/sirupsen/logrus"
 )
+
+type SpecialProgramRepository interface {
+	CreateSpecial(special *model.SpecialProgram) error
+	UpdateSpecial(special *model.SpecialProgram) error
+	DeleteSpecial(special *model.SpecialProgram) error
+}
+
+type special_repo struct {
+	DB *gorm.DB
+}
+
+func CreateSpecialRepository(db *gorm.DB) SpecialProgramRepository {
+	return &special_repo{
+		DB:db,
+	}
+}
+
+func (p *special_repo) CreateSpecial(special *model.SpecialProgram) error {
+	db := database.ConnectionDB()
+	specialObj := *special
+	err := db.Create(&specialObj).Error
+	return err
+}
+
+func (p *special_repo) UpdateSpecial(special *model.SpecialProgram) error {
+	db := database.ConnectionDB()
+	err := db.Model(&special).Where("program_name = ?", special.ProgramName).Update(&special).Error
+	return err
+}
+
+func (p *special_repo) DeleteSpecial(special *model.SpecialProgram) error {
+	db := database.ConnectionDB()
+	err := db.Model(&special).Where("program_name = ?",special.ProgramName).Update("active", false).Error
+	return err
+}
 
 func CreateSpecial(special *model.SpecialProgram) string {
 	db := database.ConnectionDB()
@@ -151,7 +187,7 @@ func GetSpecialProgram(page *int, size *int, sort *int, category *int, id *int) 
 			Select("merchants.merchant_name").
 			Where("id = ?", t.MerchantId).
 			First(&merchant)
-		t.MerchantName = merchant.MerchantName
+		//t.MerchantName = merchant.MerchantName
 		if err != nil {
 			logrus.Error(err)
 			return nil

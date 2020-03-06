@@ -8,8 +8,8 @@ import (
 
 func main() {
 	db := database.ConnectionDB()
-	program := model.Program{}
+	program := model.TransactionMerchant{}
 	db.AutoMigrate(&program)
-
+}
 
 

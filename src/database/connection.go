@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mssql"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -32,11 +33,12 @@ type Connection struct {
 
 func ConnectionDB() *gorm.DB{
 
-	db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=Loyalti.MerchantDb.Test")
+	db, err := gorm.Open("mssql", "sqlserver://moonlay:Standar123.@loyaltiexpress.database.windows.net?database=loyalti.MerchantDB.Dev")
 	//db, err := gorm.Open("mssql", "sqlserver://sa:Moonlay2019.@11.11.5.146?database=Loyalti.MerchantDb.Dev")
 
 	if err != nil {
-		panic("failed to connect database")
+		//panic("failed to connect database")
+		fmt.Println("Error : ",err.Error)
 	}
 	//defer db.Close()
 	SqlDB = db
