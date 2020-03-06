@@ -98,3 +98,48 @@ func (s *CardSuite) Test_Create_Card(){
 	require.NoError(s.T(), err)
 	fmt.Println("test 4")
 }
+
+func (s *CardSuite) Test_Delete_Card(){
+	fmt.Println("test 1")
+	var(
+		kartu = model.Card{
+			Id:                "088c4c24-7ff6-4f4b-a059-50187e5941e1",
+		}
+	)
+	fmt.Println("test 2")
+	err := s.card_repository.DeleteCard(&kartu)
+	fmt.Println("test 3")
+	require.NoError(s.T(), err)
+	fmt.Println("test 4")
+}
+
+func (s *CardSuite) Test_Update_Card(){
+	fmt.Println("Test update card")
+	var (
+		kartu = model.Card{
+			Id:                "f584d39f-ac6b-445b-a592-a98071d5d4e1",
+			Active:            true,
+			DeletedBy:         "",
+			Title:             "KARTU POINT",
+			Description:       "Deskripsi",
+			FontColor:         "White",
+			TemplateColor:     "Black",
+			IconImage:         "Icon",
+			TermsAndCondition: "TnC",
+			Benefit:           "1 Kopi",
+			ValidUntil:        time.Time{},
+			CurrentPoint:      200,
+			IsValid:           true,
+			ProgramId:         1,
+			CardType:          "Point",
+			IconImageStamp:    "",
+			MerchantId:        2,
+			Tier:              "",
+		}
+	)
+	fmt.Println("test update 1")
+	err := s.card_repository.UpdateCard(&kartu)
+	fmt.Println("test update 2")
+	require.NoError(s.T(), err)
+	fmt.Println("test update 3")
+}
