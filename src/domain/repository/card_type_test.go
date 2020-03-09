@@ -55,7 +55,7 @@ func (s *CardTypeSuite) Test_Create_Type_Card(){
 	var (
 		tipe = model.CardType{
 			CardTypeName:"abc",
-			Id:2,
+			Id:4,
 			Active:true,
 		}
 	)

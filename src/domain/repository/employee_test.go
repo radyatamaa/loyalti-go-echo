@@ -121,7 +121,7 @@ func (s *EmployeeSuite) Test_Delete_Employee(){
 	fmt.Println("test 1")
 	var (
 		employ = model.Employee{
-			Id:               "78cadd73-b45b-41e6-938f-b18b89e9866a",
+			Id:"78cadd73-b45b-41e6-938f-b18b89e9866a",
 		}
 	)
 	fmt.Println("test 2")

@@ -257,6 +257,24 @@ func NewRoot() *Root {
 						},
 						Resolve: CardResolver,
 					},
+					"voucher": &graphql.Field{
+						Type:graphql.NewList(voucher),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"merchant_id": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve:VoucherResolver,
+					},
 				},
 			},
 		),

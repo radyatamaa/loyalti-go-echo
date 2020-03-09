@@ -64,7 +64,7 @@ func (s *Suite) Test_Create_Merchant(){
 	fmt.Println("test 1 aman")
 	var (
 		merchant = model.NewMerchantCommand{
-			Id:            100,
+			Id:            19,
 			MerchantEmail: "abc",
 			Active:true,
 		}

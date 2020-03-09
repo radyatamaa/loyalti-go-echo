@@ -54,7 +54,7 @@ func (s *SpecialProgramSuite) Test_Create_Special_Program(){
 	fmt.Println("test 1 aman")
 	var (
 		program = model.SpecialProgram{
-				Id:1,
+				Id:2,
 				ProgramName: "Program A",
 				ProgramDescription:"Program Mantap",
 				Active:true,

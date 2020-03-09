@@ -367,6 +367,26 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 	return outlet, nil
 }
 
+func VoucherResolver (p graphql.ResolveParams) (interface{}, error) {
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
+	sort, top := p.Args["sort"].(int)
+	merchant_id, tap := p.Args["merchant_id"].(int)
+	if ok && sip && top && tap{
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		var merchant_ids *int = &merchant_id
+		voucher := repository.GetVoucher(pages, sizes, sorts, merchant_ids)
+		fmt.Println(voucher)
+		return voucher, nil
+	}
+
+	voucher := repository.GetVoucher(nil, nil, nil, nil)
+
+	return voucher, nil
+}
+
 //func MerchantResolve() {
 //
 //}

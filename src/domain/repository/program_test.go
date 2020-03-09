@@ -55,6 +55,7 @@ func (s *ProgramSuite) Test_Create_Program(){
 	fmt.Println("test 1 aman")
 	var (
 			program = model.Program{
+				Id:6,
 				ProgramName: "dsfgsdf",
 				Active:true,
 			}
