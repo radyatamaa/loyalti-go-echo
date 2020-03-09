@@ -739,3 +739,78 @@ var card = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var voucher = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Voucher",
+	Fields:graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"voucher_name": &graphql.Field{
+			Type:graphql.String,
+		},
+		"start_date": &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"end_date": &graphql.Field{
+			Type:graphql.DateTime,
+		},
+		"voucher_description": &graphql.Field{
+			Type:graphql.String,
+		},
+		"voucher_terms_and_condition": &graphql.Field{
+			Type:graphql.String,
+		},
+		"is_push_notification": &graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"is_give_voucher" :&graphql.Field{
+			Type:graphql.Boolean,
+		},
+		"voucher_period" :&graphql.Field{
+			Type:graphql.String,
+		},
+		"reward_terms_and_condition" :&graphql.Field{
+			Type:graphql.String,
+		},
+		"background_voucher" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"background_voucher_colour": &graphql.Field{
+			Type:graphql.String,
+		},
+		"merchant_id": &graphql.Field{
+			Type:graphql.String,
+		},
+		"outlet_id": &graphql.Field{
+			Type:graphql.String,
+		},
+		"program_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+	},
+})
+
