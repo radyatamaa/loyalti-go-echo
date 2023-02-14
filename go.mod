@@ -5,7 +5,7 @@ go 1.12
 require (
 	github.com/DATA-DOG/go-sqlmock v1.4.1
 	github.com/Shopify/sarama v1.24.1
-	github.com/aws/aws-sdk-go v1.25.41
+	github.com/aws/aws-sdk-go v1.34.0
 	github.com/beevik/guid v0.0.0-20170504223318-d0ea8faecee0
 	github.com/biezhi/gorm-paginator/pagination v0.0.0-20190124091837-7a5c8ed20334
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -17,15 +17,13 @@ require (
 	github.com/klauspost/cpuid v1.2.1 // indirect
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0 // indirect
-	github.com/pkg/errors v0.8.0
-	github.com/sendgrid/rest v2.4.1+incompatible // indirect
-	github.com/sendgrid/sendgrid-go v3.5.0+incompatible // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.2.0
-	github.com/stretchr/testify v1.4.0
+	github.com/stretchr/testify v1.5.1
 	github.com/valyala/fasttemplate v1.1.0 // indirect
 	golang.org/x/crypto v0.0.0-20191122220453-ac88ee75c92c // indirect
 	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
-	golang.org/x/tools v0.0.0-20200305224536-de023d59a5d1 // indirect
+	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e // indirect
 	google.golang.org/grpc v1.19.0
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
