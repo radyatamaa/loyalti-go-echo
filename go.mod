@@ -11,21 +11,17 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/felixsiburian/loyalti-go-echo v0.0.0-20191125073729-5f00d893c9c6
 	github.com/go-sql-driver/mysql v1.5.0
-	github.com/gogo/protobuf v1.2.0
+	github.com/gogo/protobuf v1.3.2
 	github.com/graphql-go/graphql v0.7.8
 	github.com/jinzhu/gorm v1.9.11
 	github.com/klauspost/cpuid v1.2.1 // indirect
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/pkg/errors v0.8.0
-	github.com/sendgrid/rest v2.4.1+incompatible // indirect
-	github.com/sendgrid/sendgrid-go v3.5.0+incompatible // indirect
 	github.com/sirupsen/logrus v1.2.0
 	github.com/stretchr/testify v1.4.0
 	github.com/valyala/fasttemplate v1.1.0 // indirect
-	golang.org/x/crypto v0.0.0-20191122220453-ac88ee75c92c // indirect
-	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
-	golang.org/x/tools v0.0.0-20200305224536-de023d59a5d1 // indirect
+	golang.org/x/net v0.0.0-20201021035429-f5854403a974
 	google.golang.org/grpc v1.19.0
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
